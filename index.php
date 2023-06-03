@@ -1,0 +1,261 @@
+<?php
+    if(isset($_POST['signin'])){
+        header('Location: login.php');
+    }
+    session_start();
+    unset($_SESSION['accountID']);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<!-- header-->
+<?php include 'includes/header.php'; ?>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>wisdom</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,600,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i">
+    <link rel="stylesheet" href="assets/css/swiper-icons.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Features-Cards-icons.css">
+    <link rel="stylesheet" href="assets/css/Landing%20Page.css">
+    <link rel="stylesheet" href="assets/css/Simple-Slider-swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/Simple-Slider.css">
+    <link rel="stylesheet" href="assets/css/Tasks.css">
+    <link rel="stylesheet" href="assets/css/Ultimate-Event-Calendar.css">
+</head>
+
+<body style="font-family: Poppins, sans-serif;">
+    
+    <section style="background: url(&quot;assets/img/landing_header.svg&quot;);height: 3200px;">
+        <section class="py-4 py-xl-5">
+            <div class="container h-100" style="margin-top: 5rem;">
+                <div class="row h-100">
+                    <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                        <div>
+                            <h1 style="font-weight: bold;width: auto;font-size: 60px;">Find the internship of your&nbsp;<span style="color: #0017EB;">Dreams</span></h1>
+                            <p class="mb-4" style="font-size: 22px;max-width: 40rem;margin: 0 auto;">Discover your ideal internship and work with professionals. Explore opportunities that fit your goals today!</p><button class="btn btn-primary fs-5 fw-semibold me-2 py-2 px-4" type="button" style="background: #0017EB;border-radius: 5REM;margin-top: 1rem;">Join Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container py-4 py-xl-5" style="margin-top: 7rem;width: 1040px;">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h1 class="fw-semibold" style="width: auto;font-weight: bold;">Featured Projects</h1>
+                    <p>Here are some of the projects done by the WISDOM team:</p>
+                </div>
+            </div>
+            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3" style="margin-top: -57px;">
+                <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 10px;">
+                            <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/technotyper.png">
+                                <h4 class="card-title" style="margin-top: 16px;font-weight: bold;">TechnoTyper</h4>
+                                <p class="card-text" style="font-size: 14px;"><span style="background-color: transparent;">A keyboarding web application to be developed for the purpose of teaching children with ages 4 to 6 years old the QWERTY finger typing method through fun and educational activities that will help develop and master typing skills using a keyboard.</span></p>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 10px;">
+                            <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/original-0219a6b663e274b49d3c5816428c890a.webp">
+                                <h4 class="card-title" style="margin-top: 16px;font-weight: bold;">Project Name</h4>
+                                <p class="card-text" style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a interdum ipsum. Nulla non ultrices ex. Quisque sit amet diam ante. Nullam lacinia, libero semper egestas varius, erat mauris molestie nibh, non vehicula neque massa eu sem.</p>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 10px;">
+                            <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/original-d210c6d256c9abb879cd7600b7e5c276.webp">
+                                <h4 class="card-title" style="margin-top: 16px;font-weight: bold;"><strong>Project Name</strong></h4>
+                                <p class="card-text" style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a interdum ipsum. Nulla non ultrices ex. Quisque sit amet diam ante. Nullam lacinia, libero semper egestas varius, erat mauris molestie nibh, non vehicula neque massa eu sem.</p>
+                            </div>
+                        </div>
+                    </a></div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 5rem;max-width: 960px;">
+            <div class="row" id="heading-1">
+                <div class="col-md-12" style="text-align: center;">
+                    <h4 style="color: rgb(0,23,235);font-family: Poppins, sans-serif;font-size: 20px;margin-bottom: -2px;">Choose Categories</h4>
+                    <h1 class="fw-semibold" style="width: auto;font-weight: bold;">Internship Opportunities</h1>
+                </div>
+            </div>
+            <div class="row row-cols-2">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#marketing-comm">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 18px;"><i class="fas fa-comments-dollar" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-left: 10px;margin-right: 1rem;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Marketing &amp; Communication</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#ui-ux">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="padding: 20px;height: 100px;"><i class="fas fa-pen-nib" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">UI/UX Design</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#finance-management">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="fas fa-donate" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Finance Management</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-window-restore" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Web Development</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="w-100"></div>
+                <div class="w-100"></div>
+            </div>
+            <div class="row row-cols-2" style="height: auto;">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-folder-open" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Project Management</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-handshake" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Business &amp; Consulting</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="fas fa-paint-brush" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Graphic Designer</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                        <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
+                            <div class="card-body" style="height: 100px;padding: 20px;"><i class="fas fa-photo-video" style="font-size: 35px;color: rgb(0,23,235);"></i>
+                                <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Video Editor</span>
+                                    <h6 class="fw-lighter text-muted mb-2" style="font-family: Poppins, sans-serif;font-size: 12px;">12 Jobs Available</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a></div>
+            </div>
+        </div>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 960px;">
+                <h1 id="marketing-comm" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Marketing &amp; Communication</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 960px;">
+                <h1 id="ui-ux" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">UI/UX Design</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 960px;">
+                <h1 id="finance-management" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">UI/UX Design</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/Card-Carousel-slider.js"></script>
+    <script src="assets/js/Daily-Logs-and-Tasks-Toggle.js"></script>
+    <script src="assets/js/Simple-Slider-swiper-bundle.min.js"></script>
+    <script src="assets/js/Simple-Slider.js"></script>
+    <script src="assets/js/Task-List.js"></script>
+    <script src="assets/js/Ultimate-Event-Calendar.js"></script>
+
+<!-- footer-->
+<?php include 'includes/footer.php'; ?>
+
+</body>
+
+</html>
