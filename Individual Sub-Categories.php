@@ -30,7 +30,7 @@
 
  <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="backend" style="font-weight: bold;margin-top: -15px;">Robotics</h1>
+                <h1 id="robotics" style="font-weight: bold;margin-top: -15px;">Robotics</h1>
                 <p style="width: auto; text-align: justify;">A back-end developer intern is responsible for involving building and maintaining the server-side logic and infrastructure that powers web applications, mobile apps, or other software systems.</p>
                 <p style="width: auto; text-align: justify;">During their internship, a back-end developer will learn the technology stack. They will be familiarized with the backend technologies, frameworks, and programming languages used by the organization. This may include languages like Java, Python, Ruby, or frameworks like Node.js or Django.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
@@ -201,13 +201,12 @@
         </section>
 
 
-
 <!--NETWORKING CATEGORY --> 
  <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="backend" style="font-weight: bold;margin-top: -15px;">Networking</h1>
-                <p style="width: auto; text-align: justify;">A back-end developer intern is responsible for involving building and maintaining the server-side logic and infrastructure that powers web applications, mobile apps, or other software systems.</p>
-                <p style="width: auto; text-align: justify;">During their internship, a back-end developer will learn the technology stack. They will be familiarized with the backend technologies, frameworks, and programming languages used by the organization. This may include languages like Java, Python, Ruby, or frameworks like Node.js or Django.</p>
+                <h1 id="networking" style="font-weight: bold;margin-top: -15px;">Networking</h1>
+                <p style="width: auto; text-align: justify;">As a networking intern, you will have the opportunity to gain practical experience in the field of computer networking, working with network infrastructure, protocols, and systems to support efficient and secure communication between devices and networks.</p>
+                <p style="width: auto; text-align: justify;">They assist network engineers and administrators in tasks such as network configuration, troubleshooting, monitoring, documentation, security implementation, and participating in collaborative projects to support the organization's network infrastructure and ensure efficient and secure communication between devices and networks.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
             </div>
         </section>
@@ -217,21 +216,20 @@
                     <div class="col-md-6 col-xxl-6" style="box-shadow: 0px 0px 14px 0px rgb(213,213,213);border-radius: 15px;padding: 2rem;margin: 1rem 0;width: 380px;">
                         <h1 style="font-size: 28px;font-weight: bold;">Key Roles</h1>
                         <ul>
-                            <li  style = "margin: 10px 0; list-style-type:circle;">Server-side development</li>
-                            <li  style = "margin: 10px 0; list-style-type:circle;">API development</li>
-                            <li  style = "margin: 10px 0; list-style-type:circle;">Database management</li>
-                            <li  style = "margin: 10px 0; list-style-type:circle;">Performance optimization</li>
-                            <li  style = "margin: 10px 0; list-style-type:circle;">Security implementation</li>
+                            <li  style = "margin: 10px 0; list-style-type:circle;">Network Configuration</li>
+                            <li  style = "margin: 10px 0; list-style-type:circle;">Network Troubleshooting</li>
+                            <li  style = "margin: 10px 0; list-style-type:circle;">Network Monitoring</li>
+                            <li  style = "margin: 10px 0; list-style-type:circle;">Network Maintenance</li>
+                            <li  style = "margin: 10px 0; list-style-type:circle;">Network Documentation</li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-xxl-6" style="box-shadow: 0px 0px 14px 0px rgb(213,213,213);border-radius: 15px;padding: 2rem;margin: 1rem 0;width: 380px;">
                         <h1 style="font-size: 28px;font-weight: bold;">Key Roles</h1>
                         <ul>
-                            <li style = "margin: 10px 0; list-style-type:circle;">Integration with external services</li>
-                            <li style = "margin: 10px 0; list-style-type:circle;">Testing and debugging</li>
-                            <li style = "margin: 10px 0; list-style-type:circle;">Deployment and DevOps</li>
-                            <li style = "margin: 10px 0; list-style-type:circle;">Collaboration with frontend developers</li>
-                            <li style = "margin: 10px 0; list-style-type:circle;">Documentation and maintenance</li>
+                            <li style = "margin: 10px 0; list-style-type:circle;">Network Security</li>
+                            <li style = "margin: 10px 0; list-style-type:circle;">Network Expansion</li>
+                            <li style = "margin: 10px 0; list-style-type:circle;">Collaborative Projects</li>
+                            <li style = "margin: 10px 0; list-style-type:circle;">Research and Learning</li>    
                         </ul>
                     </div>
                 </div>
