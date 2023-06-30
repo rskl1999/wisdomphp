@@ -58,10 +58,10 @@
 
 
                                         <div class="col-md-6 d-flex">
-                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i></a>
-                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><div style="margin-left: 10px;"><a href="#" class="text-decoration-none"></a>
-                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Networks</h1></a>
-                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
+                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i></a>
+                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div style="margin-left: 10px;"><a href="#" class="text-decoration-none"></a>
+                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Networks</h1></a>
+                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
                                                 </a></div>
                                         </div>
 
