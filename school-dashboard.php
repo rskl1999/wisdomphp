@@ -2,24 +2,26 @@
     require_once('connection.php');
     session_start();
 
-            if(isset($_SESSION['accountID'])){
-                $accID = $_SESSION['accountID'];
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
 
-                $sql ="SELECT accountID FROM accounttbl WHERE accountID = ?";
-                    $stmt = $con->prepare($sql);
-                    $stmt->bind_param("i", $accID);
-                    $stmt->execute();
-                    $stmt->bind_result($accountID);
-                    $stmt->fetch();
-                    $stmt->close();
-                    
-                    if(!$accountID){
-                        header("Location:index.php");
-                    }
-                    else{
-                    header("Location:index.php");
-                }
-            }
+        $sql = "SELECT accountID FROM accounttbl WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        if(!$accountID){
+            header("Location: index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    else{
+        header("Location: index.php");
+        exit(); // Added exit() to stop further execution
+    }
 
     $accountid = $_SESSION['accountID'];
 
@@ -48,6 +50,7 @@
         $Numenrolled->bind_param("i", $accountid);
         $total->bind_param("i", $accountid);
         $schoolLogo->bind_param("i", $accountid);        
+
 
             // execute queries
             $Numpending->execute();
@@ -94,7 +97,7 @@
 </head>
 
 <body style="color: rgb(0,0,0);">
-<nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
+<nav class="navbar navbar-light navbar-expand bg-white  topbar static-top" >
     <div class="container-fluid"><a href="index.php"><img src="school-assets/img/logo_black.png" width="140" height="29" /></a>
         <ul class="navbar-nav flex-nowrap ms-auto">
             <li class="nav-item d-flex justify-content-center align-items-center dropdown no-arrow mx-1"><a href="internship-application.php"><button class="btn btn-primary" name="add-student" type="button" style="background: #0017eb;border-radius: 35px;width: 130px;">Apply</button></a></li>
