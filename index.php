@@ -32,19 +32,19 @@
 
 <body style="font-family: Poppins, sans-serif;">
     
-    <section style="background: url(&quot;assets/img/landing_header.svg&quot;);height: 3200px;">
-        <section class="py-4 py-xl-5">
-            <div class="container h-100" style="margin-top: 5rem;">
+        <section style="height: 6200px;">
+            <section class="py-4 py-xl-5" style="background: url(&quot;assets/img/landing_header.svg&quot;); background-size: cover;">
+                <div class="container h-100" style="margin-top: 5rem;">
                 <div class="row h-100">
                     <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                         <div>
                             <h1 style="font-weight: bold;width: auto;font-size: 60px;">Find the internship of your&nbsp;<span style="color: #0017EB;">Dreams</span></h1>
-                            <p class="mb-4" style="font-size: 22px;max-width: 40rem;margin: 0 auto;">Discover your ideal internship and work with professionals. Explore opportunities that fit your goals today!</p><button class="btn btn-primary fs-5 fw-semibold me-2 py-2 px-4" type="button" style="background: #0017EB;border-radius: 5REM;margin-top: 1rem;">Join Now</button>
+                            <p class="mb-4" style="font-size: 22px; max-width: 40rem; margin: 0 auto;">Discover your ideal internship and work with professionals. Explore opportunities that fit your goals today!</p>
+                            <a href="register.php" class="btn btn-primary fs-5 fw-semibold me-2 py-2 px-4" style="background: #0017EB; border-radius: 5REM; margin-top: 1rem;">Join Now</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
         <div class="container py-4 py-xl-5" style="margin-top: 7rem;width: 1040px;">
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -79,6 +79,7 @@
                     </a></div>
             </div>
         </div>
+        </section>
         <div class="container" style="margin-top: 5rem;max-width: 960px;">
             <div class="row" id="heading-1">
                 <div class="col-md-12" style="text-align: center;">
@@ -114,7 +115,7 @@
                             </div>
                         </div>
                     </a></div>
-                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#web-dev">
                         <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
                             <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-window-restore" style="font-size: 35px;color: rgb(0,23,235);"></i>
                                 <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Web Development</span>
@@ -127,7 +128,7 @@
                 <div class="w-100"></div>
             </div>
             <div class="row row-cols-2" style="height: auto;">
-                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#project-management">
                         <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
                             <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-folder-open" style="font-size: 35px;color: rgb(0,23,235);"></i>
                                 <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Project Management</span>
@@ -136,7 +137,7 @@
                             </div>
                         </div>
                     </a></div>
-                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#buss-and-consulting">
                         <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
                             <div class="card-body" style="height: 100px;padding: 20px;"><i class="far fa-handshake" style="font-size: 35px;color: rgb(0,23,235);"></i>
                                 <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Business &amp; Consulting</span>
@@ -145,7 +146,7 @@
                             </div>
                         </div>
                     </a></div>
-                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#graphic-designer">
                         <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
                             <div class="card-body" style="height: 100px;padding: 20px;"><i class="fas fa-paint-brush" style="font-size: 35px;color: rgb(0,23,235);"></i>
                                 <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Graphic Designer</span>
@@ -154,7 +155,7 @@
                             </div>
                         </div>
                     </a></div>
-                <div class="col-md-3" style="margin-top: 1rem;"><a href="#">
+                <div class="col-md-3" style="margin-top: 1rem;"><a href="#video-editor">
                         <div class="card card-categories" style="border-style: none;box-shadow: inset 0px 3px 8px 0px rgb(215,215,215);border-radius: 15px;">
                             <div class="card-body" style="height: 100px;padding: 20px;"><i class="fas fa-photo-video" style="font-size: 35px;color: rgb(0,23,235);"></i>
                                 <div style="display: inline-block;position: absolute;margin-right: 1rem;margin-left: 10px;"><span class="fw-semibold" style="font-family: Poppins, sans-serif;font-size: 15px;color: rgb(0,0,0);">Video Editor</span>
@@ -165,8 +166,16 @@
                     </a></div>
             </div>
         </div>
-        <section style="margin-top: 8rem;">
-            <div class="container" style="width: 1319px;max-width: 960px;">
+        <section style="margin-top: 3rem;">
+            <div class="container" style="display: flex; align-items: flex-start; width: 1319px; max-width: 960px; position: relative;">
+            <img class="about-us-img" style="object-fit: cover; max-height: 650px; max-width: 700px; width: 630px; height: 700px; border-radius: 35px;" src="assets/img/about-us-img.png">
+                <h3 id="abt-us" style="font-weight: bold; text-align: left; font-size: 16px; color: #0017EB; position: absolute; top: 8rem; right: 19.4rem; margin: 1rem;">About Us</h3>
+                <h2 id="abt-wisdom" style="font-weight: bold; text-align: left; max-width:16rem; font-size: 26px; color: Gray 1; position: absolute; top: 10rem; right: 8rem; margin: 1rem;">What is WISDOM all about?</h2>
+                <h4 id="wisdom-desc" style="text-align: justify; max-width:15rem; font-size: 13px; color: #000000; position: absolute; top: 15rem; right: 8.9rem; margin: 1rem;">FortWorth Inc. (PCMed - Technokids Philippines) is a premier I.T. company in the country specializing in I.T. solutions and providing I.T. education to our partners. <br><br> Its <span style="color:#1B3996">mission</span> is to combine education and technology to provide children with the core computing skills that will best prepare them for the future. <br><br> Its <span style="color:#1B3996">vision</span> is to be the leading pivotal force in transforming the Filipinos into becoming tech-savvy citizens who will make the Philippines an economically progressive and technologically advanced country.</h4>
+             </div>
+        </section>
+        <section style="margin-top: 5rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
                 <h1 id="marketing-comm" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Marketing &amp; Communication</h1>
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
@@ -192,7 +201,7 @@
             </div>
         </section>
         <section style="margin-top: 8rem;">
-            <div class="container" style="width: 1319px;max-width: 960px;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
                 <h1 id="ui-ux" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">UI/UX Design</h1>
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
@@ -218,8 +227,138 @@
             </div>
         </section>
         <section style="margin-top: 8rem;">
-            <div class="container" style="width: 1319px;max-width: 960px;">
-                <h1 id="finance-management" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">UI/UX Design</h1>
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="finance-management" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Finance Management</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="web-dev" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Web Development</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="project-management" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Project Management</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="buss-and-consulting" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Business & Consulting</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="graphic-designer" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Graphic Designer</h1>
+                <div class="simple-slider" style="height: 300px;">
+                    <div class="swiper-container" style="height: 320px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                                </a></div>
+                        </div>
+                        <div class="swiper-pagination" style="margin-top: 103px;"></div>
+                        <div class="swiper-button-prev" style="color: rgb(255,255,255);"></div>
+                        <div class="swiper-button-next" style="color: rgb(255,255,255);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section style="margin-top: 8rem;">
+            <div class="container" style="width: 1319px;max-width: 1015px;">
+                <h1 id="video-editor" style="font-weight: bold;text-align: left;font-size: 30px;margin-bottom: 16px;">Video Editor</h1>
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
