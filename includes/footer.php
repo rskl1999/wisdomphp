@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -12,6 +13,10 @@
     <link rel="stylesheet" href="assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
     <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
     <link rel="stylesheet" href="landing-assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="includes/footer.css">
+    
+
     
 </head>
 
@@ -22,33 +27,53 @@
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6"><img src="assets/img/logo_white.png" width="140" height="29"></h3>
                     <p>FortWorth Inc. (PCMed - Technokids Philippines) is a premier I.T. company in the country specializing in I.T. solutions and providing I.T. education to our partners.</p>
+
+                    <!--<h3 class="fs-6"><strong>Follow Us</strong></h3> -->
+                    <div class="footer-col">
+                    <div class="social-links">
+  	 				<a href="https://www.facebook.com/TechnokidsPh" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="https://twitter.com/technokidsinc" target="_blank"><i class="fab fa-twitter"></i></a>
+  	 				<a href="https://www.instagram.com/technokidsphilippines/" target="_blank"><i class="fab fa-instagram"></i></a>
+  	 				<a href="https://www.linkedin.com/company/technokids-philippines/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+
+  	 			</div>
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column"></div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6"><strong>Our Company</strong></h3>
-                    <ul class="list-unstyled">
-                        <li> <a href="index.php" class="text-white text-decoration-none fs-6">Home </a></li>
-                        <li> <a href="About Us.php" class="text-white text-decoration-none fs-6">About </a></li>
-                        <li> <a href="" class="text-white text-decoration-none fs-6">Categories</li>
-                        <li> <a href="Contact Us.php" class="text-white text-decoration-none fs-6">Contact</a></li>
-                    </ul>
+                    <div class="footer-col">
+                        <ul class="list-unstyled">
+                            <li> <a href="index.php" class="text-white text-decoration-none fs-6">Home </a></li>
+                            <li> <a href="About Us.php" class="text-white text-decoration-none fs-6">About </a></li>
+                            <li> <a href="" class="text-white text-decoration-none fs-6">Categories</li>
+                            <li> <a href="Contact Us.php" class="text-white text-decoration-none fs-6">Contact</a></li>
+                         </ul>
+                    </div>
                 </div>
+
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6"><strong>Categories</strong></h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none fs-6">Web Development </a></li>
-                        <li><a href="#" class="text-white text-decoration-none fs-6">Robotics </a></li>
-                        <li><a href="#" class="text-white text-decoration-none fs-6">Networking </a></li>
-                        <li><a href="#" class="text-white text-decoration-none fs-6">Graphic Design </a></li>
-                    </ul>
+                    <div class="footer-col">
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Web Development </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Robotics </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Networking </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Graphic Design </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Animation </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Research </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Ed-Tech </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
-
         </div>
+
+      
         <div style="height:40px; background: #122664;margin-top: 56px;">
             <p class="text-center" style="color: white; padding-top: 10px;"><i class="far fa-copyright"></i>&nbsp;All Copyrights are reserved by Wisdom.</p>
         </div>
+
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
@@ -58,6 +83,8 @@
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="assets/js/theme.js"></script>
+
+
 </body>
 
 </html>

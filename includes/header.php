@@ -42,25 +42,35 @@
                                                     <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
                                                 </a></div>
                                         </div>
+                                        
+
+                                        <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;">
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
                                             <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Front-End</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
-                                                </a></div>
+                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Front-End</h1></a>
+                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
+                                            </div>
                                         </div>
+    
+                                    
+
+
+
                                         <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Networks</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
+                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i></a>
+                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><div style="margin-left: 10px;"><a href="#" class="text-decoration-none"></a>
+                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Networks</h1></a>
+                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
                                                 </a></div>
                                         </div>
+
+                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;">
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-code-branch" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
                                             <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Back-End</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
+                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Back-End</h1></a>
+                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement the server-side components of a website.</p></a>
                                                 </a></div>
                                         </div>
                                     </div>
