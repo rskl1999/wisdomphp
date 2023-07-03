@@ -3,13 +3,19 @@
    session_start();
    // Retrieve user data from the database
    
-   $userid =$_SESSION['accountID'];
-   $sql = "SELECT *
-            FROM schooltbl sc
-            JOIN accounttbl a ON a.accountID = sc.accountID
-            WHERE schoolid = $userid";
-            
-   $result = $con->query($sql);
+   if (isset($_SESSION['accountID'])) {
+      $userid = $_SESSION['accountID'];
+      
+      $sql = "SELECT *
+               FROM schooltbl sc
+               JOIN accounttbl a ON a.accountID = sc.accountID
+               WHERE schoolid = ?";
+      
+      $stmt = $con->prepare($sql);
+      $stmt->bind_param("i", $userid);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
       if ($result->num_rows > 0) {
          $row = $result->fetch_assoc();
 
@@ -21,13 +27,13 @@
          $schoolLogo = $row['schoolLogo'];
       }
 
-      // If form is submitted, update the user's profile in the database
-      if (isset($_POST['save'])) {
-         $schoolName = $_POST['name'];
-         $email = $_POST['email'];
-         $address = $_POST['address'];
-         $contact_info = $_POST['email'];
-         $schoolLogo = $row['avatar-file'];
+   // If form is submitted, update the user's profile in the database
+   if (isset($_POST['save'])) {
+      $schoolName = $_POST['name'];
+      $email = $_POST['email'];
+      $address = $_POST['address'];
+      $contact_info = $_POST['email'];
+      $schoolLogo = $row['avatar-file'];
 
             $image_name = $_FILES["avatar-file"]["name"];
             $image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
@@ -64,6 +70,12 @@
 
             header("Location:school-dashboard.php");
           }
+         
+         } else {
+            // Handle the case when the "accountID" key is not set in the session
+            header("Location: index.php");
+            exit(); // Terminate the script to prevent further execution
+         }
    ?>
 
 <!DOCTYPE html>

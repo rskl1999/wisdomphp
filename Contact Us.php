@@ -68,8 +68,8 @@
                                 </svg></div>
                             <div class="px-2">
                                 <h6 class="mb-0">Websites</h6>
-                                <p class="mb-0" style="font-size: 14px;">https://technokids.ph/</p>
-                                <p class="mb-0" style="font-size: 14px;">www.fortworth.com.ph/</p>
+                                <a href ="https://technokids.ph/" target="_blank"><p class="mb-0" style="font-size: 14px;">https://technokids.ph/</p></a>
+                                <a href ="http://www.fortworth.com.ph/" target="_blank"><p class="mb-0" style="font-size: 14px;">www.fortworth.com.ph/</p></a>
                             </div>
                         </div>
                     </div>
