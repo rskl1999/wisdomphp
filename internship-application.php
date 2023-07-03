@@ -1,23 +1,30 @@
 <?php
+    // Connect ot database and start session.
     require_once('connection.php');
     session_start();
     
+    // Remember session account ID
     $accountid = $_SESSION['accountID'];
+    echo "$accountid";
 
             $moa = $con->prepare("SELECT moa FROM schooltbl WHERE accountID = ?");
+            echo gettype($moa);
             $moa->bind_param("i", $accountid);
             $moa->execute();
                 $result = $moa->get_result();
                 $row = $result->fetch_assoc();
                 $Schoolmoa = $row['moa'];
 
+            // Check if school has no MOA 
             if(empty($schoolmoa)){
-                header("Location:internship-application.php");
-                
-            }
-            else{
+                // Redirect to MOA upload page
+                echo "<script>alert('Please upload school MOA');</script>";
                 header("Location:school-moa.php");
             }
+            // Proceed to intern application
+            else
+            {
+            };
         ?>
 
 <!DOCTYPE html>

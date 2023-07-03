@@ -12,6 +12,8 @@ session_start();
 $schoolLogo =$_SESSION['schoolLogo'];
         //Check Account ID if set
         if(isset($_SESSION['accountID'])){
+            $accountid = $_SESSION['accountID'];
+            echo "<script>alert('ID is: $accountid');</script>";
             $accID = $_SESSION['accountID'];
 
             $sql ="SELECT accountID FROM accounttbl WHERE accountID = ?";
@@ -27,6 +29,7 @@ $schoolLogo =$_SESSION['schoolLogo'];
             }
         }
         else{
+            echo "<script>alert('ID is: None');</script>";
             header("Location:index.php");
         }
     
@@ -35,42 +38,42 @@ $schoolLogo =$_SESSION['schoolLogo'];
     //if Upload is pressed
     if(isset($_POST['submit'])){
 
-        
-if (isset($_POST['submit'])) {
-    // Count total files
-    // Get total files count
-    $countFiles = count($_FILES['file']['name']);
-        
-    // Loop through all files
-    for ($i = 0; $i < $countFiles; $i++) {
-        // Get the file name and type
-        $filename = $_FILES['file']['name'][$i];
-        $filetype = $_FILES['file']['type'][$i];
+        if (isset($_POST['submit'])) {
+            // Count total files
+            // Get total files count
+            $countFiles = count($_FILES['file']['name']);
+                
+            // Loop through all files
+            for ($i = 0; $i < $countFiles; $i++) {
+                // Get the file name and type
+                $filename = $_FILES['file']['name'][$i];
+                $filetype = $_FILES['file']['type'][$i];
 
-        // Upload file if it's a PDF or MP4
-        if ($filetype == 'application/pdf' || $filetype == 'video/mp4') {
-            if (move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$filename)) {
-                echo $filename.' uploaded successfully.<br>';
+                // Upload file if it's a PDF or MP4
+                if ($filetype == 'application/pdf' || $filetype == 'video/mp4') {
+                    if (move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$filename)) {
+                        echo $filename.' uploaded successfully.<br>';
 
-                // Insert file name into database
-                $sql = "UPDATE schooltbl SET moa = '$filename' WHERE accountID = $accountID";
-                if ($con->query($sql) === TRUE) {
-                    echo "File name added to database.<br>";
+                        // Insert file name into database
+                        $sql = "UPDATE schooltbl SET moa = '$filename' WHERE accountID = $accountID";
+                        if ($con->query($sql) === TRUE) {
+                            echo "File name added to database.<br>";
+                        } else {
+                            echo "Error adding file name to database: " . $con->error."<br>";
+                        }
+                    } else {
+                        echo 'Error uploading '.$filename.'<br>';
+                    }
                 } else {
-                    echo "Error adding file name to database: " . $con->error."<br>";
+                    echo 'Invalid file type for '.$filename.'<br>';
                 }
-            } else {
-                echo 'Error uploading '.$filename.'<br>';
             }
+            $con->close();
+            echo 'File successfully submitted.<br/>';
+            header('Location: internship-application.php');
         } else {
-            echo 'Invalid file type for '.$filename.'<br>';
+            echo 'No files submitted.<br>';
         }
-    }
-    } else {
-    echo 'No files submitted.<br>';
-    }
-    $con->close();
-        header('Location: internship-application.php');
     }    
           
 ?>
