@@ -180,17 +180,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/socialmed.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Social Media Manager</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/consultant.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Advertising Consultant</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/marketing.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Digital Marketing Specialist</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/promotions.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Promotions Coordinator</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -206,17 +206,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ui-designer.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">UI Designer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ux-designer.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">UX Designer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ui-ux.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">UI/UX Designer Specialist</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/jr-ui-ux.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Jr. UI/UX Designer</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -232,17 +232,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fin-analyst.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Financial Analyst</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fin-planner.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Financial Planner</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fin-manager.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Finance Manager</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fin-specialist.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Financial Specialist</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -258,17 +258,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/front-end.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Front-end Web Developer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/back-end.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Back-end Web Developer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/full-stack.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Full Stack Web Developer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/jr-web-dev.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Jr. Web Developer</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -284,17 +284,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/proj-manager.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Project Manager</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/proj-coordinator.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Project Coordinator</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/associate-proj.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Associate Project Manager</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/jr-proj-manager.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Jr. Project Manager</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -310,17 +310,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/bus-consultant.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Business Consultant</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/bus-analyst.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Business Analyst</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/bus-associate.png">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Business Consulting Associate</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/bus-manager.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Business Manager</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -336,17 +336,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/multimedia.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Multimedia Artist</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/creative-design.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Creative Design Specialist</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/graphic-artist.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Graphic Artist</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/graphic-visual.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Graphic and Visual Design Analyst</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
@@ -362,17 +362,17 @@
                 <div class="simple-slider" style="height: 300px;">
                     <div class="swiper-container" style="height: 320px;">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/110fc1dea3e8b545e38032234c8429a3.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/videographer.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Videographer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/fb987f28c2efeaaeea5c33378f7d189b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/motion-graphics.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Motion Graphics Designer</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/e496f3d8dd862c31d8cf3b20384e551b.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/3d-animator.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">3D Animator</h1>
                                 </a></div>
-                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/ffd3e5e8ff42ebe3dd16a6f61811bfb4.webp">
-                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Heading</h1>
+                            <div class="swiper-slide" style="border-radius: 15px;max-width: 300px;text-align: center;"><a class="text-decoration-none" href="#"><img class="category-img" style="object-fit: cover;max-height: 250px;max-width: 300px;width: 230px;height: 300px;border-radius: 15px;" src="assets/img/vid-editor.jpg">
+                                    <h1 class="sub-category-name" style="max-width: 300px;margin-top: 5px;font-size: 20px;">Video Editor</h1>
                                 </a></div>
                         </div>
                         <div class="swiper-pagination" style="margin-top: 103px;"></div>
