@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="carousel-item" style="max-width: 850px;">
-                        <div style="height: 960px; position:relative;">>
+                        <div style="height: 960px; position:relative;">
                             <div id="slide-responsive" style="top: 23rem;background: #373737;position: absolute;border-radius: 15px;width: 100%;height: auto;">
                                 <h1 class="fw-normal" style="margin-top: 9rem;color: rgb(255,255,255);margin-left: 7rem;margin-right: 7rem;font-size: 20px;margin-bottom: 8rem;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et nunc lacus."</h1>
                                 <div style="left: 0;bottom: 0;background: rgba(31,31,31,0.9);border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;position: absolute;width: 100%;">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="carousel-item" style="max-width: 850px;">
-                        <div style="height: 960px; position:relative;">>
+                        <div style="height: 960px; position:relative;">
                             <div id="slide-responsive" style="top: 23rem;background: #373737;position: absolute;border-radius: 15px;width: 100%;height: auto;">
                                 <h1 class="fw-normal" style="margin-top: 9rem;color: rgb(255,255,255);margin-left: 7rem;margin-right: 7rem;font-size: 20px;margin-bottom: 8rem;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et nunc lacus."</h1>
                                 <div style="left: 0;bottom: 0;background: rgba(31,31,31,0.9);border-bottom-right-radius: 15px;border-bottom-left-radius: 15px;position: absolute;width: 100%;">
