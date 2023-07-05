@@ -1,24 +1,22 @@
 <?php
-require_once('connection.php');
-session_start();
+    require_once('connection.php');
+    session_start();
             
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-        // Send email using PHPMailer
-        require 'vendor/autoload.php';
+    // Send email using PHPMailer
+    require 'vendor/autoload.php';
 
-$schoolLogo =$_SESSION['schoolLogo'];
+    $schoolLogo =$_SESSION['schoolLogo'];
         //Check Account ID if set
         if(isset($_SESSION['accountID'])){
-            $accountid = $_SESSION['accountID'];
-            echo "<script>alert('ID is: $accountid');</script>";
-            $accID = $_SESSION['accountID'];
+            $accountID = $_SESSION['accountID'];
 
             $sql ="SELECT accountID FROM accounttbl WHERE accountID = ?";
                 $stmt = $con->prepare($sql);
-                $stmt->bind_param("i", $accID);
+                $stmt->bind_param("i", $accountID);
                 $stmt->execute();
                 $stmt->bind_result($accountID);
                 $stmt->fetch();
@@ -29,7 +27,7 @@ $schoolLogo =$_SESSION['schoolLogo'];
             }
         }
         else{
-            echo "<script>alert('ID is: None');</script>";
+            echo "<script>alert('HERE');</script>";
             header("Location:index.php");
         }
     
