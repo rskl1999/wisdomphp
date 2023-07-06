@@ -76,8 +76,26 @@
                 </div>
                 <div class="col-md-6 col-lg-5 col-xl-4">
                     <div style="background: url(&quot;assets/img/contact-us-bg.svg&quot;) bottom / auto no-repeat, #292d32;border-radius: 15px;">
-                        <h1 style="font-size: 35px;color: #ffffff;padding-top: 1.7rem;padding-left: 1.7rem;">Get in touch!</h1>
+                        <h1 style="font-size: 35px;color: #ffffff;padding-top: 1rem;padding-left: 1.7rem;">Get in touch</h1>
+                        <h3 style="font-size: 15px;color: #ffffff;padding-left: 1.7rem;">Our friendly team would love to hear from you!</h3>
+
                         <form class="p-3 p-xl-4" method="post">
+                                
+                            <?php
+
+                                $name = isset($_POST['name']) ? $_POST['name'] : '';
+                                $email = isset($_POST['email']) ? $_POST['email'] : '';
+                                $message = isset($_POST['message']) ? $_POST['message'] : '';
+
+                                $conn = mysqli_connect("localhost", "root", "", "wisdomdb") or die ("connection failed");
+
+                                $sql = "INSERT INTO getintouch(name, email, message) VALUES ('{$name}', '{$email}', '{$message}')";
+
+                                $result = mysqli_query($conn, $sql) or die ("Query Failed!");
+
+                            ?>
+
+
                             <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name" style="border-radius: 15px;"></div>
                             <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email" style="border-radius: 15px;"></div>
                             <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message" style="border-radius: 15px;"></textarea></div>
