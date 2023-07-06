@@ -1,5 +1,82 @@
 <?php
+    require_once('../connection.php');
+    session_start();
 
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM accounttbl WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+    $schoolid = $_SESSION['schoolID'];
+
+    // prepare statements
+    $Numpending = $con->prepare("SELECT COUNT(st.studentID) AS pendingNum 
+                             FROM studenttbl st 
+                             JOIN schooltbl sc ON st.schoolID = sc.schoolID 
+                             WHERE sc.accountID = ? AND st.status='pending'");
+
+    $Numenrolled = $con->prepare("SELECT COUNT(st.studentID) AS enrolled 
+                                FROM studenttbl st 
+                                JOIN schooltbl sc ON st.schoolID = sc.schoolID 
+                                WHERE sc.accountID = ? AND st.status='accepted'");
+
+    $total = $con->prepare("SELECT COUNT(st.studentID) AS studTotal 
+                            FROM studenttbl st 
+                            JOIN schooltbl sc ON st.schoolID = sc.schoolID 
+                            WHERE sc.accountID = ? AND st.status='finished' OR st.status='accepted'");
+
+    $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
+                                FROM schooltbl 
+                                WHERE accountID = ?");
+        
+    
+    $Numpending->bind_param("i", $accountid);
+    $Numenrolled->bind_param("i", $accountid);
+    $total->bind_param("i", $accountid);
+    $schoolLogo->bind_param("i", $accountid);        
+
+
+    // execute queries
+    $Numpending->execute();
+    $result = $Numpending->get_result();
+    $row = $result->fetch_assoc();
+    $pendingNum = $row['pendingNum'];
+
+    $Numenrolled->execute();
+    $result = $Numenrolled->get_result();
+    $row = $result->fetch_assoc();
+    $enrolled = $row['enrolled'];
+
+    $total->execute();
+    $result = $total->get_result();
+    $row = $result->fetch_assoc();
+    $studentTotal = $row['studTotal'];
+
+    $schoolLogo->execute();
+    $result = $schoolLogo->get_result();
+    $row = $result->fetch_assoc();
+    $_SESSION['schoolLogo'] = $row['schoolLogo'];
+    $_SESSION['schoolID'] = $row['schoolID'];
 
 ?>
 
@@ -56,7 +133,9 @@
                         <div class="col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-center">
                             <p style="margin: 0px;font-weight: bold;">Total Student</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;">34</span></div>
+
+                        <!-- Number of All Students -->
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $studentTotal ?></span></div>
                     </div>
                 </div>
             </div>
@@ -66,7 +145,9 @@
                         <div class="col-md-6 d-flex justify-content-center">
                             <p style="margin: 0px;font-weight: bold;">Enrolled Student</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;">34</span></div>
+
+                        <!-- Number of Enrolled Students -->
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $enrolled ?></span></div>
                     </div>
                 </div>
             </div>
@@ -76,7 +157,9 @@
                         <div class="col-md-6 d-flex justify-content-center">
                             <p style="margin: 0px;font-weight: bold;">Pending Student</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;">34</span></div>
+
+                        <!-- Number of Pending Students -->
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $pendingNum ?></span></div>
                     </div>
                 </div>
             </div>
@@ -98,44 +181,109 @@
                     </tr>
                 </thead>
                 <tbody style="color: rgb(0,0,0);font-size: 12px;">
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>
-                            <p style="margin: 0px;"><strong>Juan Dela Cruz</strong></p><small>juandelacruz@gmail.com</small>
-                        </td>
-                        <td>
-                            <p>Paragraph</p>
-                        </td>
-                        <td><span style="padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;">Completed</span></td>
-                        <td>STEM</td>
-                        <td>200&nbsp;</td>
-                        <td>200</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>
-                            <p style="margin: 0px;"><strong>Juan Dela Cruz</strong></p><small>juandelacruz@gmail.com</small>
-                        </td>
-                        <td>
-                            <p>Paragraph</p>
-                        </td>
-                        <td><span style="padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;">Completed</span></td>
-                        <td>STEM</td>
-                        <td>200&nbsp;</td>
-                        <td>200</td>
-                    </tr>
+                <?php
+                    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+
+                    $items_per_page = 10;
+
+                    // Counts students from current school 
+                    $total_stud_query = "SELECT COUNT(studentID) FROM studenttbl WHERE schoolID = ?"; 
+                    // Selects student details of those who applied in the internship
+                    $students = $con->prepare("SELECT DISTINCT
+                                            st.studentName, st.course, a.dateSubmitted, st.studentID, st.batchID, 
+                                            st.hoursRendered, st.status, a.duration, ac.email 
+                                        FROM 
+                                            studenttbl st 
+                                            JOIN applicanttbl a ON st.batchID = a.batchID AND st.schoolID = a.schoolID
+                                            JOIN accounttbl ac ON st.accountID = ac.accountID  
+                                            JOIN schooltbl s ON st.schoolID = s.schoolID
+                                        WHERE 
+                                            s.accountID = ?
+                                        LIMIT ?, ?"); 
+                    // Execution of getting srudent count
+                    $total_stud_stmt = $con->prepare($total_stud_query);
+                    $total_stud_stmt->bind_param("i", $schoolID);
+                    $total_stud_stmt->execute();
+                    $total_stud_result = $total_stud_stmt->get_result();
+                    $total_items = $total_stud_result->fetch_row()[0];
+
+                    // Execution of getting students' details
+                    $offset = 0;
+                    $students->bind_param("iii", $accountid, $offset, $items_per_page);
+                    $students->execute();
+                    $result = $students->get_result();
+
+                    $rows = array(); // Storage of student details
+                    while($row = $result->fetch_assoc()) {
+                        $rows[] = $row; // Add next row queried to array
+                        // Loop thru the details of each row ... 
+                        foreach($row as $key=>$value) {
+                            if($key == 'hoursRendered' & !$value){
+                                    $value = 0;
+                            }
+                        }
+
+                        // Print to website each student and their details
+                        echo "
+                            <tr>
+                                <td><input type=\"checkbox\"></td>
+                                <td>
+                                    <p style=\"margin: 0px;\"><strong>".$row['studentName']."</strong></p><small>".$row['email']."</small>
+                                </td>
+                                <td>".$row['batchID']."</td>
+                                <td><span style=\"padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;\">".$row['status']."</span></td>
+                                <td>".$row['course']."</td>
+                                <td>".$row['hoursRendered']."&nbsp;</td>
+                                <td>".$row['duration']."</td>
+                            </tr>
+                        ";
+                    }
+
+                    $total_stud_stmt->close();
+                    $students->close();  
+                ?>
                 </tbody>
             </table>
         </div>
         <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                <!-- <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                 <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li> -->
+                <?php
+                    $total_pages = ceil($total_items / $items_per_page);
+
+                    if ($total_pages > 1) {
+                        // Validate the current page number
+                        $page = max($page, 1);
+                        $page = min($page, $total_pages);
+                    
+                        // Generate the "Previous" button link
+                        $prev_page = $page - 1;
+                        if ($prev_page >= 1) {
+                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="school-dashboard.php?page=' . $prev_page . '">«</a></li>';
+                        }
+                    
+                        // Create the pagination links
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            if ($i == $page) {
+                                echo '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+                            } else {
+                                echo '<li class="page-item"><a class="page-link" href="school-dashboard.php?page=' . $i . '">' . $i . '</a></li>';
+                            }
+                        }
+                    
+                        // Generate the "Next" button link
+                        $next_page = $page + 1;
+                        if ($next_page <= $total_pages) {
+                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="school-dashboard.php?page=' . $next_page . '">»</a></li>';
+                        }
+                    }
+                ?>
             </ul>
         </nav>
     </div>

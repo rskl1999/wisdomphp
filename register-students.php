@@ -35,7 +35,7 @@
         echo "<br/>";
 
         // Applicant table req'd params
-        $schoolID = $_SESSION['accountID'];
+        $schoolID = $_SESSION['schoolID'];
         $batchID = 1;
         $programAdviser = $_POST['advFname']." ".$_POST['advLname'];    // Type: str
         $adviserEmail = $_POST['advEmail'];                             // Type: str
@@ -70,10 +70,10 @@
         // DEBUG: print out student details -- header --
         echo "<hr/><br/>Students<br/>";
 
-        // NOTE: to future dev(s): change arbitary values
-        $accountID = 17; // arbitrary value
+        // NOTE to future dev(s): change arbitary values
+        $accountID = $_SESSION['accountID'];
         $batchID = 1; // arbitrary value
-        $schoolID = $_SESSION['accountID'];
+        $schoolID = $_SESSION['schoolID'];
         $student_names = array();
         foreach($_POST["fname"] as $key=>$value) {
             array_push($student_names, $value." ".$_POST['lname'][$key]);
@@ -105,7 +105,7 @@
         // Redirect to school dashboard after application
         header("Location:school-dashboard.php");
     }
-    // Else return to login page.
+    // If school acc is not logged in, return to login page.
     else {
         header("Location:login.php");
     }
