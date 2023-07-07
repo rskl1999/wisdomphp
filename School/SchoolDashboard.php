@@ -202,20 +202,18 @@
                                         LIMIT ?, ?"); 
                     // Execution of getting srudent count
                     $total_stud_stmt = $con->prepare($total_stud_query);
-                    $total_stud_stmt->bind_param("i", $schoolID);
+                    $total_stud_stmt->bind_param("i", $schoolid);
                     $total_stud_stmt->execute();
                     $total_stud_result = $total_stud_stmt->get_result();
                     $total_items = $total_stud_result->fetch_row()[0];
 
                     // Execution of getting students' details
-                    $offset = 0;
+                    $offset = ($page - 1) * $items_per_page;
                     $students->bind_param("iii", $accountid, $offset, $items_per_page);
                     $students->execute();
                     $result = $students->get_result();
 
-                    $rows = array(); // Storage of student details
                     while($row = $result->fetch_assoc()) {
-                        $rows[] = $row; // Add next row queried to array
                         // Loop thru the details of each row ... 
                         foreach($row as $key=>$value) {
                             if($key == 'hoursRendered' & !$value){
@@ -247,13 +245,6 @@
         </div>
         <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
             <ul class="pagination">
-                <!-- <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li> -->
                 <?php
                     $total_pages = ceil($total_items / $items_per_page);
 
@@ -265,22 +256,22 @@
                         // Generate the "Previous" button link
                         $prev_page = $page - 1;
                         if ($prev_page >= 1) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="school-dashboard.php?page=' . $prev_page . '">«</a></li>';
+                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="SchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
                         }
                     
                         // Create the pagination links
                         for ($i = 1; $i <= $total_pages; $i++) {
                             if ($i == $page) {
-                                echo '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+                                echo '<li class="page-item active"><a class="page-link" href="#StudentTable">' . $i. '</a></li>';
                             } else {
-                                echo '<li class="page-item"><a class="page-link" href="school-dashboard.php?page=' . $i . '">' . $i . '</a></li>';
+                                echo '<li class="page-item"><a class="page-link" href="SchoolDashboard.php?page=' .$i. '">'.$i. '</a></li>';
                             }
                         }
                     
                         // Generate the "Next" button link
                         $next_page = $page + 1;
                         if ($next_page <= $total_pages) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="school-dashboard.php?page=' . $next_page . '">»</a></li>';
+                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="SchoolDashboard.php?page=' . $next_page . '">»</a></li>';
                         }
                     }
                 ?>

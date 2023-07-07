@@ -199,22 +199,20 @@
                                         WHERE 
                                             s.accountID = ?
                                         LIMIT ?, ?"); 
-                    // Execution of getting srudent count
+                    // Execution of getting student count
                     $total_stud_stmt = $con->prepare($total_stud_query);
-                    $total_stud_stmt->bind_param("i", $schoolID);
+                    $total_stud_stmt->bind_param("i", $schoolid);
                     $total_stud_stmt->execute();
                     $total_stud_result = $total_stud_stmt->get_result();
                     $total_items = $total_stud_result->fetch_row()[0];
 
                     // Execution of getting students' details
-                    $offset = 0;
+                    $offset = ($page - 1) * $items_per_page;
                     $students->bind_param("iii", $accountid, $offset, $items_per_page);
                     $students->execute();
                     $result = $students->get_result();
 
-                    $rows = array(); // Storage of student details
                     while($row = $result->fetch_assoc()) {
-                        $rows[] = $row; // Add next row queried to array
                         // Loop thru the details of each row ... 
                         foreach($row as $key=>$value) {
                             if($key == 'hoursRendered' & !$value){

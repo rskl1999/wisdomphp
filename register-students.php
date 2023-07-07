@@ -36,7 +36,7 @@
 
         // Applicant table req'd params
         $schoolID = $_SESSION['schoolID'];
-        $batchID = 1;
+        $batchID = 1; // TODO: Replace arbitrary value (1) with an inputted value
         $programAdviser = $_POST['advFname']." ".$_POST['advLname'];    // Type: str
         $adviserEmail = $_POST['advEmail'];                             // Type: str
         $dateSubmitted = date("Y-m-d");                                 // Type: str
