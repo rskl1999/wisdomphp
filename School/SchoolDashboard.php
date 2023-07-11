@@ -107,8 +107,8 @@
             <li class="nav-item d-flex justify-content-center align-items-center dropdown no-arrow mx-1"><a href="SchoolAddStudent.php"><button class="btn btn-primary" type="button" style="background: #0017eb;border-radius: 35px;width: 130px;">Add Student</button></a></li>
             <li class="nav-item dropdown no-arrow mx-1"></li>
             <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="school-assets/img/avatars/avatar1.jpeg" /></a>
-                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="SchoolEditProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="SchoolDashboard"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="../School-Logo/<?php echo $_SESSION['schoolLogo'];?>" /></a>
+                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="SchoolEditProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="SchoolDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
                 </div>
@@ -242,41 +242,42 @@
                 ?>
                 </tbody>
             </table>
-        </div>
-        <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
-            <ul class="pagination">
-                <?php
-                    $total_pages = ceil($total_items / $items_per_page);
 
-                    if ($total_pages > 1) {
-                        // Validate the current page number
-                        $page = max($page, 1);
-                        $page = min($page, $total_pages);
-                    
-                        // Generate the "Previous" button link
-                        $prev_page = $page - 1;
-                        if ($prev_page >= 1) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="SchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
-                        }
-                    
-                        // Create the pagination links
-                        for ($i = 1; $i <= $total_pages; $i++) {
-                            if ($i == $page) {
-                                echo '<li class="page-item active"><a class="page-link" href="#StudentTable">' . $i. '</a></li>';
-                            } else {
-                                echo '<li class="page-item"><a class="page-link" href="SchoolDashboard.php?page=' .$i. '">'.$i. '</a></li>';
+            <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
+                <ul class="pagination">
+                    <?php
+                        $total_pages = ceil($total_items / $items_per_page);
+
+                        if ($total_pages > 1) {
+                            // Validate the current page number
+                            $page = max($page, 1);
+                            $page = min($page, $total_pages);
+                        
+                            // Generate the "Previous" button link
+                            $prev_page = $page - 1;
+                            if ($prev_page >= 1) {
+                                echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="SchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
+                            }
+                        
+                            // Create the pagination links
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                if ($i == $page) {
+                                    echo '<li class="page-item active"><a class="page-link" href="#StudentTable">' . $i. '</a></li>';
+                                } else {
+                                    echo '<li class="page-item"><a class="page-link" href="SchoolDashboard.php?page=' .$i. '">'.$i. '</a></li>';
+                                }
+                            }
+                        
+                            // Generate the "Next" button link
+                            $next_page = $page + 1;
+                            if ($next_page <= $total_pages) {
+                                echo '<li class="page-item"><a class="page-link" aria-label="Next" href="SchoolDashboard.php?page=' . $next_page . '">»</a></li>';
                             }
                         }
-                    
-                        // Generate the "Next" button link
-                        $next_page = $page + 1;
-                        if ($next_page <= $total_pages) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="SchoolDashboard.php?page=' . $next_page . '">»</a></li>';
-                        }
-                    }
-                ?>
-            </ul>
-        </nav>
+                    ?>
+                </ul>
+            </nav>
+        </div>
     </div>
     <script src="school-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
