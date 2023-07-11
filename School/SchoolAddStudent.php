@@ -86,12 +86,6 @@ else {
                     </div>
                 </div>
                 <div id="addStudent" style="padding: 40px 0px;">
-                    <!-- 
-                        TODO: IDFK KUNG ANONG GAGAWIN:
-                        'submit' only records one entry of student info.
-                        might have somthing to do with detection of each
-                        dynamically added row; IDFK I'm POOFED~
-                    -->
                     <div id="addStudent-1" style="padding: 40px 10px;">
                         <h3><strong>Add Student</strong></h3>
                         <div class="row">
