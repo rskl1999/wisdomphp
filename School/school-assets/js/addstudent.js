@@ -8,17 +8,14 @@ function addStudent() {
 
   // Add the new row's HTML
   newRow.innerHTML = `
-    <div class="col">
-      <label class="form-label"><strong>First Name</strong></label>
-      <input class="form-control" type="text" style="height: 45px;border-radius: 35px;" placeholder="First Name" required />
+    <div class="col" style="padding: 5px 10px 5px 15px">
+      <input class="form-control" name="fname[]" type="text" style="height: 45px;border-radius: 35px;" placeholder="First Name" required="" />
     </div>
-    <div class="col">
-      <label class="form-label"><strong>Last Name</strong></label>
-      <input class="form-control" type="text" style="height: 45px;border-radius: 35px;" placeholder="Last Name" required />
+    <div class="col" style="padding: 5px 10px 5px 15px">
+      <input class="form-control" name="lname[]" type="text" style="height: 45px;border-radius: 35px;" placeholder="Last Name" required="" />
     </div>
-    <div class="col">
-      <label class="form-label"><strong>Email </strong></label>
-      <input class="form-control" type="email" style="height: 45px;border-radius: 35px;" placeholder="Email" required />
+    <div class="col" style="padding: 5px 10px 5px 15px">
+      <input class="form-control" name="email[]" type="email" style="height: 45px;border-radius: 35px;" placeholder="Email" required="" />
     </div>
     <div class="col d-flex align-items-end align-content-start">
       <button class="btn btn-danger delete-row" type="button" style="background: #dc3545;height: 45px;border-radius: 35px;border-width: 2px;border-color: #dc3545;color: #ffffff;margin: 0px 12px;width: 122px;">
