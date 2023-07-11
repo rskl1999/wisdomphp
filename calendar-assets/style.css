@@ -30,7 +30,7 @@
   }
 
 .calendar {
-    padding: 25px;
+    padding: 15px;
 }
     
 .calendar ul {
@@ -48,7 +48,7 @@
 .calendar li{
     color: #333;
     width: calc(100% / 7);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 
 .calendar .weeks li {
@@ -62,8 +62,8 @@
     cursor: pointer;
     position: relative;
     margin-top: 10px;
-    width: 120px;
-    height: 130px;
+    width: 100px;
+    height: 120px;
     margin-right: 12px;
 }
 
@@ -73,7 +73,7 @@
     box-shadow: 0 8px 8px rgba(0,0,0,0.12);
     display: flex;
     align-items: center;
-    padding: 80px 3px 1px 75px;
+    padding: 72px 3px 1px 57px;
     justify-content: space-between;
 }
 
@@ -88,8 +88,8 @@
 .days li::before {
     position: absolute;
     content: "";
-    width: 120px;
-    height: 130px;
+    width: 100px;
+    height: 120px;
     z-index: -1;
     border-radius: 20px;
     left: 0;
