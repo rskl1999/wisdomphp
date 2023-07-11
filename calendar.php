@@ -45,7 +45,7 @@
                                 <span id="next" class="material-symbols-rounded" style="margin-left: 54%;">&rsaquo;</span>
                             </div>
                         <div class="calendar">
-                        <ul class="weeks" style="margin-right:0; margin-left:0;">
+                        <ul class="weeks" style="margin-right:25px; margin-left:15px;">
                             <li>S</li>
                             <li>M</li>
                             <li>T</li>
