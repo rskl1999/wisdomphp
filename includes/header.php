@@ -16,7 +16,7 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md py-3" style="font-family: Poppins, sans-serif; box-shadow: 0px 0px 2px rgba(33,37,41,0.66);">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.php"><img src="assets/img/logo_black.png" width="140" height="29"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="indexnew.php"><img src="assets/img/logo_black.png" width="140" height="29"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="About Us.php">About</a></li>
@@ -25,7 +25,7 @@
                         <div class="nav-item dropdown"><a class="dropdown-toggle text-decoration-none" aria-expanded="false" data-bs-toggle="dropdown" href="Individual Sub-Categories.php" style="color: rgba(0,0,0,0.55);">Categories</a>
                             <div class="dropdown-menu" style="padding: 40px 15px;width: 800px;max-width: 800px;min-width: 500px;margin-top: 15px;">
                                
-                            <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;">Computer Science and Information Technology</h1>
+                            <!-- <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;">Computer Science and Information Technology</h1> -->
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6 d-flex">
@@ -38,7 +38,7 @@
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-th-large" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
                                             <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Robotics</h1>
+                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">3D Printing</h1>
                                                     <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
                                                 </a></div>
                                         </div>
@@ -48,7 +48,7 @@
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
                                             <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Front-End</h1></a>
+                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Programming</h1></a>
                                             <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@
                                         <div class="col-md-6 d-flex">
                                         <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i></a>
                                         <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div style="margin-left: 10px;"><a href="#" class="text-decoration-none"></a>
-                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Networks</h1></a>
+                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Graphic Design</h1></a>
                                         <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
                                                 </a></div>
                                         </div>
@@ -69,13 +69,13 @@
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-code-branch" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
                                             <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Web Back-End</h1></a>
+                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Animation</h1></a>
                                             <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement the server-side components of a website.</p></a>
                                                 </a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;margin-top: 15px;">Education, Art and Design</h1>
+                                <!-- <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;margin-top: 15px;">Education, Art and Design</h1>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6 d-flex">
@@ -107,12 +107,15 @@
                                                 </a></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="Alumni.php">Alumni</a></li>
                     <li class="nav-item"><a class="nav-link" href="Contact Us.php">Contact</a></li>
-                </ul><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;background: #0017eb;font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;">Join Now</button><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;background: rgba(0,23,235,0);font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;color: #0017eb;border-width: 2px;border-color: #0017eb;font-weight: bold;">Sign in</button>
+                </ul>
+                <a href = "register.php"><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;margin-right: 1px; background: #0017eb;font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;">Join Now</button></a>
+                <a href = "login.php"><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;background: rgba(0,23,235,0);font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;color: #0017eb;border-width: 2px;border-color: #0017eb;font-weight: bold;">Sign in</button></a>
             </div>
         </div>
     </nav>
