@@ -25,7 +25,7 @@
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6"><img src="assets/img/logo_white.png" width="140" height="29"></h3>
-                    <p>FortWorth Inc. (PCMed - Technokids Philippines) is a premier I.T. company in the country specializing in I.T. solutions and providing I.T. education to our partners.</p>
+                    <p style= "text-align: justify";>FortWorth Inc. (PCMed - Technokids Philippines) is a premier I.T. company in the country specializing in I.T. solutions and providing I.T. education to our partners.</p>
 
                     <!--<h3 class="fs-6"><strong>Follow Us</strong></h3> -->
                     <div class="footer-col">
@@ -46,6 +46,7 @@
                             <li> <a href="index.php" class="text-white text-decoration-none fs-6">Home </a></li>
                             <li> <a href="About Us.php" class="text-white text-decoration-none fs-6">About </a></li>
                             <li> <a href="" class="text-white text-decoration-none fs-6">Categories</li>
+                            <li> <a href="Alumni.php" class="text-white text-decoration-none fs-6">Alumni</a></li>
                             <li> <a href="Contact Us.php" class="text-white text-decoration-none fs-6">Contact</a></li>
                          </ul>
                     </div>
@@ -55,13 +56,12 @@
                     <h3 class="fs-6"><strong>Categories</strong></h3>
                     <div class="footer-col">
                         <ul class="list-unstyled">
-                            <li><a href="#" class="text-white text-decoration-none fs-6">Web Development </a></li>
                             <li><a href="#" class="text-white text-decoration-none fs-6">Robotics </a></li>
-                            <li><a href="#" class="text-white text-decoration-none fs-6">Networking </a></li>
-                            <li><a href="#" class="text-white text-decoration-none fs-6">Graphic Design </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">3D Printing </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Programming </a></li>
+                            <li><a href="#" class="text-white text-decoration-none fs-6">Graphic Designing </a></li>
                             <li><a href="#" class="text-white text-decoration-none fs-6">Animation </a></li>
-                            <li><a href="#" class="text-white text-decoration-none fs-6">Research </a></li>
-                            <li><a href="#" class="text-white text-decoration-none fs-6">Ed-Tech </a></li>
+                    
                         </ul>
                     </div>
                 </div>
