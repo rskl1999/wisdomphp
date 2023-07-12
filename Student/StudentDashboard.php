@@ -108,14 +108,14 @@
     <div class="container d-flex justify-content-center align-items-center" style="padding: 20px 12px;">
         <div class="row justify-content-center">
             <div class="col-md-6 mb-4">
-                <a href="#" class="card text-white" style="border-radius: 25px; border-style: none; background-color: #1b3996; text-decoration: none;">
+                <a href="StudentLogs.php" class="card text-white" style="border-radius: 25px; border-style: none; background-color: #1b3996; text-decoration: none;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center" style="border-radius: 25px; box-shadow: 0px 4px 20px rgba(0,0,0,0.15); border-style: none; height: 230px; width: 600px;">
                         <h5 class="card-title text-center" style="font-size: 42px; font-weight: bold; font-family: Poppins, sans-serif;">Daily Logs</h5>
                     </div>
                 </a>
             </div>
             <div class="col-md-6 mb-4">
-                <a href="#" class="card text-white" style="border-radius: 25px; border-style: none; background-color: #5cb8ff; text-decoration: none;">
+                <a href="StudentTasks.php" class="card text-white" style="border-radius: 25px; border-style: none; background-color: #5cb8ff; text-decoration: none;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center" style="border-radius: 25px; box-shadow: 0px 4px 20px rgba(0,0,0,0.15); border-style: none; height: 230px; width: 600px;">
                         <h5 class="card-title text-center" style="font-size: 42px;font-weight: bold; font-family: Poppins, sans-serif;">Daily Tasks and Documentation</h5>
                     </div>
