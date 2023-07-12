@@ -11,17 +11,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>wisdom-1</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="hr-assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,700,800&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="hr-assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="hr-assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="hr-assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="hr-assets/css/animate.min.css">
+    <link rel="stylesheet" href="hr-assets/css/2-columns-media-image-video-carousel-map-2-columns-media1.css">
+    <link rel="stylesheet" href="hr-assets/css/Bold-BS4-Animated-Back-To-Top.css">
+    <link rel="stylesheet" href="hr-assets/css/Bootstrap-Cards-v2.css">
+    <link rel="stylesheet" href="hr-assets/css/Documents-App-Browser.css">
+    <link rel="stylesheet" href="hr-assets/css/iframe.css">
+    <link rel="stylesheet" href="hr-assets/css/Navbar-Centered-Links-icons.css">
+    <link rel="stylesheet" href="hr-assets/css/untitled.css">
 </head>
 
 <body>
-    <div>
-        <section id="sec-header" style="height: 150px;">
-            <div></div>
-        </section>
-        <section id="table">
+    <nav class="navbar navbar-light navbar-expand bg-white topbar static-top">
+        <div class="container-fluid"><img src="hr-assets/img/logo.png" width="150" height="31" style="width: 129px;height: 27px;">
+            <ul class="navbar-nav flex-nowrap ms-auto">
+                <li class="nav-item dropdown no-arrow">
+                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="hr-assets/img/avatars/side%20logo.png"></a>
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="banner" style="height: 250px;background: url(&quot;hr-assets/img/New%20Project.jpg&quot;), #d3edff;"></div>
             <div class="container" style="padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student Applicants</h1>
                 <div></div>
@@ -120,6 +139,15 @@
         </section>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
+    <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
+    <script src="assets/js/Profile-Edit-Form-profile.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/untitled.js"></script>
 </body>
 
 </html>
