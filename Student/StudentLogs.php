@@ -40,8 +40,8 @@
                         <div class="wrapper">
                             <div class="icons">
                                 <h1 class="current-date" style="font-family: Poppins,sans-serif; font-weight:bold;"></h1>
-                                <span id="prev" class="material-symbols-rounded" style="margin-left: 51%;">&lsaquo;</span>
-                                <span id="next" class="material-symbols-rounded" style="margin-left: 54%;">&rsaquo;</span>
+                                <span id="prev" class="material-symbols-rounded" style="margin-left: 47%;">&lsaquo;</span>
+                                <span id="next" class="material-symbols-rounded" style="margin-left: 50%;">&rsaquo;</span>
                             </div>
                         <div class="calendar">
                         <ul class="weeks" style="margin-right:25px; margin-left:15px;">
@@ -87,10 +87,7 @@
                                     <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time In</label><input type="time" style="width: 100%;height: 37px;border-radius: 25px;padding: 16px;border: 1px solid #dadada;"></div>
                                     <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time Out</label><input type="time" style="width: 100%;border-radius: 25px;padding: 16px;height: 37px;border: 1px solid rgb(218,218,218);"></div>
                                 </div>
-                            </div><button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style="margin-left: 5px;">
-                                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                    <path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z"></path>
-                                </svg></button>
+                            </div><button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
                         </div>
                         <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                             <div>
