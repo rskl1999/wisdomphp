@@ -1,6 +1,26 @@
 <?php
+    require_once('../connection.php');
+    session_start();
 
+    // include('../checkLogin.php');
 
+    $accoundid = $_SESSION['accountID'];
+
+    // Query for List of Accounts
+    $account_query = "SELECT accountID, email, role
+                    FROM accounttbl";
+    $account_stmt = $con->prepare($account_query);
+    $account_stmt->execute();
+    $account_stmt_result = $account_stmt->get_result();
+    $accounts_detail = array();
+    while($account_row = $account_stmt_result->fetch_assoc()) {
+        $accounts_detail[] = $account_row; // Store query result inside array
+    }
+
+    $account_stmt->close();
+
+    $total_items = count($accounts_detail);
+    $items_per_page = 3;
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +62,9 @@
     </div>
         <section id="table">
             <div class="container" style="border-color: rgb(233,78,80);">
+                <?php
+
+                ?>
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 40px;margin-top: 30px;">Account Roles</h1>
                 <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);">
                     <table class="table">
@@ -55,47 +78,83 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;">Account Name</h1>
-                                </td>
-                                <td>email@gmail.com</td>
-                                <td>Student</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 50px;padding: 10px;margin-right: 15px;"><i class="far fa-edit"></i></button><button class="btn btn-primary" type="button" style="background: rgb(233,78,80);border-radius: .75rem;width: 50px;padding: 10px;border-style: solid;border-color: #E94E50;"><i class="far fa-trash-alt"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;">Account Name</h1>
-                                </td>
-                                <td>email@gmail.com</td>
-                                <td>Student</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 50px;padding: 10px;margin-right: 15px;"><i class="far fa-edit"></i></button><button class="btn btn-primary" type="button" style="background: rgb(233,78,80);border-radius: .75rem;width: 50px;padding: 10px;border-style: solid;border-color: #E94E50;"><i class="far fa-trash-alt"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;">Account Name</h1>
-                                </td>
-                                <td>email@gmail.com</td>
-                                <td>Student</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 50px;padding: 10px;margin-right: 15px;"><i class="far fa-edit"></i></button><button class="btn btn-primary" type="button" style="background: rgb(233,78,80);border-radius: .75rem;width: 50px;padding: 10px;border-style: solid;border-color: #E94E50;"><i class="far fa-trash-alt"></i></button></td>
-                            </tr>
+                            <?php 
+                                $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+                                
+                                foreach($accounts_detail as $account) {
+                                    echo " <tr>
+                                            <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
+                                            <td><h1 style=\"font-size: 16px;\">".$account['accountID']."</h1></td>
+                                            <td>".$account['email']."</td>
+                                            <td>".$account['role']."</td>
+                                            <!-- Buttons -->
+                                            <td>
+                                                <a href=\"AdminEditRole.php?i=".$account['accountID']."\">
+                                                    <button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 50px;padding: 10px;margin-right: 15px;\">
+                                                        <i class=\"far fa-edit\"></i>
+                                                    </button>
+                                                </a>
+                                                <a onclick=\"confirmDelete()\">
+                                                    <button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(233,78,80);border-radius: .75rem;width: 50px;padding: 10px;border-style: solid;border-color: #E94E50;\">
+                                                        <i class=\"far fa-trash-alt\"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>";
+                                    
+                                }
+
+                            ?>
                         </tbody>
                     </table>
                 </div>
                 <nav class="text-center" style="margin-left: 40%;margin-top: 3%;margin-right: 40%;">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                        <?php
+                            $total_pages = ceil($total_items / $items_per_page);
+
+                            if ($total_pages > 1) {
+                                // Validate the current page number
+                                $page = max($page, 1);
+                                $page = min($page, $total_pages);
+                            
+                                // Generate the "Previous" button link
+                                $prev_page = $page - 1;
+                                if ($prev_page >= 1) {
+                                    echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="adminDashboard.php?page=' . $prev_page . '">«</a></li>';
+                                }
+                            
+                                // Create the pagination links
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    if ($i == $page) {
+                                        echo '<li class="page-item active"><a class="page-link" href="#">' . $i. '</a></li>';
+                                    } else {
+                                        echo '<li class="page-item"><a class="page-link" href="adminDashboard.php?page=' .$i. '">'.$i. '</a></li>';
+                                    }
+                                }
+                            
+                                // Generate the "Next" button link
+                                $next_page = $page + 1;
+                                if ($next_page <= $total_pages) {
+                                    echo '<li class="page-item"><a class="page-link" aria-label="Next" href="admindashboard.php?page=' . $next_page . '">»</a></li>';
+                                }
+                            }
+                        ?>
                     </ul>
                 </nav>
+
+                <script>
+                    function confirmDelete() {
+                        var response = confirm('Are you sure you would like to delete this account?');
+                        if(response) {
+                            fetch('../account-delete.php')
+                                .then(response => response.text())
+                                .then(data => {
+                                    console.log(data);
+                                });
+                        }
+                    }
+                </script>
             </div>
         </section>
     </div>
