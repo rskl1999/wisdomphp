@@ -27,29 +27,29 @@
         $passwordhash = password_hash($password, PASSWORD_DEFAULT);
         $role = 'school';
 
-            // Create new School Role
-            $stmt = $con->prepare("INSERT INTO accounttbl (email, pass, role) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $email, $passwordhash, $role);
-            $stmt->execute();
+        // Create new School Role
+        $stmt = $con->prepare("INSERT INTO accounttbl (email, pass, role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $email, $passwordhash, $role);
+        $stmt->execute();
 
-            $sql = "SELECT accountID FROM accounttbl WHERE email = '$email'";
-            $result = mysqli_query($con, $sql);
-            $maxID = mysqli_fetch_assoc($result);
-            $userID = $maxID["accountID"];
+        $sql = "SELECT accountID FROM accounttbl WHERE email = '$email'";
+        $result = mysqli_query($con, $sql);
+        $maxID = mysqli_fetch_assoc($result);
+        $userID = $maxID["accountID"];
 
-            unset($_SESSION['email']);
-            unset($_SESSION['password']);
-            
-            $stmt = $con->prepare("INSERT INTO schooltbl (accountID, schoolName, address, contact_info, schoolLogo) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
-            $stmt->execute();
-    
-            $stmt->close();
-            $con->close();
+        unset($_SESSION['email']);
+        unset($_SESSION['password']);
+        
+        $stmt = $con->prepare("INSERT INTO schooltbl (accountID, schoolName, address, contact_info, schoolLogo) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
+        $stmt->execute();
 
-            unset($_SESSION['schoolName']);
-            unset($_SESSION['address']); 
-            unset($_SESSION['contact-no']);
+        $stmt->close();
+        $con->close();
+
+        unset($_SESSION['schoolName']);
+        unset($_SESSION['address']); 
+        unset($_SESSION['contact-no']);
             
 
         $_SESSION['success'] = "Account Created Succesfully";

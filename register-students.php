@@ -49,7 +49,7 @@
             ."Advisor: ".$programAdviser."<br/>"
             ."Advisor Email: ".$adviserEmail."<br/>"
             ."Date Submitted: ".$dateSubmitted."<br/>"
-            ."Duaration: ".$duration;
+            ."Duration: ".$duration;
 
         // Upload application data into database
         $insert_applicant_query = $con->prepare("INSERT INTO applicanttbl (schoolID, batchID, programAdviser, adviserEmail, dateSubmitted, duration) VALUES (?, ?, ?, ?, ?, ?)");
@@ -103,7 +103,7 @@
         $con->close();
 
         // Redirect to school dashboard after application
-        header("Location:school-dashboard.php");
+        header("Location:School/SchoolDashboard.php");
     }
     // If school acc is not logged in, return to login page.
     else {

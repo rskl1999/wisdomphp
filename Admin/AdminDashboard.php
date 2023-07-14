@@ -20,7 +20,7 @@
     $account_stmt->close();
 
     $total_items = count($accounts_detail);
-    $items_per_page = 3;
+    $items_per_page = 10;
 ?>
 
 <!DOCTYPE html>
@@ -80,16 +80,17 @@
                         <tbody>
                             <?php 
                                 $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+                                $offset = ($page - 1) * $items_per_page;
                                 
-                                foreach($accounts_detail as $account) {
+                                for($i = $offset; ($i < $total_items - 1) & ($i < $offset + $items_per_page); $i++) {
                                     echo " <tr>
                                             <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
-                                            <td><h1 style=\"font-size: 16px;\">".$account['accountID']."</h1></td>
-                                            <td>".$account['email']."</td>
-                                            <td>".$account['role']."</td>
+                                            <td><h1 style=\"font-size: 16px;\">".$accounts_detail[$i]['accountID']."</h1></td>
+                                            <td>".$accounts_detail[$i]['email']."</td>
+                                            <td>".$accounts_detail[$i]['role']."</td>
                                             <!-- Buttons -->
                                             <td>
-                                                <a href=\"AdminEditRole.php?i=".$account['accountID']."\">
+                                                <a href=\"AdminEditRole.php?i=".$accounts_detail[$i]['accountID']."\">
                                                     <button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 50px;padding: 10px;margin-right: 15px;\">
                                                         <i class=\"far fa-edit\"></i>
                                                     </button>
