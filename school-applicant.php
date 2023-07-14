@@ -117,6 +117,8 @@
                     if ($column_count % 4 == 0) {
                         echo '<div class="row pb-5 mb-4">';
                     }
+                
+                mysqli_close($con);
             ?> 
                 <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                     <!-- Card-->

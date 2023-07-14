@@ -77,6 +77,11 @@
     $row = $result->fetch_assoc();
     $_SESSION['schoolLogo'] = $row['schoolLogo'];
     $_SESSION['schoolID'] = $row['schoolID'];
+
+    $Numpending->close();
+    $Numenrolled->close();
+    $total->close();
+    $schoolLogo->close();
 ?>
 
 <!DOCTYPE html>
@@ -271,7 +276,7 @@
                         if ($next_page <= $total_pages) {
                             echo '<li class="page-item"><a class="page-link" aria-label="Next" href="school-dashboard.php?page=' . $next_page . '">»</a></li>';
                         }
-                    }
+                    } 
                 ?>
                 </ul>
             </nav>

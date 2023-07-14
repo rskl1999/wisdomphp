@@ -11,6 +11,7 @@ $moa->bind_param("i", $accountid);
 $moa->execute();
 $result = $moa->get_result();
 $row = $result->fetch_assoc();
+$moa->close();
 $schoolmoa = $row['moa'];
 
 // Check if school has no MOA 

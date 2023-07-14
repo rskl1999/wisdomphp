@@ -27,7 +27,6 @@
             }
         }
         else{
-            echo "<script>alert('HERE');</script>";
             header("Location:index.php");
         }
     

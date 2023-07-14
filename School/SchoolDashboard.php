@@ -16,13 +16,13 @@
 
         // If account ID is not located in database ... return to index.php
         if(!$accountID){
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit(); // Added exit() to stop further execution
         }
     }
     // Else return to index.php
     else{
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit(); // Added exit() to stop further execution
     }
 
@@ -60,21 +60,25 @@
     $Numpending->execute();
     $result = $Numpending->get_result();
     $row = $result->fetch_assoc();
+    $Numpending->close();
     $pendingNum = $row['pendingNum'];
 
     $Numenrolled->execute();
     $result = $Numenrolled->get_result();
     $row = $result->fetch_assoc();
+    $Numenrolled->close();
     $enrolled = $row['enrolled'];
 
     $total->execute();
     $result = $total->get_result();
     $row = $result->fetch_assoc();
+    $total->close();
     $studentTotal = $row['studTotal'];
 
     $schoolLogo->execute();
     $result = $schoolLogo->get_result();
     $row = $result->fetch_assoc();
+    $schoolLogo->close();
     $_SESSION['schoolLogo'] = $row['schoolLogo'];
     $_SESSION['schoolID'] = $row['schoolID'];
 
