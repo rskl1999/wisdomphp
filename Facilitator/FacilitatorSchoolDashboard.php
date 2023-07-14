@@ -1,6 +1,61 @@
 <?php
+    require_once('../connection.php');
+    session_start();
 
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accounID'])) {
+        $accountID = $_SESSION['accounID'];
 
+        $sql = "SELECT accountID FROM accounttbl WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to login page
+        if(!$accountID){
+            // header("Location: ../login.php");
+            // exit(); // Added exit() to stop further execution
+        }
+
+    }
+    // Else return to index.php
+    else{
+        // header("Location: ../login.php");
+        // exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+    $schools_list = array();
+
+    // Initializing variables
+    $card_count_per_page = 8;
+    $card_count_per_row = 4;
+
+    // Count Total Number of Schools Registered in the Database
+    $SchoolNum = $con->prepare("SELECT COUNT(schoolID) AS schoolCount FROM schooltbl");
+    $SchoolNum->execute();
+    $SchoolNum_result = $SchoolNum->get_result();
+    $SchoolNum_row = $SchoolNum_result->fetch_assoc();
+    $SchoolNum->close();
+    $schoolCount = $SchoolNum_row['schoolCount'];
+
+    $card_details = array();
+    // Get School Names with their IDs and Addresses
+    $SchoolQuery = $con->prepare("SELECT schoolName, schoolID, address, schoolLogo FROM schooltbl");
+    $SchoolQuery->execute();
+    $SchoolQuery_result = $SchoolQuery->get_result();
+
+    while($SchoolQuery_row = $SchoolQuery_result->fetch_assoc()) {
+        $card_details[] = $SchoolQuery_row;
+    }
+
+    $SchoolQuery->close();
+
+    // Page offset for displaying card in specific pages
+    $page_offset = 0
 ?>
 
 <!DOCTYPE html>
@@ -25,108 +80,97 @@
 
 </head>
 
-<body style="color: rgb(0,0,0);"><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
-    <div class="container-fluid"><a href="FacilitatorSchoolDashboard.php"><img src="assets/img/logo_black.png" width="140" height="29" /></a>
-        <ul class="navbar-nav flex-nowrap ms-auto">
-            <li class="nav-item dropdown no-arrow mx-1"></li>
-            <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg" /></a>
-                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="FacilitatorSchoolDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
-    <div id="banner" style="height: 250px;background: url(&quot;assets/img/banner-bg.png&quot;) center / cover no-repeat, #d3edff;">
-    </div>
+<body>
+    <div>
+        <section id="sec-header" style="height: 150px;">
+            <div>
+            </div>
+        </section>
         <section id="acc-form">
             <div class="container">
-                <h1 style="text-align: center;font-weight: bold;margin-top:50px;margin-bottom: 39px;">School Partners</h1>
-                <div class="row" style="margin-top: 3%;">
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
+                <h1 style="text-align: center;font-weight: bold;margin-bottom: 39px;">School Partners</h1>
+
+                    <div id="schoolCards">
+                        <?php
+                            // Card Paging
+                            $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+
+                            // Setting page offset based on which page number it is currently in
+                            $page_offset = ($page - 1) * $card_count_per_page;
+
+                            // Define number of rows 
+                            $no_of_row = $card_count_per_page / $card_count_per_row;
+                            
+                            // Create rows
+                            for($i = 0; $i < $no_of_row; $i++) {
+                                echo '<div class="row">';
+                                // Create cards
+                                for($c = 0; $c < $card_count_per_row; $c++) {
+                                    // Break out if end of array reached
+                                    if(($page_offset + $i*$card_count_per_row) + $c >= count($card_details)) break;
+
+                                    // Current card index at the array
+                                    $curr_card = $card_details[$page_offset + ($i*$card_count_per_row) + $c];
+
+                                    echo "
+                                        <div class=\"col-md-3\">
+                                            <a href=\"FacilitatorStudentList.php?school_index=".$card_details[$page_offset + ($i*$card_count_per_row) + $c]['schoolID']."\" style=\"text-decoration: none; color:black;\">
+                                                <div class=\"card\" style=\"border-radius: 25px;border-style: none;\">
+                                                    <div class=\"card-body\" style=\"border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;\"><img src=\"../School-Logo/".$curr_card['schoolLogo']."\" width=\"100\" height=\"80\" style=\"height: 20%;width: 100%;\">
+                                                        <h4 class=\"card-title\" style=\"margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25px;\">".$curr_card['schoolName']."</h4>
+                                                        <h6 class=\"text-muted card-subtitle mb-2\" style=\"text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;\">".$curr_card['address']."</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    ";
+                                }
+                                echo '</div>';
+
+                            }
+                        ?>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 3%;">
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card" style="border-radius: 25px;border-style: none;">
-                            <div class="card-body" style="border-radius: 25px;box-shadow: 0px 4px 20px rgba(0,0,0,0.15);border-style: none;"><img width="100" height="80" style="height: 20%;width: 100%;">
-                                <h4 class="card-title" style="margin-top: 5%;text-align: center;font-weight: bold;margin-bottom: 25'px;">Pamantasan ng Lungsod ng Maynila</h4>
-                                <h6 class="text-muted card-subtitle mb-2" style="text-align: center;font-size: 14px;margin-top: 25px;margin-bottom: 30px;">General Luna, corner Muralla St, Intramuros, Manila</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <nav style="text-align: center;">
+
+                    <div class="col" style="padding:50px 30px;">
+                        <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="text-align: center;">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                <?php
+                                    // Determine how many page numbers to show
+                                    $total_items = count($card_details);
+                                    $total_pages = ceil($total_items / $card_count_per_page);
+
+                                    if ($total_pages > 1) {
+                                        // Validate the current page number
+                                        $page = max($page, 1);
+                                        $page = min($page, $total_pages);
+                                    
+                                        // Generate the "Previous" button link
+                                        $prev_page = $page - 1;
+                                        if ($prev_page >= 1) {
+                                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="FacilitatorSchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
+                                        }
+                                    
+                                        // Create the pagination links
+                                        for ($i = 1; $i <= $total_pages; $i++) {
+                                            if ($i == $page) {
+                                                echo '<li class="page-item active"><a class="page-link" href="#acc-form">' . $i. '</a></li>';
+                                            } else {
+                                                echo '<li class="page-item"><a class="page-link" href="FacilitatorSchoolDashboard.php?page=' .$i. '">'.$i. '</a></li>';
+                                            }
+                                        }
+                                    
+                                        // Generate the "Next" button link
+                                        $next_page = $page + 1;
+                                        if ($next_page <= $total_pages) {
+                                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="FacilitatorSchoolDashboard.php?page=' . $next_page . '">»</a></li>';
+                                        }
+                                    }
+                                ?>
                             </ul>
                         </nav>
                     </div>
                 </div>
+
             </div>
         </section>
     </div>

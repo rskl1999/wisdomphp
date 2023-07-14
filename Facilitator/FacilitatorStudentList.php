@@ -1,6 +1,39 @@
 <?php
+   session_start();
+   require_once('../connection.php');
 
+    $school_index = $_GET['school_index'];
 
+    // Query for List of Students
+    $students_query = "SELECT studentName, batchID, status, course, hoursRendered
+                    FROM studenttbl 
+                    WHERE schoolID = ?";
+    $students_stmt = $con->prepare($students_query);
+    $students_stmt->bind_param("i", $school_index);
+    $students_stmt->execute();
+    $students_result = $students_stmt->get_result();
+    // Store List of Students
+    $students_list = array();
+    while($row = $students_result->fetch_assoc()) {
+        $students_list[] = $row;
+    }
+    // Close query
+    $students_stmt->close();
+
+    // Query for School Details
+    $school_query = "SELECT schoolName, schoolLogo FROm schooltbl where schoolID = ?";
+    $school_stmt = $con->prepare($school_query);
+    $school_stmt->bind_param("i", $school_index);
+    $school_stmt->execute();
+    $school_result = $school_stmt->get_result();
+    // Store School detail
+    $school_detail = $school_result->fetch_assoc();
+    // Close query 
+    $school_stmt->close();
+
+    // Varibales for table-page setup
+    $total_items = count($students_list);
+    $items_per_page = 10;
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +76,8 @@
         <section id="table">
             <div class="container" style="margin-right: 5.5px;margin-left: 12.5px;padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student List</h1>
-                <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;font-size: 30px;"><span style="font-weight: normal !important;">School Name</span></h1>
-                <p>BS Information Technology |&nbsp;Batch 1</p>
+                <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;font-size: 30px;"><span style="font-weight: normal !important;"><?php echo $school_detail['schoolName']; ?></span></h1>
+                <p><?php echo $students_list[0]['course']; ?> |&nbsp;Batch <?php echo $students_list[0]['batchID']; ?></p>
                 <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);width: 100%;">
                     <table class="table">
                         <thead style="--bs-body-bg: #55565a;">
@@ -60,57 +93,66 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;"><strong>Student Name</strong></h1>
-                                    <p>studentemail@gmail.com</p>
-                                </td>
-                                <td>Batch 1</td>
-                                <td><button class="btn btn-primary" type="button" style="color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;">Ongoing</button></td>
-                                <td>STEM</td>
-                                <td>200</td>
-                                <td>180</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;"><i class="far fa-eye" style="margin-right: 5px;"></i>View</button><button class="btn btn-primary" type="button" style="background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;"><i class="far fa-check-circle" style="margin-right: 5px;"></i>Done</button></td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;"><strong>Student Name</strong></h1>
-                                    <p>studentemail@gmail.com</p>
-                                </td>
-                                <td>Batch 1</td>
-                                <td><button class="btn btn-primary" type="button" style="color: #89c593;background: rgb(216,255,223);width: 90%;border-radius: 35px;border-style: none;">Completed</button></td>
-                                <td>STEM</td>
-                                <td>200</td>
-                                <td>200</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;"><i class="far fa-eye" style="margin-right: 5px;"></i>View</button><button class="btn btn-primary" type="button" style="background: rgb(156,163,175);border-radius: .75rem;width: 100px;padding: 10px;color: rgb(255,255,255);border-color: rgb(156,163,175);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);"><i class="fas fa-check-circle" style="margin-right: 5px;"></i>Done</button></td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
-                                <td>
-                                    <h1 style="font-size: 16px;"><strong>Student Name</strong></h1>
-                                    <p>studentemail@gmail.com</p>
-                                </td>
-                                <td>Batch 1</td>
-                                <td><button class="btn btn-primary" type="button" style="color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;">Ongoing</button></td>
-                                <td>STEM</td>
-                                <td>200</td>
-                                <td>180</td>
-                                <td><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;"><i class="far fa-eye" style="margin-right: 5px;"></i>View</button><button class="btn btn-primary" type="button" style="background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;"><i class="far fa-check-circle" style="margin-right: 5px;"></i>Done</button></td>
-                            </tr>
+                            <?php
+                                $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+
+                                $offset = ($page - 1) * $items_per_page;
+
+                                for($i = $offset; ($i < $offset + $items_per_page) & ($i < count($students_list)); $i++) {
+                                    echo "
+                                        <tr>
+                                            <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
+                                            <td>
+                                                <h1 style=\"font-size: 16px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
+                                                <p>studentemail@gmail.com</p>
+                                            </td>
+                                            <td>Batch 1</td>
+                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;\">".$students_list[$i]['status']."</button></td>
+                                            <td>".$students_list[$i]['course']."</td>
+                                            <td>200</td>
+                                            <td>".$students_list[$i]['hoursRendered']."</td>
+                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button></td>
+                                        </tr>
+                                    ";
+                                }
+
+                            ?>
+
                         </tbody>
                     </table>
                 </div>
                 <nav class="text-center" style="margin-left: 40%;margin-top: 3%;margin-right: 40%;">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                        <?php
+                            $total_pages = ceil($total_items / $items_per_page);
+
+                            if ($total_pages > 1) {
+                                // Validate the current page number
+                                $page = max($page, 1);
+                                $page = min($page, $total_pages);
+                            
+                                // Generate the "Previous" button link
+                                $prev_page = $page - 1;
+                                if ($prev_page >= 1) {
+                                    echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' . $prev_page . '">«</a></li>';
+                                }
+                            
+                                // Create the pagination links
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    if ($i == $page) {
+                                        echo '<li class="page-item active"><a class="page-link" href="#">' . $i. '</a></li>';
+                                    } else {
+                                        echo '<li class="page-item"><a class="page-link" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' .$i. '">'.$i. '</a></li>';
+                                    }
+                                }
+                            
+                                // Generate the "Next" button link
+                                $next_page = $page + 1;
+                                if ($next_page <= $total_pages) {
+                                    echo '<li class="page-item"><a class="page-link" aria-label="Next" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' . $next_page . '">»</a></li>';
+                                }
+                            }
+                        ?>
                     </ul>
                 </nav>
             </div>
