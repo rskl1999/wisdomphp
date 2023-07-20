@@ -25,10 +25,16 @@
         
         <div class="container d-flex justify-content-center align-items-center parallax-content">
             <div class="col-12 col-md-10 col-lg-8 d-flex justify-content-center flex-column" style="width: 908.656px;">
-                <h1 class="pulse animated" style="font-family: 'Montserrat Alternates', sans-serif;font-size: 34px;"><strong>Creating a world of endless possibilities</strong></h1>
-                <p class="pulse animated" style="font-size: 24px;font-family: 'Montserrat Alternates', sans-serif;">Let's turn our visions into reality and create a new world</p>
-            </div>
-        </div><video class="parallax-background" autoplay="" loop="" muted="">
+                <h1 class="pulse animated" style="font-weight: bold;width: auto; line-height: 1; font-size: 60px;">Find the internship of your&nbsp;<span style="color: #0017EB;">Dreams</span></h1>
+                <br><br><p class="pulse animated" style="font-size: 22px; text-align: center; max-width: 40rem; margin: 0 auto;">Discover your ideal internship and work with professionals. Explore opportunities that fit your goals today!</p>    
+             </div>
+        </div>
+
+        <div style="text-align: center;">
+        <a href="register.php" class="btn btn-primary fs-5 fw-semibold me-2 py-2 px-4" style="background: #0017EB; border-radius: 5REM; margin-top: 1rem;">Join Now</a>
+        </div>
+
+        <video class="parallax-background" autoplay="" loop="" muted="">
             <source src="landing-assets/video/cubes.mp4" type="video/mp4" wp-acf="[{'type':'url','name':'video','label':'Video','wrapper':{'width':25}},{'type':'text','name':'video_css','label':'Video CSS (eg. filters)','wrapper':{'width':25}}]" wp-attr="[{'target':'src','replace':'%1'},{'target':'parent_style','replace':'%2'}]">
         </video>
     
