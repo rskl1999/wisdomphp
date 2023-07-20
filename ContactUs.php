@@ -106,6 +106,7 @@
             </div>
         </div>
     </section>
+    </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/Card-Carousel-slider.js"></script>
@@ -115,9 +116,8 @@
     <script src="assets/js/Task-List.js"></script>
     <script src="assets/js/Ultimate-Event-Calendar.js"></script>
 
-<!-- footer-->
+<!--footer-->
 <?php include 'includes/footer.php'; ?>
 
 </body>
-
 </html>
