@@ -11,15 +11,15 @@ if (isset($_POST['Login'])) {
         $_SESSION['error'] = "Email and password are required.";
         exit();
     }
-    // Look for user in accounttbl based on role
-    if ($stmt = mysqli_prepare($con, "SELECT * FROM accounttbl WHERE email = ?")) {
+    // Look for user in account table based on role
+    if ($stmt = mysqli_prepare($con, "SELECT * FROM account WHERE email = ?")) {
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_array($result);
-            $hashed_password = $row['pass'];
+            $hashed_password = $row['password'];
 
             if (password_verify($password, $hashed_password)) {
                 $role = $row['role'];
@@ -33,7 +33,7 @@ if (isset($_POST['Login'])) {
                     case "school":
                         $_SESSION['accountID'] = $row['accountID'];
                         mysqli_close($con);
-                        header("Location: school-dashboard.php?page=1");
+                        header("Location: School/SchoolDashboard.php?page=1");
                         exit();
                         break;
                     case "facilitator":

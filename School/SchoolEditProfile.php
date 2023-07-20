@@ -1,85 +1,84 @@
 <?php
    session_start();
    require_once('../connection.php');
-   // Retrieve user data from the database
 
-   if (isset($_SESSION['accountID'])) {
-      $accountid = $_SESSION['accountID'];
-      $userid = $_SESSION['schoolID'];
-      
-      $sql = "SELECT *
-               FROM schooltbl sc
-               JOIN accounttbl a ON a.accountID = sc.accountID
-               WHERE schoolid = ?";
-      
-      $stmt = $con->prepare($sql);
-      $stmt->bind_param("i", $userid);
-      $stmt->execute();
-      $result = $stmt->get_result();
-
-      if ($result->num_rows > 0) {
-         $row = $result->fetch_assoc();
-
-         $name = $row['schoolName'];
-         $email = $row['email'];
-         $address = $row['address'];
-         $contact_info = $row['contact_info'];
-         $password = $row['pass'];
-         $schoolLogo = $row['schoolLogo'];
-      }
-
-      // If form is submitted, update the user's profile in the database
-      if (isset($_POST['submit'])) {
-         $n_schoolName = $_POST['schoolName'];
-         $n_email = $_POST['email'];
-         $n_address = $_POST['address'];
-         $n_contact_info = $_POST['email'];
-         // If user uploaded a logo, load logo; if not, use saved image
-         $n_schoolLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $schoolLogo;
-
-         $image_name = $_FILES["avatar-file"]["name"];
-         $image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
-         $image_type = $_FILES["avatar-file"]["type"];
-         $image_size = $_FILES["avatar-file"]["size"];
-
-         // Check if the user uploaded a new logo
-         if($_FILES['avatar-file']['error'] !== 4 || ($_FILES['avatar-file']['size'] !== 0 && $_FILES['avatar-file']['error'] !== 0)){
-            $unique_id = uniqid(); // Generate unique identifier
-            $image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
-            $new_logo_name = $unique_id . '.png'; // Create new file name with extension
-            move_uploaded_file($image_tmp_name, "../School-Logo/" . $new_logo_name);
-            $n_schoolLogo = $new_logo_name;
-            $_SESSION['schoolLogo'] = $new_logo_name; // Set new logo as Session Logo 
-         } else {
-            $displayedLogo = $_SESSION['schoolLogo'];
-         }
-         
-         // Update the School Role
-         $stmt = $con->prepare("UPDATE accounttbl SET email=? WHERE email=?");
-         $stmt->bind_param("ss", $n_email, $email);
-         $stmt->execute();
-         
-         // Update the School information
-         $stmt = $con->prepare("UPDATE schooltbl SET schoolName=?, address=?, contact_info=?, schoolLogo=? WHERE accountID=?");
-         $stmt->bind_param("ssssi", $n_schoolName, $n_address, $n_contact_info, $n_schoolLogo, $accountid);
-         $stmt->execute();
-         
-         $stmt->close();
-         $con->close();
-         
-         // Update the session variables
-         $_SESSION['success'] = "Account Updated Successfully";
-
-
-         header("Location:SchoolDashboard.php");
-      }
-      $displayedLogo = $_SESSION['schoolLogo'];
-         
-   } else {
-      // Handle the case when the "accountID" key is not set in the session
+   // Handle the case when the "accountID" key is not set in the session
+   if (!isset($_SESSION['accountID'])) {
       header("Location: ../index.php");
       exit(); // Terminate the script to prevent further execution
    }
+
+   // Store Account and School IDs
+   $accountid = $_SESSION['accountID'];
+   $userid = $_SESSION['schoolID'];
+   
+   $sql = "SELECT *
+            FROM school sc
+            JOIN account a ON a.accountID = sc.accountID
+            WHERE schoolid = ?";
+   
+   $stmt = $con->prepare($sql);
+   $stmt->bind_param("i", $userid);
+   $stmt->execute();
+   $result = $stmt->get_result();
+
+   if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+
+      $name = $row['schoolName'];
+      $email = $row['email'];
+      $address = $row['address'];
+      $contact_info = $row['contactInfo'];
+      $password = $row['password'];
+      $schoolLogo = $row['schoolLogo'];
+   }
+
+   // If form is submitted, update the user's profile in the database
+   if (isset($_POST['submit'])) {
+      $n_schoolName = $_POST['schoolName'];
+      $n_email = $_POST['email'];
+      $n_address = $_POST['address'];
+      $n_contact_info = $_POST['email'];
+      // If user uploaded a logo, load logo; if not, use saved image
+      $n_schoolLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $schoolLogo;
+
+      $image_name = $_FILES["avatar-file"]["name"];
+      $image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
+      $image_type = $_FILES["avatar-file"]["type"];
+      $image_size = $_FILES["avatar-file"]["size"];
+
+      // Check if the user uploaded a new logo
+      if($_FILES['avatar-file']['error'] !== 4 || ($_FILES['avatar-file']['size'] !== 0 && $_FILES['avatar-file']['error'] !== 0)){
+         $unique_id = uniqid(); // Generate unique identifier
+         $image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
+         $new_logo_name = $unique_id . '.png'; // Create new file name with extension
+         move_uploaded_file($image_tmp_name, "../School-Logo/" . $new_logo_name);
+         $n_schoolLogo = $new_logo_name;
+         $_SESSION['schoolLogo'] = $new_logo_name; // Set new logo as Session Logo 
+      } else {
+         $displayedLogo = $_SESSION['schoolLogo'];
+      }
+      
+      // Update the School Role
+      $stmt = $con->prepare("UPDATE account SET email=? WHERE email=?");
+      $stmt->bind_param("ss", $n_email, $email);
+      $stmt->execute();
+      
+      // Update the School information
+      $stmt = $con->prepare("UPDATE school SET schoolName=?, address=?, contactInfo=?, schoolLogo=? WHERE accountID=?");
+      $stmt->bind_param("ssssi", $n_schoolName, $n_address, $n_contact_info, $n_schoolLogo, $accountid);
+      $stmt->execute();
+      
+      $stmt->close();
+      $con->close();
+      
+      // Update the session variables
+      $_SESSION['success'] = "Account Updated Successfully";
+
+
+      header("Location:SchoolDashboard.php");
+   }
+   $displayedLogo = $_SESSION['schoolLogo'];
 ?>
 
 <!DOCTYPE html>

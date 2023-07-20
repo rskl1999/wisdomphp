@@ -28,11 +28,11 @@
         $role = 'school';
 
         // Create new School Role
-        $stmt = $con->prepare("INSERT INTO accounttbl (email, pass, role) VALUES (?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO account (email, password, role) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $email, $passwordhash, $role);
         $stmt->execute();
 
-        $sql = "SELECT accountID FROM accounttbl WHERE email = '$email'";
+        $sql = "SELECT accountID FROM account WHERE email = '$email'";
         $result = mysqli_query($con, $sql);
         $maxID = mysqli_fetch_assoc($result);
         $userID = $maxID["accountID"];
@@ -40,7 +40,7 @@
         unset($_SESSION['email']);
         unset($_SESSION['password']);
         
-        $stmt = $con->prepare("INSERT INTO schooltbl (accountID, schoolName, address, contact_info, schoolLogo) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO school (accountID, schoolName, address, contactInfo, schoolLogo) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
         $stmt->execute();
 

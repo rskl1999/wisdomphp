@@ -6,7 +6,7 @@ session_start();
 // Remember session account ID
 $accountid = $_SESSION['accountID'];
 
-$moa = $con->prepare("SELECT moa FROM schooltbl WHERE accountID = ?");
+$moa = $con->prepare("SELECT moa FROM school WHERE accountID = ?");
 $moa->bind_param("i", $accountid);
 $moa->execute();
 $result = $moa->get_result();

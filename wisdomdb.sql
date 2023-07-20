@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 11:26 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jul 20, 2023 at 10:02 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,127 +24,222 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounttbl`
+-- Table structure for table `account`
 --
 
-CREATE TABLE `accounttbl` (
+CREATE TABLE `account` (
   `accountID` int(11) NOT NULL,
-  `email` varchar(80) NOT NULL,
-  `pass` varchar(90) NOT NULL,
-  `role` varchar(20) NOT NULL,
-  `token` varchar(90) NOT NULL
+  `email` varchar(80) DEFAULT NULL,
+  `password` varchar(90) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
+  `token` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `accounttbl`
+-- Dumping data for table `account`
 --
 
-INSERT INTO `accounttbl` (`accountID`, `email`, `pass`, `role`, `token`) VALUES
-(1, 'test@gmail.com', '$2y$10$qv6oU9UsSLRh09IQHC2lJOLJuvBKugOX8cWIgXlwL70FduL5p1F/2', 'student', ''),
-(2, 'plm@gmail.com', '$2y$10$5VNkNxuDEHFchZYkKBJALON.ZjmR6Sr1NeAYNPR41sRUfoirPNIhO', 'school', ''),
-(3, 'lloydangelomartinez@gmail.com', '$2y$10$5VNkNxuDEHFchZYkKBJALON.ZjmR6Sr1NeAYNPR41sRUfoirPNIhO', 'school', 'c0437fba750d5f00c2fb77ede951c8e06f1829c2'),
-(15, 'student1@gmail.com', '$2y$10$5VNkNxuDEHFchZYkKBJALON.ZjmR6Sr1NeAYNPR41sRUfoirPNIhO', 'student', ''),
-(16, 'impostor@gmail.com', '$2y$10$5VNkNxuDEHFchZYkKBJALON.ZjmR6Sr1NeAYNPR41sRUfoirPNIhO', 'student', ''),
-(22, 'tech@gmail.com', '$2y$10$Q3zRfnMee.XmaXa900ZgB.s4dvizSLeRiP7umxyqUyIYUzvZrTLNq', 'school', '');
+INSERT INTO `account` (`accountID`, `email`, `password`, `role`, `token`) VALUES
+(1, 'a@email.com', '$2y$10$Y1UIjiVXQctDyawKNbFVyuBriY9M2u4yVyYjmza8RmqzwWE3G0Zwa', 'school', NULL),
+(2, 's1@email.com', NULL, 'student', NULL),
+(3, 's2@email.com', NULL, 'student', NULL),
+(4, 's3@email.com', NULL, 'student', NULL),
+(5, 'd1@email.com', NULL, 'student', NULL),
+(6, 'd2@email.com', NULL, 'student', NULL),
+(7, 'd3@email.com', NULL, 'student', NULL),
+(8, 'd4@email.com', NULL, 'student', NULL),
+(9, 'd5@email.com', NULL, 'student', NULL),
+(10, 'mc1@email.com', NULL, 'student', NULL),
+(11, 'mc2@email.com', NULL, 'student', NULL),
+(12, 'mc3@email.com', NULL, 'student', NULL),
+(13, 'mc4@email.com', NULL, 'student', NULL),
+(14, 'mc5@email.com', NULL, 'student', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `applicanttbl`
+-- Table structure for table `batch`
 --
 
-CREATE TABLE `applicanttbl` (
-  `applicationID` int(11) NOT NULL,
-  `schoolID` int(11) NOT NULL,
+CREATE TABLE `batch` (
   `batchID` int(11) NOT NULL,
-  `programAdviser` varchar(80) NOT NULL,
-  `adviserEmail` varchar(80) NOT NULL,
-  `dateSubmitted` varchar(80) NOT NULL,
-  `duration` varchar(40) NOT NULL
+  `schoolID` int(11) DEFAULT NULL,
+  `batchNo` int(11) DEFAULT NULL,
+  `batchName` varchar(90) DEFAULT NULL,
+  `batchDescription` varchar(255) DEFAULT NULL,
+  `startDate` varchar(50) DEFAULT NULL,
+  `endDate` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `applicanttbl`
+-- Dumping data for table `batch`
 --
 
-INSERT INTO `applicanttbl` (`applicationID`, `schoolID`, `batchID`, `programAdviser`, `adviserEmail`, `dateSubmitted`, `duration`) VALUES
-(5, 2, 1, 'Juan Dela Cruz', 'juan@gmail.com', '2023-04-25', '460'),
-(6, 1, 1, 'Juan Dela Cruz', 'juan@gmail.com', '2023-04-25', '460');
+INSERT INTO `batch` (`batchID`, `schoolID`, `batchNo`, `batchName`, `batchDescription`, `startDate`, `endDate`) VALUES
+(1, 1, 0, NULL, NULL, '2023-07-20', NULL),
+(2, 1, 0, NULL, NULL, '2023-07-20', NULL),
+(3, 1, 1, 'Batch Mari', 'Mari Con\'s 5students from schoolID: 1', '2023-07-20', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schooltbl`
+-- Table structure for table `dailylog`
 --
 
-CREATE TABLE `schooltbl` (
+CREATE TABLE `dailylog` (
+  `logID` int(11) NOT NULL,
+  `studentID` int(11) DEFAULT NULL,
+  `hoursRendered` int(11) DEFAULT NULL,
+  `date` varchar(80) DEFAULT NULL,
+  `dateTimeIn` varchar(80) DEFAULT NULL,
+  `dateTimeOut` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dailylogtasks`
+--
+
+CREATE TABLE `dailylogtasks` (
+  `task` int(11) DEFAULT NULL,
+  `dailyLog` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `internshipapplication`
+--
+
+CREATE TABLE `internshipapplication` (
+  `internshipApplicationID` int(11) NOT NULL,
+  `schoolID` int(11) DEFAULT NULL,
+  `batchID` int(11) DEFAULT NULL,
+  `programAdviser` varchar(80) DEFAULT NULL,
+  `adviserEmail` varchar(80) DEFAULT NULL,
+  `dateSubmitted` varchar(80) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `noStudents` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `internshipapplication`
+--
+
+INSERT INTO `internshipapplication` (`internshipApplicationID`, `schoolID`, `batchID`, `programAdviser`, `adviserEmail`, `dateSubmitted`, `duration`, `noStudents`) VALUES
+(1, 1, 1, 'Hubz Dabeast', 'hd@email.com', '2023-07-20', 240, NULL),
+(2, 1, 1, 'Dex Oppa', 'do@email.com', '2023-07-20', 240, NULL),
+(3, 1, 3, 'Mari Con', 'mc@email.com', '2023-07-20', 240, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school`
+--
+
+CREATE TABLE `school` (
   `schoolID` int(11) NOT NULL,
-  `accountID` int(11) NOT NULL,
-  `schoolName` varchar(90) NOT NULL,
-  `address` varchar(90) NOT NULL,
-  `contact_info` varchar(20) NOT NULL,
-  `schoolLogo` varchar(90) NOT NULL,
-  `Moa` varchar(90) NOT NULL
+  `accountID` int(11) DEFAULT NULL,
+  `schoolName` varchar(90) DEFAULT NULL,
+  `address` varchar(90) DEFAULT NULL,
+  `contactInfo` varchar(20) DEFAULT NULL,
+  `schoolLogo` varchar(90) DEFAULT NULL,
+  `Moa` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `schooltbl`
+-- Dumping data for table `school`
 --
 
-INSERT INTO `schooltbl` (`schoolID`, `accountID`, `schoolName`, `address`, `contact_info`, `schoolLogo`, `Moa`) VALUES
-(1, 3, 'Our Lady of the Sacred Heart College of Guimba\r\n', 'Afan Salvador St, Guimba, Nueva Ecija', '0908635472', 'olshco.png', ''),
-(2, 2, 'PLM', 'General Luna, corner Muralla St, Intramuros, Manila', '091023821', 'plm.png', ''),
-(3, 1, 'Technological Institute of the Philippines', 'Quezon City, Manila', '098328323323', 'tip.png', ''),
-(18, 16, 'Impostor', 'Sample, Navotas, Benguet', '09783827382', '643f984d31bed.png', ''),
-(21, 17, 'Technological Institute of the Philippines', 'Quezon City, Mandaluyong, Antique', '09812392838', '6447352e314ba.png', ''),
-(23, 22, 'technology shit', 'Quezon city, Makati, Benguet', '09823782938', '644745c5ec958.png', '');
+INSERT INTO `school` (`schoolID`, `accountID`, `schoolName`, `address`, `contactInfo`, `schoolLogo`, `Moa`) VALUES
+(1, 1, 'Adamson', 'Ermita, Paco, Manila, Metro Manila', '0123456789', '64b8dcea49abe.png', 'Application Letter.docx.pdf');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `studenttbl`
+-- Table structure for table `student`
 --
 
-CREATE TABLE `studenttbl` (
+CREATE TABLE `student` (
   `studentID` int(11) NOT NULL,
-  `accountID` int(11) NOT NULL,
-  `batchID` int(20) NOT NULL,
-  `schoolID` int(11) NOT NULL,
-  `studentName` varchar(80) NOT NULL,
-  `course` varchar(90) NOT NULL,
-  `hoursRendered` varchar(80) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `accountID` int(11) DEFAULT NULL,
+  `applicationID` int(11) DEFAULT NULL,
+  `schoolID` int(11) DEFAULT NULL,
+  `studentName` varchar(80) DEFAULT NULL,
+  `course` varchar(90) DEFAULT NULL,
+  `hoursRendered` varchar(80) DEFAULT NULL,
+  `submittedRequirements` varchar(255) DEFAULT NULL,
+  `profileImage` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `studenttbl`
+-- Dumping data for table `student`
 --
 
-INSERT INTO `studenttbl` (`studentID`, `accountID`, `batchID`, `schoolID`, `studentName`, `course`, `hoursRendered`, `status`) VALUES
-(15, 15, 1, 2, 'Student 1', 'BSIT', '', 'pending'),
-(16, 16, 1, 1, 'Student 1', 'BSIT', '', 'pending'),
-(17, 16, 1, 1, 'Student 2', 'BSIT', '', 'pending'),
-(18, 16, 1, 1, 'Student 3', 'BSIT', '', 'pending'),
-(19, 16, 1, 1, 'Student 4', 'BSIT', '', 'pending'),
-(20, 16, 1, 1, 'Student 5', 'BSIT', '', 'pending'),
-(21, 16, 1, 1, 'Student 6', 'BSIT', '', 'pending'),
-(22, 16, 1, 1, 'Student 7', 'BSIT', '', 'pending'),
-(23, 16, 1, 1, 'Student 8', 'BSIT', '', 'pending'),
-(24, 16, 1, 1, 'Student 9', 'BSIT', '', 'pending'),
-(25, 16, 1, 1, 'Student 10', 'BSIT', '', 'pending'),
-(26, 16, 1, 1, 'Student 11', 'BSIT', '', 'pending');
+INSERT INTO `student` (`studentID`, `accountID`, `applicationID`, `schoolID`, `studentName`, `course`, `hoursRendered`, `submittedRequirements`, `profileImage`) VALUES
+(1, 2, 1, 1, 'Student 1', 'CpE', '0', NULL, NULL),
+(2, 3, 1, 1, 'Student 2', 'CpE', '0', NULL, NULL),
+(3, 4, 1, 1, 'Student 3', 'CpE', '0', NULL, NULL),
+(4, 5, 2, 1, 'Dex 1', 'CpE', '0', NULL, NULL),
+(5, 6, 2, 1, 'Dex 2', 'CpE', '0', NULL, NULL),
+(6, 7, 2, 1, 'Dex 3', 'CpE', '0', NULL, NULL),
+(7, 8, 2, 1, 'Dex 4', 'CpE', '0', NULL, NULL),
+(8, 9, 2, 1, 'Dex 5', 'CpE', '0', NULL, NULL),
+(9, 10, 3, 1, 'MC 1', 'CpE', '0', NULL, NULL),
+(10, 11, 3, 1, 'MC 2', 'CpE', '0', NULL, NULL),
+(11, 12, 3, 1, 'MC 3', 'CpE', '0', NULL, NULL),
+(12, 13, 3, 1, 'MC 4', 'CpE', '0', NULL, NULL),
+(13, 14, 3, 1, 'MC 5', 'CpE', '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uploadfiletbl`
+-- Table structure for table `studentstatus`
 --
 
-CREATE TABLE `uploadfiletbl` (
-  `documentID` int(11) NOT NULL,
-  `studentID` int(11) NOT NULL,
-  `documentType` varchar(80) NOT NULL,
-  `dateSubmitted` date NOT NULL
+CREATE TABLE `studentstatus` (
+  `schoolID` int(11) DEFAULT NULL,
+  `studentID` int(11) DEFAULT NULL,
+  `status` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `studentstatus`
+--
+
+INSERT INTO `studentstatus` (`schoolID`, `studentID`, `status`) VALUES
+(1, 1, 'pending'),
+(1, 2, 'pending'),
+(1, 3, 'pending'),
+(1, 4, 'pending'),
+(1, 5, 'pending'),
+(1, 6, 'pending'),
+(1, 7, 'pending'),
+(1, 8, 'pending'),
+(1, 9, 'pending'),
+(1, 10, 'pending'),
+(1, 11, 'pending'),
+(1, 12, 'pending'),
+(1, 13, 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `taskID` int(11) NOT NULL,
+  `applicationID` int(11) DEFAULT NULL,
+  `assignmentSlots` int(11) DEFAULT NULL,
+  `title` varchar(90) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `labels` varchar(255) DEFAULT NULL,
+  `allotedHours` int(11) DEFAULT NULL,
+  `dateStarted` varchar(80) DEFAULT NULL,
+  `dateFinished` varchar(80) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -152,68 +247,172 @@ CREATE TABLE `uploadfiletbl` (
 --
 
 --
--- Indexes for table `accounttbl`
+-- Indexes for table `account`
 --
-ALTER TABLE `accounttbl`
+ALTER TABLE `account`
   ADD PRIMARY KEY (`accountID`);
 
 --
--- Indexes for table `applicanttbl`
+-- Indexes for table `batch`
 --
-ALTER TABLE `applicanttbl`
-  ADD PRIMARY KEY (`applicationID`);
+ALTER TABLE `batch`
+  ADD PRIMARY KEY (`batchID`),
+  ADD KEY `schoolID` (`schoolID`);
 
 --
--- Indexes for table `schooltbl`
+-- Indexes for table `dailylog`
 --
-ALTER TABLE `schooltbl`
-  ADD PRIMARY KEY (`schoolID`);
+ALTER TABLE `dailylog`
+  ADD PRIMARY KEY (`logID`),
+  ADD KEY `studentID` (`studentID`);
 
 --
--- Indexes for table `studenttbl`
+-- Indexes for table `dailylogtasks`
 --
-ALTER TABLE `studenttbl`
-  ADD PRIMARY KEY (`studentID`);
+ALTER TABLE `dailylogtasks`
+  ADD KEY `task` (`task`),
+  ADD KEY `dailyLog` (`dailyLog`);
 
 --
--- Indexes for table `uploadfiletbl`
+-- Indexes for table `internshipapplication`
 --
-ALTER TABLE `uploadfiletbl`
-  ADD PRIMARY KEY (`documentID`);
+ALTER TABLE `internshipapplication`
+  ADD PRIMARY KEY (`internshipApplicationID`),
+  ADD KEY `schoolID` (`schoolID`),
+  ADD KEY `batchID` (`batchID`);
+
+--
+-- Indexes for table `school`
+--
+ALTER TABLE `school`
+  ADD PRIMARY KEY (`schoolID`),
+  ADD KEY `accountID` (`accountID`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`studentID`),
+  ADD KEY `accountID` (`accountID`),
+  ADD KEY `applicationID` (`applicationID`),
+  ADD KEY `schoolID` (`schoolID`);
+
+--
+-- Indexes for table `studentstatus`
+--
+ALTER TABLE `studentstatus`
+  ADD KEY `schoolID` (`schoolID`),
+  ADD KEY `studentID` (`studentID`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`taskID`),
+  ADD KEY `applicationID` (`applicationID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `accounttbl`
+-- AUTO_INCREMENT for table `account`
 --
-ALTER TABLE `accounttbl`
-  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+ALTER TABLE `account`
+  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `applicanttbl`
+-- AUTO_INCREMENT for table `batch`
 --
-ALTER TABLE `applicanttbl`
-  MODIFY `applicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `batch`
+  MODIFY `batchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `schooltbl`
+-- AUTO_INCREMENT for table `dailylog`
 --
-ALTER TABLE `schooltbl`
-  MODIFY `schoolID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+ALTER TABLE `dailylog`
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `studenttbl`
+-- AUTO_INCREMENT for table `internshipapplication`
 --
-ALTER TABLE `studenttbl`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+ALTER TABLE `internshipapplication`
+  MODIFY `internshipApplicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `uploadfiletbl`
+-- AUTO_INCREMENT for table `school`
 --
-ALTER TABLE `uploadfiletbl`
-  MODIFY `documentID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `school`
+  MODIFY `schoolID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `taskID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `batch`
+--
+ALTER TABLE `batch`
+  ADD CONSTRAINT `batch_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `school` (`schoolID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dailylog`
+--
+ALTER TABLE `dailylog`
+  ADD CONSTRAINT `dailylog_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `dailylogtasks`
+--
+ALTER TABLE `dailylogtasks`
+  ADD CONSTRAINT `dailylogtasks_ibfk_1` FOREIGN KEY (`task`) REFERENCES `tasks` (`taskID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `dailylogtasks_ibfk_2` FOREIGN KEY (`dailyLog`) REFERENCES `dailylog` (`logID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `internshipapplication`
+--
+ALTER TABLE `internshipapplication`
+  ADD CONSTRAINT `internshipapplication_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `school` (`schoolID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `internshipapplication_ibfk_2` FOREIGN KEY (`batchID`) REFERENCES `batch` (`batchID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `school`
+--
+ALTER TABLE `school`
+  ADD CONSTRAINT `school_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`schoolID`) REFERENCES `school` (`schoolID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ibfk_3` FOREIGN KEY (`applicationID`) REFERENCES `internshipapplication` (`internshipApplicationID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `studentstatus`
+--
+ALTER TABLE `studentstatus`
+  ADD CONSTRAINT `studentstatus_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `school` (`schoolID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `studentstatus_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`applicationID`) REFERENCES `internshipapplication` (`internshipApplicationID`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -6,7 +6,7 @@
     if(isset($_SESSION['accountID'])){
         $accID = $_SESSION['accountID'];
 
-        $sql = "SELECT accountID FROM accounttbl WHERE accountID = ?";
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("i", $accID);
         $stmt->execute();
@@ -31,22 +31,25 @@
 
     // prepare statements
     $Numpending = $con->prepare("SELECT COUNT(st.studentID) AS pendingNum 
-                             FROM studenttbl st 
-                             JOIN schooltbl sc ON st.schoolID = sc.schoolID 
-                             WHERE sc.accountID = ? AND st.status='pending'");
+                             FROM student st 
+                             JOIN school sc ON st.schoolID = sc.schoolID 
+                             JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                             WHERE sc.accountID = ? AND sts.status='pending'");
 
     $Numenrolled = $con->prepare("SELECT COUNT(st.studentID) AS enrolled 
-                                FROM studenttbl st 
-                                JOIN schooltbl sc ON st.schoolID = sc.schoolID 
-                                WHERE sc.accountID = ? AND st.status='accepted'");
+                                FROM student st 
+                                JOIN school sc ON st.schoolID = sc.schoolID 
+                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                                WHERE sc.accountID = ? AND sts.status='accepted'");
 
     $total = $con->prepare("SELECT COUNT(st.studentID) AS studTotal 
-                            FROM studenttbl st 
-                            JOIN schooltbl sc ON st.schoolID = sc.schoolID 
-                            WHERE sc.accountID = ? AND st.status='finished' OR st.status='accepted'");
+                            FROM student st 
+                            JOIN school sc ON st.schoolID = sc.schoolID 
+                            JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                            WHERE sc.accountID = ? AND sts.status='finished' OR sts.status='accepted'");
 
     $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
-                                FROM schooltbl 
+                                FROM school 
                                 WHERE accountID = ?");
         
     
@@ -186,24 +189,43 @@
                 </thead>
                 <tbody style="color: rgb(0,0,0);font-size: 12px;">
                 <?php
+                    ///
+
+                    echo "<br/>";
+                    echo "SchoolId: ".$schoolid;
+                    echo "<br/>";
+
+                    ///
+
                     $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
 
                     $items_per_page = 10;
 
                     // Counts students from current school 
-                    $total_stud_query = "SELECT COUNT(studentID) FROM studenttbl WHERE schoolID = ?"; 
+                    $total_stud_query = "SELECT COUNT(studentID) FROM student WHERE schoolID = ?"; 
                     // Selects student details of those who applied in the internship
-                    $students = $con->prepare("SELECT DISTINCT
-                                            st.studentName, st.course, a.dateSubmitted, st.studentID, st.batchID, 
-                                            st.hoursRendered, st.status, a.duration, ac.email 
-                                        FROM 
-                                            studenttbl st 
-                                            JOIN applicanttbl a ON st.batchID = a.batchID AND st.schoolID = a.schoolID
-                                            JOIN accounttbl ac ON st.accountID = ac.accountID  
-                                            JOIN schooltbl s ON st.schoolID = s.schoolID
-                                        WHERE 
-                                            s.accountID = ?
-                                        LIMIT ?, ?"); 
+                    // $students = $con->prepare("SELECT DISTINCT
+                    //                         st.studentName, st.course, a.dateSubmitted, st.studentID, b.batchID, 
+                    //                         st.hoursRendered, sts.status, a.duration, ac.email 
+                    //                     FROM 
+                    //                         student st 
+                    //                         JOIN internshipapplication a ON st.schoolID = a.schoolID
+                    //                         JOIN account ac ON st.accountID = ac.accountID  
+                    //                         JOIN school sc ON sc.schoolID = st.schoolID AND ac.accountID = sc.accountID
+                    //                         JOIN batch b on b.batchID = a.batchID
+                    //                         JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                    //                     WHERE 
+                    //                         st.schoolID = ?
+                    //                     LIMIT ?, ?"); 
+                    $students = $con->prepare("SELECT st.studentName, b.batchID, b.batchNo, sts.status, st.course, st.hoursRendered, a.duration, ac.email
+                                            FROM student st
+                                                JOIN internshipapplication a ON st.schoolID = a.schoolID
+                                                JOIN school sc ON st.schoolID = sc.schoolID 
+                                                JOIN batch b ON b.batchID = a.batchID
+                                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                                                JOIN account ac ON st.accountID = ac.accountID
+                                            WHERE st.schoolID = ?
+                                            LIMIT ?, ?");
                     // Execution of getting srudent count
                     $total_stud_stmt = $con->prepare($total_stud_query);
                     $total_stud_stmt->bind_param("i", $schoolid);
@@ -213,7 +235,7 @@
 
                     // Execution of getting students' details
                     $offset = ($page - 1) * $items_per_page;
-                    $students->bind_param("iii", $accountid, $offset, $items_per_page);
+                    $students->bind_param("iii", $schoolid, $offset, $items_per_page);
                     $students->execute();
                     $result = $students->get_result();
 
@@ -225,6 +247,9 @@
                             }
                         }
 
+                        echo "<br/>";
+                        print_r($row);
+
                         // Print to website each student and their details
                         echo "
                             <tr>
@@ -232,7 +257,7 @@
                                 <td>
                                     <p style=\"margin: 0px;\"><strong>".$row['studentName']."</strong></p><small>".$row['email']."</small>
                                 </td>
-                                <td>".$row['batchID']."</td>
+                                <td>".$row['batchNo']."</td>
                                 <td><span style=\"padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;\">".$row['status']."</span></td>
                                 <td>".$row['course']."</td>
                                 <td>".$row['hoursRendered']."&nbsp;</td>

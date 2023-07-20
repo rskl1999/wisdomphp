@@ -14,7 +14,7 @@
         if(isset($_SESSION['accountID'])){
             $accountID = $_SESSION['accountID'];
 
-            $sql ="SELECT accountID FROM accounttbl WHERE accountID = ?";
+            $sql ="SELECT accountID FROM account WHERE accountID = ?";
                 $stmt = $con->prepare($sql);
                 $stmt->bind_param("i", $accountID);
                 $stmt->execute();
@@ -52,7 +52,7 @@
                         echo $filename.' uploaded successfully.<br>';
 
                         // Insert file name into database
-                        $sql = "UPDATE schooltbl SET moa = '$filename' WHERE accountID = $accountID";
+                        $sql = "UPDATE school SET moa = '$filename' WHERE accountID = $accountID";
                         if ($con->query($sql) === TRUE) {
                             echo "File name added to database.<br>";
                         } else {

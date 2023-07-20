@@ -17,7 +17,7 @@
         // if email does not exist
         if (isset($_POST['next'])) {
             // Check if the email already exists in the database
-            $email_check_query = "SELECT * FROM accounttbl WHERE email='$email' LIMIT 1";
+            $email_check_query = "SELECT * FROM account WHERE email='$email' LIMIT 1";
             $result = mysqli_query($con, $email_check_query);
             $user = mysqli_fetch_assoc($result);
             if ($user) { // if email exists
