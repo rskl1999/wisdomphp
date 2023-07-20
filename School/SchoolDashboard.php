@@ -191,9 +191,9 @@
                 <?php
                     ///
 
-                    echo "<br/>";
-                    echo "SchoolId: ".$schoolid;
-                    echo "<br/>";
+                    // echo "<br/>";
+                    // echo "SchoolId: ".$schoolid;
+                    // echo "<br/>";
 
                     ///
 
@@ -204,24 +204,11 @@
                     // Counts students from current school 
                     $total_stud_query = "SELECT COUNT(studentID) FROM student WHERE schoolID = ?"; 
                     // Selects student details of those who applied in the internship
-                    // $students = $con->prepare("SELECT DISTINCT
-                    //                         st.studentName, st.course, a.dateSubmitted, st.studentID, b.batchID, 
-                    //                         st.hoursRendered, sts.status, a.duration, ac.email 
-                    //                     FROM 
-                    //                         student st 
-                    //                         JOIN internshipapplication a ON st.schoolID = a.schoolID
-                    //                         JOIN account ac ON st.accountID = ac.accountID  
-                    //                         JOIN school sc ON sc.schoolID = st.schoolID AND ac.accountID = sc.accountID
-                    //                         JOIN batch b on b.batchID = a.batchID
-                    //                         JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                    //                     WHERE 
-                    //                         st.schoolID = ?
-                    //                     LIMIT ?, ?"); 
                     $students = $con->prepare("SELECT st.studentName, b.batchID, b.batchNo, sts.status, st.course, st.hoursRendered, a.duration, ac.email
                                             FROM student st
                                                 JOIN internshipapplication a ON st.schoolID = a.schoolID
                                                 JOIN school sc ON st.schoolID = sc.schoolID 
-                                                JOIN batch b ON b.batchID = a.batchID
+                                                JOIN batch b ON b.batchID = a.batchID AND a.internshipApplicationID = st.applicationID
                                                 JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
                                                 JOIN account ac ON st.accountID = ac.accountID
                                             WHERE st.schoolID = ?
@@ -246,9 +233,6 @@
                                     $value = 0;
                             }
                         }
-
-                        echo "<br/>";
-                        print_r($row);
 
                         // Print to website each student and their details
                         echo "
