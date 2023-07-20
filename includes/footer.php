@@ -43,11 +43,11 @@
                     <h3 class="fs-6"><strong>Our Company</strong></h3>
                     <div class="footer-col">
                         <ul class="list-unstyled">
-                            <li> <a href="index.php" class="text-white text-decoration-none fs-6">Home </a></li>
+                            <li> <a href="indexnew.php" class="text-white text-decoration-none fs-6">Home </a></li>
                             <li> <a href="About Us.php" class="text-white text-decoration-none fs-6">About </a></li>
-                            <li> <a href="" class="text-white text-decoration-none fs-6">Categories</li>
+                            <li> <a href="Individual Sub-Categories.php" class="text-white text-decoration-none fs-6">Categories</li>
                             <li> <a href="Alumni.php" class="text-white text-decoration-none fs-6">Alumni</a></li>
-                            <li> <a href="Contact Us.php" class="text-white text-decoration-none fs-6">Contact</a></li>
+                            <li> <a href="ContactUs.php" class="text-white text-decoration-none fs-6">Contact</a></li>
                          </ul>
                     </div>
                 </div>
