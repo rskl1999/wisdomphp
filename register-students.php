@@ -1,13 +1,6 @@
 <?php
-    // TODO:
-    // X check their emails if it exists in database already
-    //      -> if existing email is 'pending', throw error
-    // X sanitize/validate inputs; throw errors if incorrect format
-
     session_start();
     require_once('connection.php');
-
-    // Validate user input
 
     // If school acc is not logged in, return to login page.
     if(!isset($_SESSION['accountID'])) {
@@ -17,13 +10,14 @@
     // counter for student inputs
     $students_count = 0;
 
-    // DEBUG: print out students
     // If inputs for students' details was created ... 
-    if(isset($_POST["fname"])) {
+    if(isset($_POST["fname"]) & isset($_POST["lname"]) & isset($_POST["email"])) {
         // Get inputted students name and print them out
-        $student_names = $_POST["fname"]; // get input values
-        foreach($student_names as $key=>$value){ // loop thru and print each input 
-            // echo "<br/> Student: ".$value." ".$_POST["lname"][$key].", ".$_POST["email"][$key];
+        $student_names_f = $_POST["fname"]; // get input first names
+        $student_names_l = $_POST["lname"]; // get input last names
+        $student_emails = $_POST["email"]; // get input emails
+        foreach($student_names_f as $key=>$value){ // loop thru and print each input 
+            echo "<br/> Student: ".$value." ".$student_names_l[$key].", ".$student_emails[$key]; // DEBUG: print out students
             $students_count++;
         }
     }
@@ -49,12 +43,68 @@
         ."Advisor Email: ".$adviserEmail."<br/>"
         ."Date Submitted: ".$dateSubmitted."<br/>"
         ."Duration: ".$duration;
+
+    // Student table req'd params
+    $accountIDs;        // Type: int
+    // $batchNo;          // Type: int
+    $schoolIDs;         // Type: int
+    $studentNames;      // Type: str
+    $course;            // Type: str
+    $hoursRendered;     // Type: str
+    $status;            // Type: str
+
+    $accountID = $_SESSION['accountID'];
+    $schoolID = $_SESSION['schoolID'];
+    $student_names = array();
+    foreach($_POST["fname"] as $key=>$value) {
+        array_push($student_names, $value." ".$_POST['lname'][$key]);
+    }
+    $student_emails = array();
+    foreach($_POST["email"] as $key=>$value) {
+        array_push($student_emails, $value);
+    }
+    $course = $_POST['course'];
+    $hoursRendered = "0";
+    $status = "pending";
+
+    // DEBUG: print out student details -- content -- 
+    echo "<br/>Account ID: ".$accountID
+        ."<br/>Batch ID: ".$batchID
+        ."<br/>School ID: ".$schoolID
+        ."<br/>Student Names: ".join("\n  ", $student_names)
+        ."<br/>Student Emails: ".join("\n  ", $student_emails)
+        ."<br/>Course: ".$course
+        ."<br/>Hrs Rendered : ".$hoursRendered
+        ."<br/>Status: ".$status;
+
+    /// CHECKING FOR DUPLICATE EMAILS
+    // Query for existing emails
+    $email_check_query = $con->prepare("SELECT email FROM account");
+    $email_check_query->execute();
+    $email_check_result = $email_check_query->get_result();
+    // Loop through each email found in query
+    $index = 0;
+    while($email_out = $email_check_result->fetch_assoc()['email']) {
+        // If a student's email is already in database...
+        if(in_array($email_out, $student_emails)) {
+            // Redirect to SchoolAddStudent page
+            $_SESSION['error'] = "Student's email <strong>".$email_out."</strong> already registered.";
+            header("Location: School/SchoolAddStudent.php");
+            exit();
+        }
+    }
     
+    // Count total number of batches
+    $batch_count_query = $con->prepare("SELECT COUNT(BatchID) AS count from batch");
+    $batch_count_query->execute();
+    $batch_count_result = $batch_count_query->get_result();
+    $batchNo = $batch_count_result->fetch_assoc()['count'];
+
     // Upload new batch into database
     $batchName = 'Batch '.$_POST['advFname'];
-    $batchDesc = ''.$programAdviser.'\'s '.$students_count.'students from schoolID: '.$schoolID;
-    $insert_batch_query = $con->prepare("INSERT INTO batch (schoolID, batchName, batchDescription, startDate) VALUES (?, ?, ?, ?)");
-    $insert_batch_query->bind_param("isss", $schoolID, $batchName, $batchDesc, $dateSubmitted);
+    $batchDesc = ''.$programAdviser.'\'s '.$students_count.' students from schoolID: '.$schoolID;
+    $insert_batch_query = $con->prepare("INSERT INTO batch (schoolID, batchName, batchNo, batchDescription, startDate) VALUES (?, ?, ?, ?, ?)");
+    $insert_batch_query->bind_param("isiss", $schoolID, $batchName, $batchNo, $batchDesc, $dateSubmitted);
     $insert_batch_query->execute();
     $insert_batch_query->close();
     /// Querying for batchID
@@ -91,40 +141,6 @@
     echo "Application ID: ".$applicationID;
     echo "<br/>";
 
-    // Student table req'd params
-    $accountIDs;        // Type: int
-    // $batchNo;          // Type: int
-    $schoolIDs;         // Type: int
-    $studentNames;      // Type: str
-    $course;            // Type: str
-    $hoursRendered;     // Type: str
-    $status;            // Type: str
-
-    // NOTE to future dev(s): change arbitary values
-    $accountID = $_SESSION['accountID'];
-    // $batchNo = 1; // arbitrary value
-    $schoolID = $_SESSION['schoolID'];
-    $student_names = array();
-    foreach($_POST["fname"] as $key=>$value) {
-        array_push($student_names, $value." ".$_POST['lname'][$key]);
-    }
-    $student_emails = array();
-    foreach($_POST["email"] as $key=>$value) {
-        array_push($student_emails, $value);
-    }
-    $course = $_POST['course'];
-    $hoursRendered = "0";
-    $status = "pending";
-
-    // DEBUG: print out student details -- content -- 
-    echo "<br/>Account ID: ".$accountID
-        ."<br/>Batch ID: ".$batchID
-        ."<br/>School ID: ".$schoolID
-        ."<br/>Student Names: ".join("\n  ", $student_names)
-        ."<br/>Student Emails: ".join("\n  ", $student_emails)
-        ."<br/>Course: ".$course
-        ."<br/>Hrs Rendered : ".$hoursRendered
-        ."<br/>Status: ".$status;
 
     // For each student...
     for($i = 0; $i < $students_count; $i++) {

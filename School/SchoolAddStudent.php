@@ -65,6 +65,12 @@ else {
     <div id="body">
         <div class="container">
             <form style="padding: 31px;" method="POST" action="../register-students.php">
+                <?php 
+                    // Check for session error message
+                        if (isset($_SESSION['error'])) {
+                        echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
+                        unset($_SESSION['error']); } // Clear the error message from session 
+                ?>
                 <div id="ProgramAdviserInfo" style="padding: 40px 0px;">
                     <h3><strong>Program Adviser Information</strong></h3>
                     <div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="name">
