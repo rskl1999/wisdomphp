@@ -1,6 +1,54 @@
 <?php
+    require_once('../connection.php');
+    session_start();
 
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
 
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+
+    if(isset($_GET['sch'])) {
+        $schoolID = $_GET['sch'];
+    }
+
+    echo $schoolID;
+
+    // Query For School Details
+    $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, a.email
+                                FROM school sc
+                                JOIN account a ON a.accountID = sc.accountID
+                                WHERE sc.schoolID =?;
+                                ");
+    $school_query->bind_param("s", $schoolID);
+    $school_query->execute();
+    $school_query_res = $school_query->get_result();
+    // Store list of schools and their details
+    $school_details = $school_query_res->fetch_assoc();
+
+    $school_query->close();
+
+    print_r($school_details);
 ?>
 
 <!DOCTYPE html>
@@ -56,18 +104,18 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="https://4.bp.blogspot.com/-YZxFNaiint4/WOL95a6PLkI/AAAAAAAAAMs/WgHDfKoN9ocGbcnooOb-tLmKLoAVt7GaACLcB/s1600/TIP%2BTECHNOLOGY%2BINSTITUTE%2BOF%2BTHE%2BPHILIPPINES.png">
-                    <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;">Technological Institute of the Philippines</h5>
-                    <p id="school-location-1" style="margin-bottom: 0px;">363 Pascual Casal St, Quiapo, Manila</p>
-                    <p id="school-email">manila@tip.edu.ph.</p>
+                <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="../School-Logo/<?php echo $school_details['schoolLogo']; ?>">
+                    <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;"><?php echo $school_details['schoolName']; ?></h5>
+                    <p id="school-location-1" style="margin-bottom: 0px;"><?php echo $school_details['address']; ?></p>
+                    <p id="school-email"><?php echo $school_details['email']; ?></p>
                     <div>
                         <div class="container text-center" style="width: 814px;">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p id="school-location" style="margin-bottom: 0px;">363 Pascual Casal St, Quiapo, Manila</p>
+                                    <p id="school-location" style="margin-bottom: 0px;"><?php echo $school_details['address']; ?></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p id="school-email-1">manila@tip.edu.ph.</p>
+                                    <p id="school-email-1"><?php echo $school_details['email']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -76,6 +124,24 @@
                 <div id="body">
                     <div class="container">
                         <div id="main-content">
+                            <?php
+                                echo "
+                                <div class=\"container\" style=\"padding-bottom: 10px;\">
+                                    <div class=\"row\" id=\"internship-body\" style=\"background: #f2f2f2;color: rgb(0,0,0);\">
+                                        <div class=\"col-md-6\">
+                                            <div id=\"school-name-1\" style=\"margin-top: 7px;\"><a id=\"program-name\" href=\"#\" style=\"font-size: 18px;color: rgb(0,0,0);\">Student Name</a></div>
+                                            <p style=\"font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;\">Year/Course</p>
+                                        </div>
+                                        <div class=\"col\" id=\"colb\">
+                                            <div id=\"divb\"><button class=\"btn btn-primary\" id=\"accept\" type=\"button\"><i class=\"fa fa-check-circle\" style=\"padding-right: 5px;\"></i>Proceed</button>
+                                                <div id=\"divider\"></div><button class=\"btn btn-primary\" id=\"reject\" type=\"button\"><i class=\"fa fa-times-circle\" style=\"padding-right: 5px;\"></i>Decline</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                "
+                            ?>
+                            <!--
                             <div class="container" style="padding-bottom: 10px;">
                                 <div class="row" id="internship-body" style="background: #f2f2f2;color: rgb(0,0,0);">
                                     <div class="col-md-6">
@@ -102,6 +168,7 @@
                                     </div>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>
