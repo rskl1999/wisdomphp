@@ -30,85 +30,45 @@
                                     <div class="row">
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-robot" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
+                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#robotics" class="text-decoration-none">
                                                     <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Robotics</h1>
                                                     <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
                                                 </a></div>
                                         </div>
+
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-th-large" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
+                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#3dprinting" class="text-decoration-none">
                                                     <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">3D Printing</h1>
                                                     <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
                                                 </a></div>
                                         </div>
                                         
-
-                                        <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;">
                                         <div class="col-md-6 d-flex">
                                             <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Programming</h1></a>
-                                            <a href = Individual%20Sub-Categories.php#frontend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
-                                            </div>
-                                        </div>
-    
-                                    
-
-
-
-                                        <div class="col-md-6 d-flex">
-                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div></div><i class="fas fa-network-wired" style="font-size: 21px;color: #3448ff;width: 30px;"></i></a>
-                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><div style="margin-left: 10px;"><a href="#" class="text-decoration-none"></a>
-                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Graphic Design</h1></a>
-                                        <a href = Individual%20Sub-Categories.php#networking style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p></a>
+                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#programming" class="text-decoration-none">
+                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Programming</h1>
+                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
                                                 </a></div>
                                         </div>
-
-                                        <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;">
+                                          
                                         <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-code-branch" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Animation</h1></a>
-                                            <a href = Individual%20Sub-Categories.php#backend style="text-decoration: none;"><p style="margin-top: -7px;color: #677489;">Implement the server-side components of a website.</p></a>
+                                            <div></div><i class="fas fa-th-large" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
+                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#animation" class="text-decoration-none">
+                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Animation</h1>
+                                                    <p style="margin-top: -7px;color: #677489;">Implement the server-side components of a website.</p>
+                                                </a></div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 d-flex">
+                                            <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
+                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#graphicdesign" class="text-decoration-none">
+                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Graphic Design</h1>
+                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
                                                 </a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;margin-top: 15px;">Education, Art and Design</h1>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-paint-brush" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Graphic Design</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Create visual designs for various media.</p>
-                                                </a></div>
-                                        </div>
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-laptop" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Research</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Conduct research and collect data</p>
-                                                </a></div>
-                                        </div>
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-film" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Animation</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Create and edit animated content</p>
-                                                </a></div>
-                                        </div>
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-chalkboard-teacher" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="#" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Ed-Tech</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Develop and implement educational technology solutions</p>
-                                                </a></div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="Alumni.php">Alumni</a></li>

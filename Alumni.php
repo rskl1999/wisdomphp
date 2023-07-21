@@ -20,9 +20,6 @@
     <link rel="stylesheet" href="assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="assets/css/Tasks.css">
     <link rel="stylesheet" href="assets/css/Ultimate-Event-Calendar.css">
-    
-
-    
 </head>
 
 <body>
@@ -30,7 +27,7 @@
         <!-- <section style="background: url(&quot;assets/img/aboutBg.svg&quot;) top / cover; height: 1455px;"> -->
         <!-- <div class="black-rectangle" style="position: absolute; top: 95em; left: 0; width: 100%; height: 24.5rem; background-color: #000;"></div> -->
         <div class="container" style="width: 1000px; max-width: 1500px; position: relative; margin: 0 auto; top: 50px; text-align: center;">
-        <h1 class="abt-tk" style="font-weight: bold; font-size: 80px;">Why join <span style="color: #0017EB;">Technokids</span></h1>
+        <h1 class="abt-tk" style="font-weight: bold; font-size: 80px;">Why join <span style="color: #0017EB;">Technokids?</span></h1>
         <br>
         </div>
     </div>
