@@ -5,9 +5,15 @@
     $school_index = $_GET['school_index'];
 
     // Query for List of Students
-    $students_query = "SELECT studentName, batchID, status, course, hoursRendered
-                    FROM studenttbl 
-                    WHERE schoolID = ?";
+    // $students_query = "SELECT studentName, batchID, status, course, hoursRendered
+    //                 FROM student 
+    //                 WHERE schoolID = ?";
+    $students_query = "SELECT st.studentName, st.course, st.hoursRendered, sts.status, b.batchNo, ap.duration
+                    FROM student st
+                    JOIN internshipapplication ap ON st.applicationID = ap.internshipapplicationID
+                    JOIN studentstatus sts ON st.schoolID = sts.schoolID AND st.studentID = sts.studentID
+                    JOIN batch b ON b.batchID = ap.batchID AND ap.internshipApplicationID = st.applicationID
+                    WHERE st.schoolID = ?";
     $students_stmt = $con->prepare($students_query);
     $students_stmt->bind_param("i", $school_index);
     $students_stmt->execute();
@@ -21,7 +27,7 @@
     $students_stmt->close();
 
     // Query for School Details
-    $school_query = "SELECT schoolName, schoolLogo FROm schooltbl where schoolID = ?";
+    $school_query = "SELECT schoolName, schoolLogo FROm school where schoolID = ?";
     $school_stmt = $con->prepare($school_query);
     $school_stmt->bind_param("i", $school_index);
     $school_stmt->execute();
@@ -77,7 +83,7 @@
             <div class="container" style="margin-right: 5.5px;margin-left: 12.5px;padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student List</h1>
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;font-size: 30px;"><span style="font-weight: normal !important;"><?php echo $school_detail['schoolName']; ?></span></h1>
-                <p><?php echo $students_list[0]['course']; ?> |&nbsp;Batch <?php echo $students_list[0]['batchID']; ?></p>
+                <p><?php echo $students_list[0]['course']; ?> |&nbsp;Batch <?php echo $students_list[0]['batchNo']; ?></p>
                 <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);width: 100%;">
                     <table class="table">
                         <thead style="--bs-body-bg: #55565a;">
@@ -106,10 +112,10 @@
                                                 <h1 style=\"font-size: 16px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
                                                 <p>studentemail@gmail.com</p>
                                             </td>
-                                            <td>Batch 1</td>
+                                            <td>Batch ".$students_list[$i]['batchNo']."</td>
                                             <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;\">".$students_list[$i]['status']."</button></td>
                                             <td>".$students_list[$i]['course']."</td>
-                                            <td>200</td>
+                                            <td>".$students_list[$i]['duration']."</td>
                                             <td>".$students_list[$i]['hoursRendered']."</td>
                                             <td><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button></td>
                                         </tr>
