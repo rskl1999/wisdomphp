@@ -1,12 +1,9 @@
 <?php
-    require_once('../connection.php');
-    session_start();
-
     // Check if a registered account is logged in ...    
     if(isset($_SESSION['accountID'])){
         $accID = $_SESSION['accountID'];
 
-        $sql = "SELECT accountID FROM accounttbl WHERE accountID = ?";
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("i", $accID);
         $stmt->execute();

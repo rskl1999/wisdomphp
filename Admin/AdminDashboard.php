@@ -2,19 +2,24 @@
     require_once('../connection.php');
     session_start();
 
-    // include('../checkLogin.php');
+    include('../checkLogin.php');
 
     $accoundid = $_SESSION['accountID'];
 
     // Query for List of Accounts
-    $account_query = "SELECT accountID, email, role
-                    FROM accounttbl";
+    $account_query = "SELECT ac.accountID, IF(role='student',st.studentName,sc.schoolName) AS Name, ac.email, ac.role
+                    FROM account ac
+                        LEFT JOIN student st ON st.accountID = ac.accountID
+                        LEFT JOIN school sc ON sc.accountID = ac.accountID
+                    WHERE NOT ac.accountID = ?";
     $account_stmt = $con->prepare($account_query);
+    $account_stmt->bind_param("i", $accoundid);
     $account_stmt->execute();
     $account_stmt_result = $account_stmt->get_result();
     $accounts_detail = array();
+    // Store query result inside array
     while($account_row = $account_stmt_result->fetch_assoc()) {
-        $accounts_detail[] = $account_row; // Store query result inside array
+        $accounts_detail[] = $account_row;
     }
 
     $account_stmt->close();
@@ -62,9 +67,6 @@
     </div>
         <section id="table">
             <div class="container" style="border-color: rgb(233,78,80);">
-                <?php
-
-                ?>
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 40px;margin-top: 30px;">Account Roles</h1>
                 <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);">
                     <table class="table">
@@ -82,10 +84,10 @@
                                 $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
                                 $offset = ($page - 1) * $items_per_page;
                                 
-                                for($i = $offset; ($i < $total_items - 1) & ($i < $offset + $items_per_page); $i++) {
+                                for($i = $offset; ($i < $total_items) & ($i < $offset + $items_per_page); $i++) {
                                     echo " <tr>
                                             <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
-                                            <td><h1 style=\"font-size: 16px;\">".$accounts_detail[$i]['accountID']."</h1></td>
+                                            <td><h1 style=\"font-size: 16px;\">".$accounts_detail[$i]['Name']."</h1></td>
                                             <td>".$accounts_detail[$i]['email']."</td>
                                             <td>".$accounts_detail[$i]['role']."</td>
                                             <!-- Buttons -->
