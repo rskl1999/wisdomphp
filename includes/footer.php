@@ -21,7 +21,7 @@
 
 <body>
     <footer style="background: #1B3996;color: rgb(255,255,255);">
-        <div class="container-fluid py-4 py-lg-4">
+        <div class="container-fluid py-4 py-lg-4" style="height: 180px;">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6"><img src="assets/img/logo_white.png" width="140" height="29"></h3>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column"></div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
-                    <br><h3 class="fs-6"><strong>Our Company</strong></h3>
+                    <h3 class="fs-6"><strong>Our Company</strong></h3>
                     <div class="footer-col">
                         <ul class="list-unstyled">
                             <li> <a href="indexnew.php" class="text-white text-decoration-none fs-6">Home </a></li>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
-                    <br><h3 class="fs-6"><strong>Categories</strong></h3>
+                    <h3 class="fs-6"><strong>Categories</strong></h3>
                     <div class="footer-col">
                         <ul class="list-unstyled">
                             <li><a href="Individual Sub-Categories.php#robotics" class="text-white text-decoration-none fs-6">Robotics </a></li>
