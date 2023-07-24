@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
     <link rel="stylesheet" href="login-reg-assets/css/untitled.css">
+    <link rel="stylesheet" href="login-reg-assets/css/radio.css">
 </head>
 
 <body class="bg-gradient-primary" style="background: url(&quot;login-reg-assets/img/image.jpg&quot;) center / cover no-repeat, rgba(211,237,255,0);">
@@ -168,7 +169,33 @@
                     <div class="row mb-3">
                         <div class="col-sm-6 mb-3 mb-sm-0" id="password"><input class="form-control form-control-user" type="password" id="password-input" placeholder="Password" name="password" style="font-family: Poppins, sans-serif;" required="" minlength="8" onkeypress="return isAlphanumericKey(event)"></div>
                             <div class="col-sm-6" id="confirm-pass"><input class="form-control form-control-user" type="password" id="confirm-password" placeholder="Confirm Password" name="con-pass" style="font-family: Poppins, sans-serif;" required="" minlength="8" onkeypress="return isAlphanumericKey(event)"></div>
-                                </div><button class="btn btn-primary d-block btn-user w-100" name="next" type="submit" style="font-family: Poppins, sans-serif;background: rgb(17,55,239);">Next</button>
+                            </div>
+                            <div class="col mb-2">
+                            <form>
+                                <h3 style="font-family: Poppins, sans-serif; font-size:13px; margin-bottom:10px;">Department</h3>
+                                <label>
+                                <input type="radio" name="radio"/>
+                                <span style="font-family: Poppins, sans-serif;">Admin</span>
+                                </label>
+                                <label>
+                                <input type="radio" name="radio"/>
+                                <span style="font-family: Poppins, sans-serif;">Facilitator</span>
+                                </label>
+                                <label>
+                                <input type="radio" name="radio"/>
+                                <span style="font-family: Poppins, sans-serif;">HR</span>
+                                </label>
+                                <label>
+                                <input type="radio" name="radio"/>
+                                <span style="font-family: Poppins, sans-serif;">School</span>
+                                </label>
+                                <label>
+                                <input type="radio" name="radio"/>
+                                <span style="font-family: Poppins, sans-serif;">Student</span>
+                                </label>
+                            </form>
+                            </div>
+                                <button class="btn btn-primary d-block btn-user w-100" name="next" type="submit" style="font-family: Poppins, sans-serif;background: rgb(17,55,239);">Register</button>
                             </form>
                             <hr>
                             <div class="text-center"><a class="small" href="login.php" style="font-family: Poppins, sans-serif;">Already have an account?</a></div>
