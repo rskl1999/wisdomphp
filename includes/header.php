@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
     <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css>
+    <link rel="stylesheet" href="path/to/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
 </head>
 
 <body>
@@ -25,50 +31,93 @@
                         <div class="nav-item dropdown"><a class="dropdown-toggle text-decoration-none" aria-expanded="false" data-bs-toggle="dropdown" href="Individual Sub-Categories.php" style="color: rgba(0,0,0,0.55);">Categories</a>
                             <div class="dropdown-menu" style="padding: 40px 15px;width: 800px;max-width: 800px;min-width: 500px;margin-top: 15px;">
                                
-                            <!-- <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;">Computer Science and Information Technology</h1> -->
+                                <!-- <h1 class="text-uppercase" style="font-size: 14px;margin-left: 15px;font-weight: bold;">Computer Science and Information Technology</h1> -->
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-robot" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#robotics" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Robotics</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
-                                                </a></div>
+                                        <!-- ROBOTICS -->
+                                        <div class="col-md-6">
+                                            <a href="Individual Sub-Categories.php#robotics" class="text-decoration-none">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-robot" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                    <div style="margin-left: 10px;">
+                                                        <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Robotics</h1>
+                                                        <p style="margin-top: -7px; color: #677489;">Design, develop, and test robotic systems.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
 
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-th-large" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#3dprinting" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">3D Printing</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Design, develop, and test robotic systems.</p>
-                                                </a></div>
+                                        <!-- 3D PRINTING -->
+                                        <div class="col-md-6">
+                                            <a href="Individual Sub-Categories.php#3dprinting" class="text-decoration-none">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-th-large" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                    <div style="margin-left: 10px;">
+                                                        <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">3D Printing</h1>
+                                                        <p style="margin-top: -7px; color: #677489;">Create 3D objects using computer created design.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#programming" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Programming</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
-                                                </a></div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <!-- PROGRAMMING -->
+                                        <div class="col-md-6">
+                                        <a href="Individual Sub-Categories.php#programming" class="text-decoration-none">
+                                            <div class="d-flex">
+                                                <i class="fa-solid fa-computer-classic" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                <div style="margin-left: 10px;">
+                                                    <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Programming</h1>
+                                                    <p style="margin-top: -7px; color: #677489;">Implement user interfaces for websites.</p>
+                                                </div>
+                                            </div>
+                                        </a>
                                         </div>
-                                          
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-th-large" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#animation" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Animation</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement the server-side components of a website.</p>
-                                                </a></div>
+
+                                        <!-- ANIMATION -->
+                                        <div class="col-md-6">
+                                            <a href="Individual Sub-Categories.php#animation" class="text-decoration-none">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-th-large" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                    <div style="margin-left: 10px;">
+                                                        <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Animation</h1>
+                                                        <p style="margin-top: -7px; color: #677489;">Generates digital moving images.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        
-                                        <div class="col-md-6 d-flex">
-                                            <div></div><i class="fas fa-project-diagram" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-                                            <div style="margin-left: 10px;"><a href="Individual Sub-Categories.php#graphicdesign" class="text-decoration-none">
-                                                    <h1 style="font-size: 16px;font-weight: bold;color: rgb(0,0,0);">Graphic Design</h1>
-                                                    <p style="margin-top: -7px;color: #677489;">Implement user interfaces for websites.</p>
-                                                </a></div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <!-- GRAPHIC DESIGN -->
+                                        <div class="col-md-6">
+                                            <a href="Individual Sub-Categories.php#graphicdesign" class="text-decoration-none">
+                                                <div class="d-flex">
+                                                <i class="fas fa-project-diagram" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                    <div style="margin-left: 10px;">
+                                                        <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Graphic Design</h1>
+                                                        <p style="margin-top: -7px; color: #677489;">Visually communicating ideas and messages.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <!-- SEE ALL -->
+                                        <div class="col-md-6">
+                                            <a href="Individual Sub-Categories.php" class="text-decoration-none">
+                                                <div class="d-flex">
+                                                    <div style="position: absolute; bottom: 0; right: 20px; ">
+                                                        <h1 style="font-size: 16px; font-weight: bold; color: #0017EB;">See All</h1>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="Alumni.php">Alumni</a></li>
@@ -87,6 +136,6 @@
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="assets/js/theme.js"></script>
+    
 </body>
-
 </html>
