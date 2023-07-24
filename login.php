@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
     <link rel="stylesheet" href="login-reg-assets/css/untitled.css">
+    <link rel="stylesheet" href="login-reg-assets/css/dropdown.css">
 </head>
 
 <body class="bg-gradient-primary" style="background: url(&quot;login-reg-assets/img/image.jpg&quot;) center / cover no-repeat, rgba(0,0,0,0);">
@@ -26,6 +27,22 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4" style="font-family: Poppins, sans-serif;font-size: 22px;">Welcome Back!</h4>
                                     </div>
+                                    <div>
+                                    <span class="dropdown-el">
+                                        <input type="radio" name="sortType" value="" id="choose" checked>
+                                        <label for="choose" style="font-family: Poppins, sans-serif;">Choose..</label>
+                                        <input type="radio" name="sortType" value="Admin" id="admin">
+                                        <label for="admin" style="font-family: Poppins, sans-serif;">Admin</label>
+                                        <input type="radio" name="sortType" value="Facilitator" id="facilitator">
+                                        <label for="facilitator" style="font-family: Poppins, sans-serif;">Facilitator</label>
+                                        <input type="radio" name="sortType" value="HR" id="hr">
+                                        <label for="hr" style="font-family: Poppins, sans-serif;">HR</label>
+                                        <input type="radio" name="sortType" value="School" id="school">
+                                        <label for="school" style="font-family: Poppins, sans-serif;">School</label>
+                                        <input type="radio" name="sortType" value="Student" id="student">
+                                        <label for="student" style="font-family: Poppins, sans-serif;">Student</label>
+                                    </span>
+                                    </div>
                                     <form class="user" action="authentication.php" method="POST">
                                     <?php
                                     session_start();
@@ -39,11 +56,11 @@
                                         unset($_SESSION['success']);
                                         }
                                         ?>
-                                        <div class="mb-3"><input class="form-control form-control-user" name="email" type="email" id="login-email" aria-describedby="emailHelp" placeholder="Email" name="email" style="font-family: Poppins, sans-serif;" required=""></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" name="email" type="email" id="login-email" aria-describedby="emailHelp" placeholder="Email" name="email" style="font-family: Poppins, sans-serif; margin-top:70px;" required=""></div>
                                         <div class="mb-3"><input class="form-control form-control-user" name="password" type="password" id="login-password" placeholder="Password" name="password" style="font-family: Poppins, sans-serif;" required="" minlength=""></div>
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small">
-                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1" required=""><label class="form-check-label custom-control-label" for="formCheck-1" style="font-family: Poppins, sans-serif;">Remember Me</label></div>
+                                                <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1" style="font-family: Poppins, sans-serif;">Remember Me</label></div>
                                             </div>
                                         </div><button class="btn btn-primary d-block btn-user w-100" name="Login" type="submit" style="background: rgb(0,23,235);border-width: 0px;font-family: Poppins, sans-serif;">Login</button>
                                         <hr>
@@ -59,7 +76,9 @@
         </div>
     </div>
     <script src="login-reg-assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="login-reg-assets/js/theme.js"></script>
+    <script src="login-reg-assets/js/dropdown.js"></script>
 </body>
 
 </html>
