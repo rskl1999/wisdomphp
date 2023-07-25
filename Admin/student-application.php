@@ -2,6 +2,8 @@
     require_once('../connection.php');
     session_start();
 
+    require_once('../pageNavigation.php');
+    
     // Check if a registered account is logged in ...    
     if(isset($_SESSION['accountID'])){
         $accID = $_SESSION['accountID'];
@@ -32,8 +34,6 @@
         $schoolID = $_GET['sch'];
     }
 
-    echo $schoolID;
-
     // Query For School Details
     $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, a.email
                                 FROM school sc
@@ -45,10 +45,26 @@
     $school_query_res = $school_query->get_result();
     // Store list of schools and their details
     $school_details = $school_query_res->fetch_assoc();
-
     $school_query->close();
 
-    print_r($school_details);
+    // Query for total number of students
+    $total_students = $con->prepare("SELECT COUNT(st.studentID) AS totalStudents 
+                                    FROM student st
+                                        JOIN studentstatus sts ON st.studentID = sts.studentID
+                                    WHERE st.schoolID = ? 
+                                        AND sts.status = 'pending' 
+                                    ");
+    $total_students->bind_param("i", $schoolID);
+    $total_students->execute();
+    $total_students_res = $total_students->get_result();
+    $total_items = $total_students_res->fetch_assoc()['totalStudents'];
+    $total_students->close();
+
+    echo $total_items;
+
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $items_per_page = 5;
+    $offset = ($page - 1) * $items_per_page;
 ?>
 
 <!DOCTYPE html>
@@ -125,52 +141,65 @@
                     <div class="container">
                         <div id="main-content">
                             <?php
-                                echo "
-                                <div class=\"container\" style=\"padding-bottom: 10px;\">
-                                    <div class=\"row\" id=\"internship-body\" style=\"background: #f2f2f2;color: rgb(0,0,0);\">
-                                        <div class=\"col-md-6\">
-                                            <div id=\"school-name-1\" style=\"margin-top: 7px;\"><a id=\"program-name\" href=\"#\" style=\"font-size: 18px;color: rgb(0,0,0);\">Student Name</a></div>
-                                            <p style=\"font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;\">Year/Course</p>
-                                        </div>
-                                        <div class=\"col\" id=\"colb\">
-                                            <div id=\"divb\"><button class=\"btn btn-primary\" id=\"accept\" type=\"button\"><i class=\"fa fa-check-circle\" style=\"padding-right: 5px;\"></i>Proceed</button>
-                                                <div id=\"divider\"></div><button class=\"btn btn-primary\" id=\"reject\" type=\"button\"><i class=\"fa fa-times-circle\" style=\"padding-right: 5px;\"></i>Decline</button>
+
+                                // Required:
+                                // student name -- OK
+                                // year/course -- OK
+                                // address -- TODO: address column in student table DOES NOT EXIST
+                                // Query for students of current school
+                                $student_query = $con->prepare("SELECT st.studentID, st.studentName, st.course, sts.status 
+                                                                FROM student st 
+                                                                    JOIN studentstatus sts ON st.studentID = sts.studentID
+                                                                WHERE st.schoolID = ? 
+                                                                    AND sts.status = 'pending' 
+                                                                LIMIT ?, ?");
+                                $student_query->bind_param("iii", $schoolID, $offset, $items_per_page);
+                                $student_query->execute();
+                                $student_query_res = $student_query->get_result();
+                                $students_list = array();
+                                while($row = $student_query_res->fetch_assoc()) {
+                                    $students_list[] = $row;
+                                }
+                                $student_query->close();
+
+                                $action_base_url = '../studentChangeStatus.php';
+
+                                $_SESSION['prevLocation'] = 'Admin/student-application.php?sch='.$schoolID.'&page='.$page;
+
+                                foreach($students_list as $student) {
+                                    echo "
+                                    <div class=\"container\" style=\"padding-bottom: 10px;\">
+                                        <div class=\"row\" id=\"internship-body\" style=\"background: #f2f2f2;color: rgb(0,0,0);\">
+                                            <div class=\"col-md-6\">
+                                                <div id=\"school-name-1\" style=\"margin-top: 7px;\"><a id=\"program-name\" href=\"#\" style=\"font-size: 18px;color: rgb(0,0,0);\">".$student['studentName']."</a></div>
+                                                <p style=\"font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;\">".$student['course']."</p>
+                                            </div>
+                                            <div class=\"col\" id=\"colb\">
+                                                <div id=\"divb\"><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=accepted\"><button class=\"btn btn-primary\" id=\"accept\" type=\"button\"><i class=\"fa fa-check-circle\" style=\"padding-right: 5px;\"></i>Proceed</button></a>
+                                                    <div id=\"divider\"></div><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=declined\"><button class=\"btn btn-primary\" id=\"reject\" type=\"button\"><i class=\"fa fa-times-circle\" style=\"padding-right: 5px;\"></i>Decline</button></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                "
+                                    ";
+                                }
                             ?>
-                            <!--
-                            <div class="container" style="padding-bottom: 10px;">
-                                <div class="row" id="internship-body" style="background: #f2f2f2;color: rgb(0,0,0);">
-                                    <div class="col-md-6">
-                                        <div id="school-name-1" style="margin-top: 7px;"><a id="program-name" href="#" style="font-size: 18px;color: rgb(0,0,0);">Student Name</a></div>
-                                        <p style="font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;">Year/Course</p>
-                                    </div>
-                                    <div class="col" id="colb">
-                                        <div id="divb"><button class="btn btn-primary" id="accept" type="button"><i class="fa fa-check-circle" style="padding-right: 5px;"></i>Proceed</button>
-                                            <div id="divider"></div><button class="btn btn-primary" id="reject" type="button"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Decline</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container" style="padding-bottom: 10px;">
-                                <div class="row" id="internship-body" style="background: #f2f2f2;color: rgb(0,0,0);">
-                                    <div class="col-md-6">
-                                        <div id="school-name-1" style="margin-top: 7px;"><a id="program-name" href="#" style="font-size: 18px;color: rgb(0,0,0);">Student Name</a></div>
-                                        <p style="font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;">Address</p>
-                                    </div>
-                                    <div class="col" id="colb">
-                                        <div id="divb"><button class="btn btn-primary" id="accept" type="button"><i class="fa fa-check-circle" style="padding-right: 5px;"></i>Proceed</button>
-                                            <div id="divider"></div><button class="btn btn-primary" id="reject" type="button"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Decline</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
                         </div>
                     </div>
+
+                    <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
+                        <ul class="pagination">
+
+                            <?php 
+                                $nav = new PageNavigation();
+                                $nav->setTotalItems($total_items);
+                                $nav->setItemsPerPage($items_per_page);
+                                $nav->getNavigation("student-application.php?sch=1", $page);
+                            ?>
+
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
             <div id="back-to-top"><a class="cd-top js-cd-top cd-top--fade-out cd-top--show" style="background-image: url(&quot;admin-assets/img/cd-top-arrow.svg&quot;);border-radius: 50px;" href="#0">Top</a></div>

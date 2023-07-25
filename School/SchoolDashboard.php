@@ -2,6 +2,8 @@
     require_once('../connection.php');
     session_start();
 
+    require_once('../PageNavigation.php');
+
     // Check if a registered account is logged in ...    
     if(isset($_SESSION['accountID'])){
         $accID = $_SESSION['accountID'];
@@ -27,7 +29,6 @@
     }
 
     $accountid = $_SESSION['accountID'];
-    $schoolid = $_SESSION['schoolID'];
 
     // prepare statements
     $Numpending = $con->prepare("SELECT COUNT(st.studentID) AS pendingNum 
@@ -84,6 +85,7 @@
     $schoolLogo->close();
     $_SESSION['schoolLogo'] = $row['schoolLogo'];
     $_SESSION['schoolID'] = $row['schoolID'];
+    $schoolid = $_SESSION['schoolID'];
 
 ?>
 
@@ -153,7 +155,6 @@
                             <p style="margin: 0px;font-weight: bold;">Enrolled Student</p>
                         </div>
 
-                        <!-- Number of Enrolled Students -->
                         <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $enrolled ?></span></div>
                     </div>
                 </div>
@@ -189,14 +190,6 @@
                 </thead>
                 <tbody style="color: rgb(0,0,0);font-size: 12px;">
                 <?php
-                    ///
-
-                    // echo "<br/>";
-                    // echo "SchoolId: ".$schoolid;
-                    // echo "<br/>";
-
-                    ///
-
                     $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
 
                     $items_per_page = 10;
@@ -258,36 +251,14 @@
 
             <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
                 <ul class="pagination">
-                    <?php
-                        $total_pages = ceil($total_items / $items_per_page);
 
-                        if ($total_pages > 1) {
-                            // Validate the current page number
-                            $page = max($page, 1);
-                            $page = min($page, $total_pages);
-                        
-                            // Generate the "Previous" button link
-                            $prev_page = $page - 1;
-                            if ($prev_page >= 1) {
-                                echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="SchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
-                            }
-                        
-                            // Create the pagination links
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                if ($i == $page) {
-                                    echo '<li class="page-item active"><a class="page-link" href="#StudentTable">' . $i. '</a></li>';
-                                } else {
-                                    echo '<li class="page-item"><a class="page-link" href="SchoolDashboard.php?page=' .$i. '">'.$i. '</a></li>';
-                                }
-                            }
-                        
-                            // Generate the "Next" button link
-                            $next_page = $page + 1;
-                            if ($next_page <= $total_pages) {
-                                echo '<li class="page-item"><a class="page-link" aria-label="Next" href="SchoolDashboard.php?page=' . $next_page . '">»</a></li>';
-                            }
-                        }
+                    <?php
+                        $nav = new PageNavigation();
+                        $nav->setTotalItems($total_items);
+                        $nav->setItemsPerPage($items_per_page);
+                        $nav->getNavigation("SchoolDashboard.php", $page);
                     ?>
+
                 </ul>
             </nav>
         </div>
