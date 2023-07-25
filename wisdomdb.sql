@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 10:02 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jul 25, 2023 at 10:11 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `account` (
   `password` varchar(90) DEFAULT NULL,
   `role` varchar(20) DEFAULT NULL,
   `token` varchar(90) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account`
@@ -53,7 +53,9 @@ INSERT INTO `account` (`accountID`, `email`, `password`, `role`, `token`) VALUES
 (11, 'mc2@email.com', NULL, 'student', NULL),
 (12, 'mc3@email.com', NULL, 'student', NULL),
 (13, 'mc4@email.com', NULL, 'student', NULL),
-(14, 'mc5@email.com', NULL, 'student', NULL);
+(14, 'mc5@email.com', NULL, 'student', NULL),
+(15, 'tip@email.com', '$2y$10$GL.cFU0wuNi8/lFRLM1VA.nIqA2pNDPA2i4ucuxS5KIqRC42MPv52', 'school', NULL),
+(16, 'tipst1@email.com', NULL, 'student', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ CREATE TABLE `batch` (
   `batchDescription` varchar(255) DEFAULT NULL,
   `startDate` varchar(50) DEFAULT NULL,
   `endDate` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `batch`
@@ -78,7 +80,8 @@ CREATE TABLE `batch` (
 INSERT INTO `batch` (`batchID`, `schoolID`, `batchNo`, `batchName`, `batchDescription`, `startDate`, `endDate`) VALUES
 (1, 1, 0, NULL, NULL, '2023-07-20', NULL),
 (2, 1, 0, NULL, NULL, '2023-07-20', NULL),
-(3, 1, 1, 'Batch Mari', 'Mari Con\'s 5students from schoolID: 1', '2023-07-20', NULL);
+(3, 1, 1, 'Batch Mari', 'Mari Con\'s 5students from schoolID: 1', '2023-07-20', NULL),
+(5, 2, 3, 'Batch Prof', 'Prof One\'s 6 students from schoolID: 2', '2023-07-25', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,7 +96,7 @@ CREATE TABLE `dailylog` (
   `date` varchar(80) DEFAULT NULL,
   `dateTimeIn` varchar(80) DEFAULT NULL,
   `dateTimeOut` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -104,7 +107,7 @@ CREATE TABLE `dailylog` (
 CREATE TABLE `dailylogtasks` (
   `task` int(11) DEFAULT NULL,
   `dailyLog` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -121,7 +124,7 @@ CREATE TABLE `internshipapplication` (
   `dateSubmitted` varchar(80) DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `noStudents` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `internshipapplication`
@@ -130,7 +133,8 @@ CREATE TABLE `internshipapplication` (
 INSERT INTO `internshipapplication` (`internshipApplicationID`, `schoolID`, `batchID`, `programAdviser`, `adviserEmail`, `dateSubmitted`, `duration`, `noStudents`) VALUES
 (1, 1, 1, 'Hubz Dabeast', 'hd@email.com', '2023-07-20', 240, NULL),
 (2, 1, 1, 'Dex Oppa', 'do@email.com', '2023-07-20', 240, NULL),
-(3, 1, 3, 'Mari Con', 'mc@email.com', '2023-07-20', 240, NULL);
+(3, 1, 3, 'Mari Con', 'mc@email.com', '2023-07-20', 240, NULL),
+(4, 2, 5, 'Prof One', 'po1@email.com', '2023-07-25', 300, 6);
 
 -- --------------------------------------------------------
 
@@ -146,14 +150,15 @@ CREATE TABLE `school` (
   `contactInfo` varchar(20) DEFAULT NULL,
   `schoolLogo` varchar(90) DEFAULT NULL,
   `Moa` varchar(90) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `school`
 --
 
 INSERT INTO `school` (`schoolID`, `accountID`, `schoolName`, `address`, `contactInfo`, `schoolLogo`, `Moa`) VALUES
-(1, 1, 'Adamson', 'Ermita, Paco, Manila, Metro Manila', '0123456789', '64b8dcea49abe.png', 'Application Letter.docx.pdf');
+(1, 1, 'Adamson University', 'Ermita, Paco, Manila, Metro Manila', '0123456789', '64b8dcea49abe.png', 'Application Letter.docx.pdf'),
+(2, 15, 'TIP', 'Ermita, Paco, Manila, Metro Manila', '09123456789', '64bf6defe9524.png', 'Narrative-Report-Format-rev02.docx.pdf');
 
 -- --------------------------------------------------------
 
@@ -171,7 +176,7 @@ CREATE TABLE `student` (
   `hoursRendered` varchar(80) DEFAULT NULL,
   `submittedRequirements` varchar(255) DEFAULT NULL,
   `profileImage` varchar(90) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student`
@@ -190,7 +195,8 @@ INSERT INTO `student` (`studentID`, `accountID`, `applicationID`, `schoolID`, `s
 (10, 11, 3, 1, 'MC 2', 'CpE', '0', NULL, NULL),
 (11, 12, 3, 1, 'MC 3', 'CpE', '0', NULL, NULL),
 (12, 13, 3, 1, 'MC 4', 'CpE', '0', NULL, NULL),
-(13, 14, 3, 1, 'MC 5', 'CpE', '0', NULL, NULL);
+(13, 14, 3, 1, 'MC 5', 'CpE', '0', NULL, NULL),
+(14, 16, 4, 2, 'Student 1', 'IT', '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +208,7 @@ CREATE TABLE `studentstatus` (
   `schoolID` int(11) DEFAULT NULL,
   `studentID` int(11) DEFAULT NULL,
   `status` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `studentstatus`
@@ -221,7 +227,13 @@ INSERT INTO `studentstatus` (`schoolID`, `studentID`, `status`) VALUES
 (1, 10, 'pending'),
 (1, 11, 'pending'),
 (1, 12, 'pending'),
-(1, 13, 'pending');
+(1, 13, 'pending'),
+(2, 14, 'pending'),
+(2, NULL, 'pending'),
+(2, NULL, 'pending'),
+(2, NULL, 'pending'),
+(2, NULL, 'pending'),
+(2, NULL, 'pending');
 
 -- --------------------------------------------------------
 
@@ -240,7 +252,7 @@ CREATE TABLE `tasks` (
   `dateStarted` varchar(80) DEFAULT NULL,
   `dateFinished` varchar(80) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -250,7 +262,8 @@ CREATE TABLE `tasks` (
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`accountID`);
+  ADD PRIMARY KEY (`accountID`),
+  ADD KEY `accountID` (`accountID`);
 
 --
 -- Indexes for table `batch`
@@ -319,13 +332,13 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `batch`
 --
 ALTER TABLE `batch`
-  MODIFY `batchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `batchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `dailylog`
@@ -337,19 +350,19 @@ ALTER TABLE `dailylog`
 -- AUTO_INCREMENT for table `internshipapplication`
 --
 ALTER TABLE `internshipapplication`
-  MODIFY `internshipApplicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `internshipApplicationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `school`
 --
 ALTER TABLE `school`
-  MODIFY `schoolID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `schoolID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -397,7 +410,7 @@ ALTER TABLE `school`
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`schoolID`) REFERENCES `school` (`schoolID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `student_ibfk_3` FOREIGN KEY (`applicationID`) REFERENCES `internshipapplication` (`internshipApplicationID`) ON DELETE SET NULL ON UPDATE CASCADE;
 

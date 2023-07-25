@@ -46,12 +46,12 @@
 
     // Student table req'd params
     $accountIDs;        // Type: int
-    // $batchNo;          // Type: int
     $schoolIDs;         // Type: int
     $studentNames;      // Type: str
     $course;            // Type: str
     $hoursRendered;     // Type: str
     $status;            // Type: str
+    $noStudent;          // type: int
 
     $accountID = $_SESSION['accountID'];
     $schoolID = $_SESSION['schoolID'];
@@ -66,6 +66,7 @@
     $course = $_POST['course'];
     $hoursRendered = "0";
     $status = "pending";
+    $noStudent = max(count($student_names), count($student_emails));
 
     // DEBUG: print out student details -- content -- 
     echo "<br/>Account ID: ".$accountID
@@ -75,7 +76,8 @@
         ."<br/>Student Emails: ".join("\n  ", $student_emails)
         ."<br/>Course: ".$course
         ."<br/>Hrs Rendered : ".$hoursRendered
-        ."<br/>Status: ".$status;
+        ."<br/>Status: ".$status
+        ."<br/>No of Students: ".$noStudent;
 
     /// CHECKING FOR DUPLICATE EMAILS
     // Query for existing emails
@@ -120,8 +122,8 @@
     $insert_batch_query->close();
 
     // Upload application data into database
-    $insert_applicant_query = $con->prepare("INSERT INTO internshipapplication (schoolID, batchID, programAdviser, adviserEmail, dateSubmitted, duration) VALUES (?, ?, ?, ?, ?, ?)");
-    $insert_applicant_query->bind_param("iissss", $schoolID, $batchID, $programAdviser, $adviserEmail, $dateSubmitted, $duration);
+    $insert_applicant_query = $con->prepare("INSERT INTO internshipapplication (schoolID, batchID, programAdviser, adviserEmail, dateSubmitted, duration, noStudents) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $insert_applicant_query->bind_param("iissssi", $schoolID, $batchID, $programAdviser, $adviserEmail, $dateSubmitted, $duration, $noStudent);
     $insert_applicant_query->execute();
     /// Querying for applicationID
     $insert_applicant_query = $con->prepare("SELECT internshipapplicationID FROM internshipapplication 
@@ -130,8 +132,9 @@
                                                 AND programAdviser = ? 
                                                 AND adviserEmail = ? 
                                                 AND dateSubmitted = ? 
-                                                AND duration = ?");
-    $insert_applicant_query->bind_param("iissss", $schoolID, $batchID, $programAdviser, $adviserEmail, $dateSubmitted, $duration);
+                                                AND duration = ?
+                                                AND noStudents = ?");
+    $insert_applicant_query->bind_param("iissssi", $schoolID, $batchID, $programAdviser, $adviserEmail, $dateSubmitted, $duration, $noStudent);
     $insert_applicant_query->execute();
     $insert_applicant_result = $insert_applicant_query->get_result();
     $applicationID = $insert_applicant_result->fetch_assoc()['internshipapplicationID'];

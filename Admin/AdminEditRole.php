@@ -8,7 +8,7 @@
         $current_account_id = $_GET['i'];
 
         // Query for Account Details
-        $account_details_query = "SELECT email, password, role, IF(role='student',studentName,schoolName) AS Name
+        $account_details_query = "SELECT ac.email, ac.password, ac.role, IF(ac.role='student',st.studentName,sc.schoolName) AS Name
                                 FROM account ac
                                 LEFT JOIN student st ON st.accountID = ac.accountID
                                 LEFT JOIN school sc ON sc.accountID = ac.accountID
@@ -37,17 +37,39 @@
             $acc_lname = $_POST['lname'];
             $acc_email = $_POST['email'];
 
+            // TODO: configure updates for other roles
             // Upload new details: Name
+            $accName = $acc_fname." ".$acc_lname;
+            switch($account_details['role']) {
+                case 'student':
+                    $name_stmt = "UPDATE student SET studentName = ? WHERE accountID = ?";
+                    break;
+                case 'school':
+                    $name_stmt = "UPDATE school SET schoolName = ? WHERE accountID = ?";
+                    break;
+                default:
+                    $name_stmt = "SELECT ac.role FROM account ac JOIN school sc ON sc.accountID = ac.accountID WHERE sc.schoolName = ? AND ac.accountID = ?";
+                    break;
+            }
+
+            $name_query = $con->prepare($name_stmt);
+            $name_query->bind_param("si", $accName, $current_account_id);
+            $name_query->execute();
+            $name_query->close();
             //
             // Upload new details: Email
-            $email_query = "UPDATE account SET email = ? WHERE accountID = ?";
-            $stmt = $con->prepare($fname_query);
-            $stmt->bind_param("si", $acc_email, $current_account_id);
-            $stmt->execute();
+            $email_stmt = "UPDATE account SET email = ? WHERE accountID = ?";
+            $email_query = $con->prepare($email_stmt);
+            $email_query->bind_param("si", $acc_email, $current_account_id);
+            $email_query->execute();
+            $email_query->close();
+            //
             // Upload new details: Role
             //
             // Upload new details: Password
             //
+
+            header("Location: AdminDashboard.php");
         }
     }
 ?>
@@ -98,17 +120,17 @@
                     <div class="row" style="height: 110px;">
                         <div class="col" style="margin: 23px;margin-top: 5px;">
                             <div><label class="form-label" style="font-size: 16px;"><strong>First Name</strong></label></div>
-                            <div><input class="form-control" type="text" name="fname" style="border-radius: 25px;width: 100%;height: 50px;font-size: 16px;border: 1px solid #d1d3e2;" placeholder="<?php echo $f_name; ?>"></div>
+                            <div><input class="form-control" type="text" name="fname" style="border-radius: 25px;width: 100%;height: 50px;font-size: 16px;border: 1px solid #d1d3e2;" value="<?php echo $f_name; ?>"></div>
                         </div>
                         <div class="col" style="margin: 23px;margin-top: 5px;">
                             <div><label class="form-label" style="font-size: 16px;"><strong>Last Name</strong></label></div>
-                            <div><input class="form-control" type="text" name="lname" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" placeholder="<?php echo $l_name; ?>"></div>
+                            <div><input class="form-control" type="text" name="lname" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" value="<?php echo $l_name; ?>"></div>
                         </div>
                     </div>
                     <div class="row" style="height: 110px;">
                         <div class="col" style="margin: 23px;margin-top: 5px;">
                             <div><label class="form-label" style="font-size: 16px;"><strong>Email</strong></label></div>
-                            <div><input class="form-control" type="text" name="email" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" placeholder="Email Address" value="<?php echo $account_details['email']?>"></div>
+                            <div><input class="form-control" type="text" name="email" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" value="<?php echo $account_details['email']?>"></div>
                         </div>
                     </div>
                     <div class="row" style="height: 110px;">
