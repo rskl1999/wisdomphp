@@ -10,11 +10,10 @@
 	 cursor: pointer;
 	 text-align: left;
 	 white-space: nowrap;
-	 color: #000000;
-	 outline: none;
-	 border: 0.06em solid transparent;
+	 color: #858585;
+	 border: 0.06em solid #3694d7;
 	 border-radius: 1em;
-	 background-color: #D3EDFF;
+	 background-color: #ffffff;
 	 transition: 0.3s all ease-in-out;
      margin-left: 115px;
 }
