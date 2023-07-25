@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="path/to/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
 </head>
 
 <body>
@@ -51,7 +49,7 @@
                                         <div class="col-md-6">
                                             <a href="Individual Sub-Categories.php#3dprinting" class="text-decoration-none">
                                                 <div class="d-flex">
-                                                    <i class="fas fa-th-large" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                    <i class="fas fa-cube" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
                                                     <div style="margin-left: 10px;">
                                                         <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">3D Printing</h1>
                                                         <p style="margin-top: -7px; color: #677489;">Create 3D objects using computer created design.</p>
@@ -67,7 +65,7 @@
                                         <div class="col-md-6">
                                         <a href="Individual Sub-Categories.php#programming" class="text-decoration-none">
                                             <div class="d-flex">
-                                                <i class="fa-solid fa-computer-classic" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                <i class="fas fa-computer" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
                                                 <div style="margin-left: 10px;">
                                                     <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Programming</h1>
                                                     <p style="margin-top: -7px; color: #677489;">Implement user interfaces for websites.</p>
@@ -96,7 +94,7 @@
                                         <div class="col-md-6">
                                             <a href="Individual Sub-Categories.php#graphicdesign" class="text-decoration-none">
                                                 <div class="d-flex">
-                                                <i class="fas fa-project-diagram" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
+                                                <i class="fas fa-pen-nib" style="font-size: 21px; color: #3448ff; width: 30px;"></i>
                                                     <div style="margin-left: 10px;">
                                                         <h1 style="font-size: 16px; font-weight: bold; color: rgb(0, 0, 0);">Graphic Design</h1>
                                                         <p style="margin-top: -7px; color: #677489;">Visually communicating ideas and messages.</p>
@@ -123,7 +121,7 @@
                     <li class="nav-item"><a class="nav-link" href="Alumni.php">Alumni</a></li>
                     <li class="nav-item"><a class="nav-link" href="ContactUs.php">Contact</a></li>
                 </ul>
-                <a href = "register.php"><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;margin-right: 1px; background: #0017eb;font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;">Join Now</button></a>
+                <a href = "register.php"><button class="btn btn-primary" type="button" style="margin: 0px 30px;border-radius: 35px;margin-right: 1px; background: #0017eb;font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;">Join Now</button></a>
                 <a href = "login.php"><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;background: rgba(0,23,235,0);font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;color: #0017eb;border-width: 2px;border-color: #0017eb;font-weight: bold;">Sign in</button></a>
             </div>
         </div>
@@ -136,6 +134,6 @@
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="assets/js/theme.js"></script>
-    
 </body>
+
 </html>
