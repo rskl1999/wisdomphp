@@ -60,10 +60,8 @@
     $total_items = $total_students_res->fetch_assoc()['totalStudents'];
     $total_students->close();
 
-    echo $total_items;
-
     $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
-    $items_per_page = 5;
+    $items_per_page = 10;
     $offset = ($page - 1) * $items_per_page;
 ?>
 
@@ -147,7 +145,7 @@
                                 // year/course -- OK
                                 // address -- TODO: address column in student table DOES NOT EXIST
                                 // Query for students of current school
-                                $student_query = $con->prepare("SELECT st.studentID, st.studentName, st.course, sts.status 
+                                $student_query = $con->prepare("SELECT st.studentID, st.studentName, st.course, sts.status, st.applicationID
                                                                 FROM student st 
                                                                     JOIN studentstatus sts ON st.studentID = sts.studentID
                                                                 WHERE st.schoolID = ? 
@@ -175,8 +173,8 @@
                                                 <p style=\"font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;\">".$student['course']."</p>
                                             </div>
                                             <div class=\"col\" id=\"colb\">
-                                                <div id=\"divb\"><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=accepted\"><button class=\"btn btn-primary\" id=\"accept\" type=\"button\"><i class=\"fa fa-check-circle\" style=\"padding-right: 5px;\"></i>Proceed</button></a>
-                                                    <div id=\"divider\"></div><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=declined\"><button class=\"btn btn-primary\" id=\"reject\" type=\"button\"><i class=\"fa fa-times-circle\" style=\"padding-right: 5px;\"></i>Decline</button></a>
+                                                <div id=\"divb\"><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=accepted&appli=".$student['applicationID']."\"><button class=\"btn btn-primary\" id=\"accept\" type=\"button\"><i class=\"fa fa-check-circle\" style=\"padding-right: 5px;\"></i>Proceed</button></a>
+                                                    <div id=\"divider\"></div><a href=\"".$action_base_url."?stid=".$student['studentID']."&status=declined&appli=".$student['applicationID']."\"><button class=\"btn btn-primary\" id=\"reject\" type=\"button\"><i class=\"fa fa-times-circle\" style=\"padding-right: 5px;\"></i>Decline</button></a>
                                                 </div>
                                             </div>
                                         </div>

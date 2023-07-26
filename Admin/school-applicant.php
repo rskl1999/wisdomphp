@@ -33,14 +33,28 @@
     $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, ap.noStudents
                                 FROM school sc
                                 JOIN internshipapplication ap ON ap.schoolID = sc.schoolID
-                                WHERE sc.schoolID > 0;
+                                WHERE sc.schoolID > 0
                                 ");
     $school_query->execute();
     $school_query_res = $school_query->get_result();
     // Store list of schools and their details
     $school_list = array();
     while($row = $school_query_res->fetch_assoc()) {
+        // Clean
+        if(empty($row['noStudents'])) {
+            $row['noStudents'] = 0;
+        }
         $school_list[] = $row;
+    }
+    // Trim duplicate schools and their total no of students together
+    for($i = 0; $i < count($school_list); $i++) {
+        for($j = $i+1; $j < count($school_list)-1; $j++) {
+            if($school_list[$i]['schoolName'] == $school_list[$j]['schoolName']) {
+                $school_list[$i]['noStudents'] += $school_list[$j]['noStudents'];
+                array_splice($school_list, $j, 1);
+                $j -= 1;
+            }
+        }
     }
 
     $school_query->close();
@@ -107,7 +121,7 @@
                 <div class="container py-5">
                     <?php
                         // TODO: redo this in javascript
-                        $col_per_row = 3;
+                        $col_per_row = 2;
                         for($i = 0; $i < count($school_list); $i++) {
                             if($i % $col_per_row == 0) {
                                 echo " <div class=\"row pb-5 mb-4\"> ";
