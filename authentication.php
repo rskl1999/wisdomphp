@@ -27,7 +27,7 @@ if (isset($_POST['Login'])) {
                     case "student":
                         $_SESSION['accountID'] = $row['accountID'];
                         mysqli_close($con);
-                        header("Location: student_dashboard.php");
+                        header("Location: Student/StudentDashboard.php");
                         exit();
                         break;
                     case "school":
@@ -39,19 +39,19 @@ if (isset($_POST['Login'])) {
                     case "facilitator":
                         $_SESSION['accountID'] = $row['accountID'];
                         mysqli_close($con);
-                        header("Location: facilitator_dashboard.php");
+                        header("Location: Facilitator/FacilitatorSchoolDashboard.php");
                         exit();
                         break;
-                    case "Human Resources":
+                    case "hr":
                         $_SESSION['accountID'] = $row['accountID'];
                         mysqli_close($con);
-                        header("Location: school-applicant.php");
+                        header("Location: HR/school-transaction.php");
                         exit();
                         break;
-                    case "Admin":
+                    case "admin":
                         $_SESSION['accountID'] = $row['accountID'];
                         mysqli_close($con);
-                        header("Location: school-applicant.php");
+                        header("Location: Admin/AdminDashboard.php");
                         exit();
                         break;
                     default:
