@@ -27,22 +27,23 @@
                                     <div class="text-center">
                                         <h4 class="text-dark mb-4" style="font-family: Poppins, sans-serif;font-size: 22px;">Welcome Back!</h4>
                                     </div>
-                                    <div>
-                                    <span class="dropdown-el">
-                                        <input type="radio" name="sortType" value="" id="choose" checked>
-                                        <label for="choose" style="font-family: Poppins, sans-serif; font-size:15px;">Choose..</label>
-                                        <input type="radio" name="sortType" value="Admin" id="admin">
-                                        <label for="admin" style="font-family: Poppins, sans-serif; font-size:15px;">Admin</label>
-                                        <input type="radio" name="sortType" value="Facilitator" id="facilitator">
-                                        <label for="facilitator" style="font-family: Poppins, sans-serif; font-size:15px;">Facilitator</label>
-                                        <input type="radio" name="sortType" value="HR" id="hr">
-                                        <label for="hr" style="font-family: Poppins, sans-serif; font-size:15px;">HR</label>
-                                        <input type="radio" name="sortType" value="School" id="school">
-                                        <label for="school" style="font-family: Poppins, sans-serif; font-size:15px;">School</label>
-                                        <input type="radio" name="sortType" value="Student" id="student">
-                                        <label for="student" style="font-family: Poppins, sans-serif; font-size:15px;">Student</label>
-                                    </span>
+                                    <div class="mb-3">
+                                        <span class="dropdown-el">
+                                            <input type="radio" name="department" value="" id="choose" checked required>
+                                            <label for="choose" style="font-family: Poppins, sans-serif; font-size:15px;">Choose..</label>
+                                            <input type="radio" name="department" value="admin" id="admin">
+                                            <label for="admin" style="font-family: Poppins, sans-serif; font-size:15px;">Admin</label>
+                                            <input type="radio" name="department" value="facilitator" id="facilitator" >
+                                            <label for="facilitator" style="font-family: Poppins, sans-serif; font-size:15px;">Facilitator</label>
+                                            <input type="radio" name="department" value="hr" id="hr" >
+                                            <label for="hr" style="font-family: Poppins, sans-serif; font-size:15px;">HR</label>
+                                            <input type="radio" name="department" value="school" id="school" >
+                                            <label for="school" style="font-family: Poppins, sans-serif; font-size:15px;">School</label>
+                                            <input type="radio" name="department" value="student" id="student" >
+                                            <label for="student" style="font-family: Poppins, sans-serif; font-size:15px;">Student</label>
+                                        </span>
                                     </div>
+                                    <input type="hidden" name="department" id="selected-role" value="">
                                     <div style="margin-top: 70px;">
                                     <form class="user" action="authentication.php" method="POST">
                                     <?php
@@ -81,6 +82,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="login-reg-assets/js/theme.js"></script>
     <script src="login-reg-assets/js/dropdown.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 
 </html>
