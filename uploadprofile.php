@@ -28,12 +28,13 @@ if (isset($_POST['create'])) {
     // The user data was already inserted in create-acct.php, so no need to insert it again here.
 
     // Get the role from the previous insertion
-    $sql = "SELECT role FROM account WHERE email = ?";
+    $sql = "SELECT accountID, role FROM account WHERE email = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
+    $userID = $user['accountID'];
     $role = $user['role'];
     $stmt->close();
 
@@ -69,6 +70,9 @@ if (isset($_POST['create'])) {
     $stmt->close();
     $con->close();
 
+    // Clear out SESSION variables
+    unset($_SESSION['email']);
+    unset($_SESSION['password']);
     unset($_SESSION['schoolName']);
     unset($_SESSION['address']);
     unset($_SESSION['contact-no']);
