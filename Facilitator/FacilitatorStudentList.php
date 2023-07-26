@@ -5,9 +5,6 @@
     $school_index = $_GET['school_index'];
 
     // Query for List of Students
-    // $students_query = "SELECT studentName, batchID, status, course, hoursRendered
-    //                 FROM student 
-    //                 WHERE schoolID = ?";
     $students_query = "SELECT st.studentName, st.course, st.hoursRendered, sts.status, b.batchNo, ap.duration
                     FROM student st
                     JOIN internshipapplication ap ON st.applicationID = ap.internshipapplicationID
@@ -25,6 +22,11 @@
     }
     // Close query
     $students_stmt->close();
+    // Temp FIx: If no students were found in query, set null value for variable
+    //           Do this so that the webpage will display an empty list instead of an error.
+    if(empty($students_list)) {
+        $students_list[] = array("studentName" => "", "course" => "", "hoursRendered" => 0, "status" => "", "batchNo" => 0, "duration" => 0);
+    }
 
     // Query for School Details
     $school_query = "SELECT schoolName, schoolLogo FROm school where schoolID = ?";
@@ -104,22 +106,26 @@
 
                                 $offset = ($page - 1) * $items_per_page;
 
-                                for($i = $offset; ($i < $offset + $items_per_page) & ($i < count($students_list)); $i++) {
-                                    echo "
-                                        <tr>
-                                            <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
-                                            <td>
-                                                <h1 style=\"font-size: 16px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
-                                                <p>studentemail@gmail.com</p>
-                                            </td>
-                                            <td>Batch ".$students_list[$i]['batchNo']."</td>
-                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;\">".$students_list[$i]['status']."</button></td>
-                                            <td>".$students_list[$i]['course']."</td>
-                                            <td>".$students_list[$i]['duration']."</td>
-                                            <td>".$students_list[$i]['hoursRendered']."</td>
-                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button></td>
-                                        </tr>
-                                    ";
+                                // If students list is not empty...
+                                if(!empty($students_list[0]['studentName']) && !empty($students_list[0]['course']) && !empty($students_list[0]['status'])) {
+                                    // Display all students
+                                    for($i = $offset; ($i < $offset + $items_per_page) && ($i < count($students_list)); $i++) {
+                                        echo "
+                                            <tr>
+                                                <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
+                                                <td>
+                                                    <h1 style=\"font-size: 16px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
+                                                    <p>studentemail@gmail.com</p>
+                                                </td>
+                                                <td>Batch ".$students_list[$i]['batchNo']."</td>
+                                                <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;\">".$students_list[$i]['status']."</button></td>
+                                                <td>".$students_list[$i]['course']."</td>
+                                                <td>".$students_list[$i]['duration']."</td>
+                                                <td>".$students_list[$i]['hoursRendered']."</td>
+                                                <td><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button></td>
+                                            </tr>
+                                        ";
+                                    }
                                 }
 
                             ?>
