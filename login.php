@@ -43,6 +43,7 @@
                                         <label for="student" style="font-family: Poppins, sans-serif; font-size:15px;">Student</label>
                                     </span>
                                     </div>
+                                    <div style="margin-top: 70px;">
                                     <form class="user" action="authentication.php" method="POST">
                                     <?php
                                     session_start();
@@ -56,7 +57,7 @@
                                         unset($_SESSION['success']);
                                         }
                                         ?>
-                                        <div class="mb-3"><input class="form-control form-control-user" name="email" type="email" id="login-email" aria-describedby="emailHelp" placeholder="Email" name="email" style="font-family: Poppins, sans-serif; margin-top:70px;" required=""></div>
+                                        <div class="mb-3"><input class="form-control form-control-user" name="email" type="email" id="login-email" aria-describedby="emailHelp" placeholder="Email" name="email" style="font-family: Poppins, sans-serif;" required=""></div>
                                         <div class="mb-3"><input class="form-control form-control-user" name="password" type="password" id="login-password" placeholder="Password" name="password" style="font-family: Poppins, sans-serif;" required="" minlength=""></div>
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small">
@@ -67,6 +68,7 @@
                                     </form>
                                     <div class="text-center"><a class="small" href="forgot-password.php" style="font-family: Poppins, sans-serif;">Forgot Password?</a></div>
                                     <div class="text-center"><a class="small" href="register.php" style="font-family: Poppins, sans-serif;">Create an Account!</a></div>
+                                </div>
                                 </div>
                             </div>
                         </div>

@@ -32,14 +32,13 @@
                                     echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
                                     unset($_SESSION['error']); } // Clear the error message from session 
                             ?>
-                                <div id="school-name" class="mb-3"><input id="school-name" class="form-control form-control-user" placeholder="School Name" name="schoolName"style="font-family: Poppins, sans-serif;" required onkeypress="return isVarchar(event)"/></div>
-                                <div id="email" class="mb-3"><input class="form-control form-control-user" type="email" id="email-address" placeholder="Email" name="email" style="font-family: Poppins, sans-serif;" required onkeypress="return validateEmail(event)"> </div>
-                                <div id="address" class="mb-3"><input id="address" class="form-control form-control-user" placeholder="Address" name="address" style="font-family: Poppins, sans-serif;" required onkeypress="return isVarchar(event)"/></div>
-
-                                <div id="contact-number" class="mb-3"><input id="contact-number" class="form-control form-control-user" placeholder="Contact Number" name="contact-no" style="font-family: Poppins, sans-serif;" inputmode="numeric" maxlength="11" required onkeypress="return isNumberKey(event)"/>
+                                <div id="schoolName" class="mb-3"><input id="school-name" class="form-control form-control-user" placeholder="School Name" name="schoolName"style="font-family: Poppins, sans-serif;" required onkeypress="return isVarchar(event)"/></div>
+                                <div id="emailAddress" class="mb-3"><input class="form-control form-control-user" type="email" id="email-address" placeholder="Email" name="email" style="font-family: Poppins, sans-serif;" required onkeypress="return validateEmail(event)"> </div>
+                                <div id="userAddress" class="mb-3"><input id="address" class="form-control form-control-user" placeholder="Address" name="address" style="font-family: Poppins, sans-serif;" required onkeypress="return isVarchar(event)"/></div>
+                                <div id="contactNumber" class="mb-3"><input id="contact-number" class="form-control form-control-user" placeholder="Contact Number" name="contact-no" style="font-family: Poppins, sans-serif;" inputmode="numeric" maxlength="11" required onkeypress="return isNumberKey(event)"/>
                             </div>
                 <div class="row mb-3">
-                        <div class="col-sm-6 mb-3 mb-sm-0" id="province">
+                        <div class="col-sm-6 mb-3 mb-sm-0" id="userProvince">
             <select id="province" name="province" class="form-select" style="height: 53.1875px;padding: 16px;font-family: Poppins, sans-serif;font-size: 12.8px;border-radius: 160px;" required>
         
         <option value="" disabled selected>Select a Province</option>
@@ -125,7 +124,7 @@
         <option value="Zamboanga Sibugay">Zamboanga Sibugay</option>
     </select></div>
 
-        <div class="col-sm-6" id="city">
+        <div class="col-sm-6" id="userCity">
         <select id="city" name="city" class="form-select" style="height: 53.1875px;padding: 16px;font-family: Poppins, sans-serif;font-size: 12.8px;border-radius: 160px;" required>
     <option name="city" value="" disabled selected>Select a City</option>
         <option value="Manila">Manila</option>
@@ -171,31 +170,29 @@
                             <div class="col-sm-6" id="confirm-pass"><input class="form-control form-control-user" type="password" id="confirm-password" placeholder="Confirm Password" name="con-pass" style="font-family: Poppins, sans-serif;" required="" minlength="8" onkeypress="return isAlphanumericKey(event)"></div>
                             </div>
                             <div class="col mb-2">
-                            <form>
                                 <h3 style="font-family: Poppins, sans-serif; font-size:13px; margin-bottom:10px;">Department</h3>
                                 <label>
-                                <input type="radio" name="radio"/>
-                                <span style="font-family: Poppins, sans-serif;">Admin</span>
+                                    <input type="radio" name="department" value="Admin" />
+                                    <span style="font-family: Poppins, sans-serif;">Admin</span>
                                 </label>
                                 <label>
-                                <input type="radio" name="radio"/>
-                                <span style="font-family: Poppins, sans-serif;">Facilitator</span>
+                                    <input type="radio" name="department" value="Facilitator" />
+                                    <span style="font-family: Poppins, sans-serif;">Facilitator</span>
                                 </label>
                                 <label>
-                                <input type="radio" name="radio"/>
-                                <span style="font-family: Poppins, sans-serif;">HR</span>
+                                    <input type="radio" name="department" value="HR" />
+                                    <span style="font-family: Poppins, sans-serif;">HR</span>
                                 </label>
                                 <label>
-                                <input type="radio" name="radio"/>
-                                <span style="font-family: Poppins, sans-serif;">School</span>
+                                    <input type="radio" name="department" value="School" />
+                                    <span style="font-family: Poppins, sans-serif;">School</span>
                                 </label>
                                 <label>
-                                <input type="radio" name="radio"/>
-                                <span style="font-family: Poppins, sans-serif;">Student</span>
+                                    <input type="radio" name="department" value="Student" />
+                                    <span style="font-family: Poppins, sans-serif;">Student</span>
                                 </label>
-                            </form>
                             </div>
-                                <button class="btn btn-primary d-block btn-user w-100" name="next" type="submit" style="font-family: Poppins, sans-serif;background: rgb(17,55,239);">Register</button>
+                                <button class="btn btn-primary d-block btn-user w-100" name="next" type="submit" style="font-family: Poppins, sans-serif;background: rgb(17,55,239);" id="register">Register</button>
                             </form>
                             <hr>
                             <div class="text-center"><a class="small" href="login.php" style="font-family: Poppins, sans-serif;">Already have an account?</a></div>
@@ -210,53 +207,3 @@
 </body>
 
 </html>
-
-<script>
-    function isNumberKey(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 
-        && (charCode < 48 || charCode > 57)){
-            return false;
-        }
-        return true;
-    }
-
-    function isAlphanumericKey(event) {
-        const charCode = event.which || event.keyCode;
-    const passwordRegex = /^[a-zA-Z0-9]*$/;
-
-    if (!passwordRegex.test(String.fromCharCode(charCode))) {
-        event.preventDefault();
-    }
-    return passwordRegex.test(String.fromCharCode(charCode));
-}
-
-function isVarchar(event) {
-    const charCode = event.which ? event.which : event.keyCode;
-    if (charCode > 31 
-        && (charCode < 48 || charCode > 57) 
-        && (charCode < 65 || charCode > 90) 
-        && (charCode < 97 || charCode > 122) 
-        && charCode !== 44 // allow comma
-        && charCode !== 32) { // allow space
-        event.preventDefault();
-        return false;
-    }
-    return true;
-}
-
-function validateEmail(event) {
-  const keyCode = event.keyCode;
-  const allowedKeys = [46, 64, 95]; // 46 is for ".", 64 is for "@", and 95 is for "_"
-
-  if ((keyCode >= 48 && keyCode <= 57) // 0-9
-    || (keyCode >= 65 && keyCode <= 90) // A-Z
-    || (keyCode >= 97 && keyCode <= 122) // a-z
-    || allowedKeys.includes(keyCode)) { // allowed special characters
-    return true;
-  }
-  event.preventDefault();
-  return false;
-}
-
-</script>

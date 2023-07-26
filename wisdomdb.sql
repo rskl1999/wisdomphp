@@ -31,7 +31,7 @@ CREATE TABLE `account` (
   `accountID` int(11) NOT NULL,
   `email` varchar(80) DEFAULT NULL,
   `password` varchar(90) DEFAULT NULL,
-  `role` varchar(20) DEFAULT NULL,
+  `role` ENUM('admin', 'facilitator', 'hr', 'school', 'student') DEFAULT NULL,
   `token` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

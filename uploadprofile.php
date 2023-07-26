@@ -1,61 +1,82 @@
 <?php
-    require_once('connection.php');
-    session_start();
+require_once('connection.php');
+session_start();
 
+// Check if the required session variables are set
+$schoolName = $_SESSION['schoolName'];
+$email = $_SESSION['email'];
+$address = $_SESSION['address'];
+$contactno = $_SESSION['contact-no'];
+$password = $_SESSION['password'];
+
+if (!$schoolName || !$email || !$address || !$contactno || !$password) {
+    header("Location: register.php");
+}
+
+if (isset($_POST['create'])) {
+    $image_name = $_FILES["logo"]["name"];
+    $image_tmp_name = $_FILES["logo"]["tmp_name"];
+    $image_type = $_FILES["logo"]["type"];
+    $image_size = $_FILES["logo"]["size"];
+
+    $unique_id = uniqid(); // Generate unique identifier
+    $image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
+    $new_logo_name = $unique_id . '.' . $image_extension; // Create new file name with extension
     
-    $schoolName = $_SESSION['schoolName'];
-    $email = $_SESSION['email'];
-    $address = $_SESSION['address']; 
-    $contactno = $_SESSION['contact-no'];
-    $password = $_SESSION['password'];
-    
-    if(!$schoolName || !$email || !$address || !$contactno || !$password){
-        header("Location:register.php");
+    $passwordhash = password_hash($password, PASSWORD_DEFAULT);
+
+    // The user data was already inserted in create-acct.php, so no need to insert it again here.
+
+    // Get the role from the previous insertion
+    $sql = "SELECT role FROM account WHERE email = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $role = $user['role'];
+    $stmt->close();
+
+    // Determine the folder to save the image based on the role
+    $folder = "";
+    switch ($role) {
+        case 'admin':
+            $folder = "Admin-Logo/";
+            break;
+        case 'facilitator':
+            $folder = "Facilitator-Logo/";
+            break;
+        case 'hr':
+            $folder = "HR-Logo/";
+            break;
+        case 'school':
+            $folder = "School-Logo/";
+            break;
+        case 'student':
+            $folder = "Student-Logo/";
+            break;
+        // Add additional cases for more roles, if needed
+        default:
+            $folder = "Other-Logo/";
     }
-    
-    if(isset($_POST['create'])){
-       
-        $image_name = $_FILES["logo"]["name"];
-        $image_tmp_name = $_FILES["logo"]["tmp_name"];
-        $image_type = $_FILES["logo"]["type"];
-        $image_size = $_FILES["logo"]["size"];
 
-        $unique_id = uniqid(); // Generate unique identifier
-        $image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
-        $new_logo_name = $unique_id . '.' . $image_extension; // Create new file name with extension
-        move_uploaded_file($image_tmp_name, "School-Logo/" . $new_logo_name);
-        $passwordhash = password_hash($password, PASSWORD_DEFAULT);
-        $role = 'school';
+    move_uploaded_file($image_tmp_name, $folder . $new_logo_name);
 
-        // Create new School Role
-        $stmt = $con->prepare("INSERT INTO account (email, password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $email, $passwordhash, $role);
-        $stmt->execute();
+    $stmt = $con->prepare("INSERT INTO school (accountID, schoolName, address, contactInfo, schoolLogo) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
+    $stmt->execute();
 
-        $sql = "SELECT accountID FROM account WHERE email = '$email'";
-        $result = mysqli_query($con, $sql);
-        $maxID = mysqli_fetch_assoc($result);
-        $userID = $maxID["accountID"];
+    $stmt->close();
+    $con->close();
 
-        unset($_SESSION['email']);
-        unset($_SESSION['password']);
-        
-        $stmt = $con->prepare("INSERT INTO school (accountID, schoolName, address, contactInfo, schoolLogo) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
-        $stmt->execute();
+    unset($_SESSION['schoolName']);
+    unset($_SESSION['address']);
+    unset($_SESSION['contact-no']);
 
-        $stmt->close();
-        $con->close();
-
-        unset($_SESSION['schoolName']);
-        unset($_SESSION['address']); 
-        unset($_SESSION['contact-no']);
-            
-
-        $_SESSION['success'] = "Account Created Succesfully";
-        header("Location:login.php");
-
-    }
+    $_SESSION['success'] = "Account Created Successfully";
+    header("Location: login.php");
+    exit; // Stop further code execution after the redirection
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +95,8 @@
 <body class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="height: 100vh;background: url(&quot;login-reg-assets/img/image.jpg&quot;) center / cover round;">
     <div class="card" style="width: 350px;box-shadow: 0px 0px 19px 0px rgba(133,135,150,0.29);border-radius: 15px;">
         <form method="POST" enctype="multipart/form-data">
-            <h4 class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center" style="margin-top: 20px;margin-right: 25px;margin-bottom: 8px;margin-left: 25px;font-family: Poppins, sans-serif;color: rgb(0,0,0);">School Logo</h4>
-            <div class="row" id="profImage" style="margin: 50px;">
+            <h4 class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center" style="margin-top: 30px;margin-right: 25px;margin-bottom: 8px;margin-left: 25px;font-family: Poppins, sans-serif;color: rgb(0,0,0);">Profile Picture</h4>
+            <div class="row" id="profImage" style="margin: 40px;">
                 <div class="col d-flex d-xxl-flex justify-content-center justify-content-xxl-center"><img></div>
             </div>
             <div class="row" id="inputBox" style="padding-bottom: 30px;padding-right: 20px;padding-left: 20px;">
