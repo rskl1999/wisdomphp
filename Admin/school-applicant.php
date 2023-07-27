@@ -121,116 +121,42 @@
                 <div class="container py-5">
                     <?php
                         // TODO: redo this in javascript
-                        $col_per_row = 2;
-                        for($i = 0; $i < count($school_list); $i++) {
-                            if($i % $col_per_row == 0) {
-                                echo " <div class=\"row pb-5 mb-4\"> ";
-                            }
+                        $col_per_row = 3;
+                        $row_count = count($school_list) / $col_per_row;
 
-                            echo "
-                                <div class=\"col-lg-3 col-md-6 mb-4 mb-lg-0\">
-                                    <div class=\"card shadow-sm border-0 rounded\">
-                                        <div class=\"card-body p-0\">
-                                            <a href=\"student-application.php?sch=".$school_list[$i]['schoolID']."\">
-                                                <img src=\"../School-Logo/".$school_list[$i]['schoolLogo']."\" alt=\"\" class=\"w-100 card-img-top\">
-                                            </a>
-                                            <div class=\"p-4\">
-                                                <a href=\"student-application.php?sch=".$school_list[$i]['schoolID']."\"><h5 class=\"mb-0\">".$school_list[$i]['schoolName']."</h5> </a>
-                                                <p class=\"small text-muted\">".$school_list[$i]['address']."</p>
-                                                
-                                                <a href=\"student-application.php?sch=".$school_list[$i]['schoolID']."\">
-                                                    <div class=\"pending\"><p><span class=\"pending-number\">".$school_list[$i]['noStudents']."</span> students pending</p></div>
+                        for($i = 0; $i < $row_count; $i++) {
+                            echo " <div class=\"row pb-5 mb-4\"> ";
+                            for($j = 0; $j < $col_per_row; $j++){
+                                $index = ($i * $col_per_row) + $j;
+                                if($index >= count($school_list)) break;
+                                echo "
+                                    <div class=\"col-lg-3 col-md-6 mb-4 mb-lg-0\">
+                                        <div class=\"card shadow-sm border-0 rounded\">
+                                            <div class=\"card-body p-0\">
+                                                <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\">
+                                                    <img src=\"../School-Logo/".$school_list[$index]['schoolLogo']."\" alt=\"".$school_list[$index]['schoolLogo']."\" class=\"w-100 card-img-top\">
                                                 </a>
-                                                <a href=\"transaction.php?sch=".$school_list[$i]['schoolID']."\">
-                                                    <div class=\"transaction\">
-                                                        <p>View Transaction History</p>
-                                                    </div>
-                                                </a>
+                                                <div class=\"p-4\">
+                                                    <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\"><h5 class=\"mb-0\">".$school_list[$index]['schoolName']."</h5> </a>
+                                                    <p class=\"small text-muted\">".$school_list[$index]['address']."</p>
+                                                    
+                                                    <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\">
+                                                        <div class=\"pending\"><p><span class=\"pending-number\">".$school_list[$index]['noStudents']."</span> students pending</p></div>
+                                                    </a>
+                                                    <a href=\"transaction.php?sch=".$school_list[$index]['schoolID']."\">
+                                                        <div class=\"transaction\">
+                                                            <p>View Transaction History</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ";
-                            if($i % $col_per_row == 0) {
-                                echo "</div>";
+                                ";
                             }
+                            echo "</div>";
                         }
                     ?>
-                    <!-- Second Row [Team]-->
-                    <!--
-                    <div class="row pb-5 mb-4">
-
-                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                            <div class="card shadow-sm border-0 rounded">
-                                <div class="card-body p-0">
-                                    <a href="student-application.php">
-                                        <img src="https://www.seekpng.com/png/detail/100-1007713_plm-logo-pamantasan-ng-lungsod-ng-maynila-logo.png" alt="" class="w-100 card-img-top">
-                                    </a>
-                                    <div class="p-4">
-                                        <a href="student-application.php"><h5 class="mb-0">Pamantasan ng Lungsod ng Maynila</h5> </a>
-                                        <p class="small text-muted">General Luna, corner Muralla St, Intramuros, Manila</p>
-                                        
-                                        <a href="student-application.php">
-                                            <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-                                        </a>
-                                        <a href="transaction.php">
-                                            <div class="transaction">
-                                                <p>View Transaction History</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                            <div class="card shadow-sm border-0 rounded">
-                                <div class="card-body p-0">
-                                    <a href="student-application.php">
-                                        <img src="https://scontent.fmnl15-1.fna.fbcdn.net/v/t1.18169-9/487834_368971733174539_1914724478_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=174925&_nc_ohc=hEeEWL2hxHwAX--_X15&_nc_ht=scontent.fmnl15-1.fna&oh=00_AfAyPcZAsGkRH-XU6Vg6iH9p4AlVRCNmtVt4b67qbLes5w&oe=6430D966" alt="" class="w-100 card-img-top">
-                                    </a>   
-                                    <div class="p-4">
-                                        <a href="student-application.php"><h5 class="mb-0">Technological Institute of the Philippines</h5> </a>
-                                        <p class="small text-muted">363 Pascual Casal St, Quiapo, Manila</p>
-                                        
-                                        <a href="student-application.php">
-                                            <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-                                        </a>
-                                        <a href="transaction.php">
-                                            <div class="transaction">
-                                                <p>View Transaction History</p>
-                                            </div>
-                                        </a>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                            <div class="card shadow-sm border-0 rounded">
-                                <div class="card-body p-0">
-                                    <a href="student-application.php">
-                                    <img src="https://scontent.fmnl15-1.fna.fbcdn.net/v/t39.30808-6/304876520_452370496913886_1208855622441055407_n.png?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aPmDYa4n8jAAX9-UpuR&_nc_ht=scontent.fmnl15-1.fna&oh=00_AfBxEAyKN349XF8MfMwaVmaA7dv-hF4Y1Lx3edCuSCgl5A&oe=64136CCB" alt="" class="w-100 card-img-top">
-                                    </a>
-                                    <div class="p-4">
-                                        <a href="student-application.php"><h5 class="mb-0">Our Lady of the Sacred Heart College of Guimba, Inc.</h5> </a>
-                                        <p class="small text-muted">Afan Salvador St. Guimba Nueva Ecija</p>
-                                        
-                                        <a href="student-application.php">
-                                            <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-                                        </a>
-                                        <a href="transaction.php">
-                                            <div class="transaction">
-                                                <p>View Transaction History</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div> -->
                 </div>
             </div>
         </div>
