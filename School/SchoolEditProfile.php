@@ -100,13 +100,11 @@
     <link rel="stylesheet" href="school-assets/css/Navbar-With-Button-icons.css">
     <link rel="stylesheet" href="school-assets/css/Profile-Edit-Form-styles.css">
     <link rel="stylesheet" href="school-assets/css/Profile-Edit-Form.css">
-    <link rel="stylesheet" href="editProfile-assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
     <link rel="stylesheet" href="editProfile-assets/css/styles.min.css">
-
 </head>
 
-<body><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
+<body style="color: rgb(0,0,0);"><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
     <div class="container-fluid"><a href="SchoolDashboard.php"><img src="school-assets/img/logo_black.png" width="140" height="29" /></a>
         <ul class="navbar-nav flex-nowrap ms-auto">
             <li class="nav-item d-flex justify-content-center align-items-center dropdown no-arrow mx-1"><a href="SchoolAddStudent.php"><button class="btn btn-primary" type="button" style="background: #0017eb;border-radius: 35px;width: 130px;">Add Student</button></a></li>
