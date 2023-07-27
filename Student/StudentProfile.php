@@ -42,7 +42,7 @@
     </div>
 </nav>
     <div>
-        <div><img src="assets/img/banner.jpg"></div>
+    <div id="banner" style="height: 150px;background: url(&quot;student-assets/img/banner-bg.png&quot;) center / cover no-repeat, #d3edff;"></div>
         <div class="container profile profile-view" id="profile" style="padding: 0px 20px;">
         <form>
             <div class="row profile-row">
