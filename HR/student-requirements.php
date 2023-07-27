@@ -1,5 +1,72 @@
 <?php
 
+    /*
+    * TODO:
+    *   - Define student profile picture location
+    */
+
+    require_once('../connection.php');
+    session_start();
+
+    require_once('../pageNavigation.php');
+    
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+
+    if(isset($_GET['std'])) {
+        $studentID = $_GET['std'];
+    }
+    else {
+
+    }
+
+    /// LOAD STUDENT DETAILS
+
+    $student_query = $con->prepare("SELECT st.studentID, st.schoolID, st.profileImage, st.studentName, ac.email, st.submittedRequirements, st.applicationID
+                                    FROM student st 
+                                    JOIN account ac ON st.accountID = ac.accountID 
+                                    WHERE st.studentID = ?");
+    $student_query->bind_param("i", $studentID);
+    $student_query->execute();
+    $student_query_res = $student_query->get_result();
+    $student_details = $student_query_res->fetch_assoc();
+
+    $student_requirements = explode(",",$student_details['submittedRequirements']); // WARNING: Diplaying of files assumes files are uploaded properly
+
+    /// RECEIVE SUBMITION
+    unset($_SESSION['prevLocation']);
+
+    if(isset($_POST['accept'])) {
+        $_SESSION['prevLocation'] = 'HR/student-application.php?sch='.$student_details['schoolID'];
+        header("Location: ../studentChangeStatus.php?stid=".$student_details['studentID']."&status=accepted&appli=".$student_details['applicationID']);
+    }
+    else if(isset($_POST['decline'])) {
+        $_SESSION['prevLocation'] = 'HR/student-application.php?sch='.$student_details['schoolID'];
+        header("Location: ../studentChangeStatus.php?stid=".$student_details['studentID']."&status=declined&appli=".$student_details['applicationID']);
+    }
 
 ?>
 
@@ -47,10 +114,11 @@
         <hr style="margin: 0px;color: rgb(197,197,197);">
     </div>
     <div class="container">
-        <form>
+        <form method="POST">
             <div class="row">
                 <div class="col-md-4 text-center" style="margin: 20px 0px;"><img style="width: 200px;height: 200px;border-radius: 50%;margin: 10px 0px;" src="hr-assets/img/Jocas-Kim-Orlan.jpg">
-                    <h4 id="student-name" style="margin: 0px;"><strong>Juan Dela Cruz</strong></h4><small id="student-email"><span style="color: rgb(147, 147, 147);">juandelacruz@gmail.com</span></small>
+                    <h4 id="student-name" style="margin: 0px;"><strong><?php echo $student_details['studentName']; ?></strong></h4>
+                    <small id="student-email"><span style="color: rgb(147, 147, 147);"><?php echo $student_details['email']; ?></span></small>
                 </div>
                 <div class="col-md-8" style="margin: 20px 0px;">
                     <h4><strong>Requirements:</strong></h4>
@@ -60,96 +128,47 @@
 <div id="main-content" class="file_manager">
         <div class="container">            
             <div class="row clearfix">
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card">
-                        <div class="file">
-                            <a href="javascript:void(0);">
 
-                                <div class="icon">
-                                    <i class="fa fa-file text-info"></i>
-                                </div>
-                                <div class="file-name">
-                                    <p class="m-b-5 text-muted">Resume.pdf</p>
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card">
-                        <div class="file">
-                            <a href="javascript:void(0);">
+                <?php 
 
-                                <div class="icon">
-                                    <i class="fa fa-file text-info"></i>
-                                </div>
-                                <div class="file-name">
-                                    <p class="m-b-5 text-muted">Resume.pdf</p>
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card">
-                        <div class="file">
-                            <a href="javascript:void(0);">
+                    for($i = 0; $i < count($student_requirements); $i++) {
+                        echo "
+                            <div class=\"col-lg-3 col-md-4 col-sm-12\">
+                                <div class=\"card\">
+                                    <div class=\"file\">
+                                        <a href=\"javascript:void(0);\">
 
-                                <div class="icon">
-                                    <i class="fa fa-file text-info"></i>
+                                            <div class=\"icon\">
+                                                <i class=\"fa fa-file text-info\"></i>
+                                            </div>
+                                            <div class=\"file-name\">
+                                                <p class=\"m-b-5 text-muted\">".$student_requirements[$i]."</p>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="file-name">
-                                    <p class="m-b-5 text-muted">Resume.pdf</p>
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card">
-                        <div class="file">
-                            <a href="javascript:void(0);">
+                            </div>                
+                        ";
+                    }
 
-                                <div class="icon">
-                                    <i class="fa fa-file text-info"></i>
-                                </div>
-                                <div class="file-name">
-                                    <p class="m-b-5 text-muted">Resume.pdf</p>
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="card">
-                        <div class="file">
-                            <a href="javascript:void(0);">
-
-                                <div class="icon">
-                                    <i class="fa fa-file text-info"></i>
-                                </div>
-                                <div class="file-name">
-                                    <p class="m-b-5 text-muted">Resume.pdf</p>
-                                    
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>                
-                
+                ?>
             </div>
-            
         </div>
     </div></div>
                     </div>
                     
                     <div class="row">
                         <div class="col d-flex d-xxl-flex justify-content-end justify-content-xxl-end" style="margin: 50px 0px;">
-                            <div class="btn-group" role="group"><button class="btn btn-primary" id="accept" type="button" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: rgb(0,160,45);"><i class="fas fa-check-circle" style="margin: 0px 6px;"></i>Accept</button><button class="btn btn-primary" id="decline" type="button" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: red;"><i class="fas fa-times-circle" style="margin: 0px 6px;"></i>Decline</button></div>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-primary" name="accept" id="accept" type="submit" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: rgb(0,160,45);">
+                                    <i class="fas fa-check-circle" style="margin: 0px 6px;"></i>
+                                    Accept
+                                </button>
+                                <button class="btn btn-primary" name="decline" id="decline" type="submit" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: red;">
+                                    <i class="fas fa-times-circle" style="margin: 0px 6px;"></i>
+                                    Decline
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

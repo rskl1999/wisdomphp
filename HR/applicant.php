@@ -1,6 +1,63 @@
 <?php
+    require_once('../connection.php');
+    session_start();
+
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../login.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../login.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
 
 
+    // Query For Schools and the no. of student applicants
+    $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, ap.noStudents
+                                FROM school sc
+                                JOIN internshipapplication ap ON ap.schoolID = sc.schoolID
+                                WHERE sc.schoolID > 0
+                                ");
+    $school_query->execute();
+    $school_query_res = $school_query->get_result();
+    // Store list of schools and their details
+    $school_list = array();
+    while($row = $school_query_res->fetch_assoc()) {
+        // Clean
+        if(empty($row['noStudents'])) {
+            $row['noStudents'] = 0;
+        }
+        $school_list[] = $row;
+    }
+    // Trim duplicate schools and their total no of students together
+    for($i = 0; $i < count($school_list); $i++) {
+        for($j = $i+1; $j < count($school_list)-1; $j++) {
+            if($school_list[$i]['schoolName'] == $school_list[$j]['schoolName']) {
+                $school_list[$i]['noStudents'] += $school_list[$j]['noStudents'];
+                array_splice($school_list, $j, 1);
+                $j -= 1;
+            }
+        }
+    }
+
+    $school_query->close();
 ?>
 
 <!DOCTYPE html>
@@ -54,74 +111,48 @@
         <hr style="margin: 0px;color: rgb(197,197,197);">
     </div>
     <div id="main-content"><div class="bootstrap_cards2">
-<div class="container py-5">
-    <!-- Second Row [Team]-->
-    <div class="row pb-5 mb-4">
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <!-- Card-->
-            <div class="card shadow-sm border-0 rounded">
-                <div class="card-body p-0">
-                    <a href="student-application.php">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/d/dc/PLM_Seal_2013.png" alt="" class="w-100 card-img-top">
-                    </a>
-                    <div class="p-4">
-                        <a href="student-application.php"><h5 class="mb-0">Pamantasan ng Lungsod ng Maynila</h5> </a>
-                        <p class="small text-muted">General Luna, corner Muralla St, Intramuros, Manila</p>
-                        
-                        <a href="student-application.php">
-  <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-</a>
-                        
-                    </div>
-                </div>
-            </div>
+        <div class="container py-5">
+            <?php
+                // TODO: redo this in javascript
+                $col_per_row = 3;
+                $row_count = count($school_list) / $col_per_row;
+
+                for($i = 0; $i < $row_count; $i++) {
+                    echo " <div class=\"row pb-5 mb-4\"> ";
+                    for($j = 0; $j < $col_per_row; $j++){
+                        $index = ($i * $col_per_row) + $j;
+                        if($index >= count($school_list)) break;
+                        echo "
+                            <div class=\"col-lg-3 col-md-6 mb-4 mb-lg-0\">
+                                <div class=\"card shadow-sm border-0 rounded\">
+                                    <div class=\"card-body p-0\">
+                                        <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\">
+                                            <img src=\"../School-Logo/".$school_list[$index]['schoolLogo']."\" alt=\"".$school_list[$index]['schoolLogo']."\" class=\"w-100 card-img-top\">
+                                        </a>
+                                        <div class=\"p-4\">
+                                            <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\"><h5 class=\"mb-0\">".$school_list[$index]['schoolName']."</h5> </a>
+                                            <p class=\"small text-muted\">".$school_list[$index]['address']."</p>
+                                            
+                                            <a href=\"student-application.php?sch=".$school_list[$index]['schoolID']."\">
+                                                <div class=\"pending\"><p><span class=\"pending-number\">".$school_list[$index]['noStudents']."</span> students pending</p></div>
+                                            </a>
+                                            <a href=\"transaction-history.php?sch=".$school_list[$index]['schoolID']."\">
+                                                <div class=\"transaction\">
+                                                    <p>View Transaction History</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ";
+                    }
+                    echo "</div>";
+                }
+            ?>
         </div>
-        
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <!-- Card-->
-            <div class="card shadow-sm border-0 rounded">
-                <div class="card-body p-0">
-                    <a href="student-application.php">
-                    <img src="https://scontent.fmnl15-1.fna.fbcdn.net/v/t1.18169-9/487834_368971733174539_1914724478_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=174925&_nc_ohc=hEeEWL2hxHwAX--_X15&_nc_ht=scontent.fmnl15-1.fna&oh=00_AfAyPcZAsGkRH-XU6Vg6iH9p4AlVRCNmtVt4b67qbLes5w&oe=6430D966" alt="" class="w-100 card-img-top">
-                    </a>
-                    <div class="p-4">
-                        <a href="student-application.php"><h5 class="mb-0">Technological Institute of the Philippines</h5> </a>
-                        <p class="small text-muted">363 Pascual Casal St, Quiapo, Manila</p>
-                        
-                        <a href="student-application.php">
-  <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-</a>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <!-- Card-->
-            <div class="card shadow-sm border-0 rounded">
-                <div class="card-body p-0">
-                    <a href="student-application.php">
-                    <img src="https://scontent.fmnl15-1.fna.fbcdn.net/v/t39.30808-6/304876520_452370496913886_1208855622441055407_n.png?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=6IoQMLNqlNEAX_rvYYF&_nc_ht=scontent.fmnl15-1.fna&oh=00_AfAKUScND2YDbog7IgPDe8z3-5qxqj_WsHraGDZHpT90pA&oe=640D7E0B" alt="" class="w-100 card-img-top">
-                    </a>
-                    <div class="p-4">
-                        <a href="student-application.php"><h5 class="mb-0">Our Lady of the Sacred Heart College of Guimba, Inc.</h5> </a>
-                        <p class="small text-muted">Afan Salvador St. Guimba Nueva Ecija</p>
-                        
-                        <a href="student-application.php">
-  <div class="pending"><p><span class="pending-number">10</span> students pending</p></div>
-</a>
-                       
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-</div>
-</div></div>
+
+    </div>
     <script src="hr-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="hr-assets/js/bs-init.js"></script>
     <script src="hr-assets/js/2-columns-media-image-video-carousel-map-2-columns-media.js"></script>

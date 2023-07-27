@@ -7,6 +7,8 @@
     require_once('connection.php');
     session_start();
 
+    require_once('checkLogin.php');
+
     if(isset($_GET['stid']) && isset($_GET['status']) && isset($_GET['appli'])) {
         $studentid = $_GET['stid'];
         $status = $_GET['status'];
@@ -17,7 +19,7 @@
     }
 
     // Insert into database student status
-   $query = $con->prepare("UPDATE studentstatus 
+    $query = $con->prepare("UPDATE studentstatus 
                             SET status = ? 
                             WHERE studentID = ?");
     $query->bind_param("si", $status, $studentid);

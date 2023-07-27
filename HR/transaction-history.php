@@ -1,6 +1,72 @@
 <?php
 
+    require_once('../connection.php');
+    session_start();
 
+    require_once('../pageNavigation.php');
+    
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+
+    if(isset($_GET['sch'])) {
+        $schoolID = $_GET['sch'];
+    }
+
+    // Query For School Details
+    $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, a.email
+                                FROM school sc
+                                JOIN account a ON a.accountID = sc.accountID
+                                WHERE sc.schoolID =?;
+                                ");
+    $school_query->bind_param("s", $schoolID);
+    $school_query->execute();
+    $school_query_res = $school_query->get_result();
+    // Store list of schools and their details
+    $school_details = $school_query_res->fetch_assoc();
+    $school_query->close();
+
+    // Query for transactions
+    $transaction_query = $con->prepare("SELECT tr.accountID, tr.date, st.course, studentName
+                                        FROM transaction tr
+                                        JOIN student st ON tr.accountID = st.accountID
+                                        ");
+    $transaction_query->execute();
+    $transaction_query_res = $transaction_query->get_result();
+    $transactions = array();
+
+    // Query for total number of students
+    $total_transaction = $con->prepare("SELECT COUNT(st.transactionID) AS totalTransactions FROM transaction st");
+    $total_transaction->execute();
+    $total_transaction_res = $total_transaction->get_result();
+    $total_items = $total_transaction_res->fetch_assoc()['totalTransactions'];
+    $total_transaction->close();
+
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $items_per_page = 10;
+    $offset = ($page - 1) * $items_per_page;
 ?>
 
 
@@ -56,10 +122,10 @@
     </div>
     <div id="main-content" style="padding-top: 24px;padding-bottom: 24px;">
         <div id="content">
-            <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="https://4.bp.blogspot.com/-YZxFNaiint4/WOL95a6PLkI/AAAAAAAAAMs/WgHDfKoN9ocGbcnooOb-tLmKLoAVt7GaACLcB/s1600/TIP%2BTECHNOLOGY%2BINSTITUTE%2BOF%2BTHE%2BPHILIPPINES.png">
-                <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;">Technological Institute of the Philippines</h5>
-                <p id="school-location" style="margin-bottom: 0px;">363 Pascual Casal St, Quiapo, Manila</p>
-                <p id="school-email">manila@tip.edu.ph.</p>
+            <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="../School-Logo/<?php echo $school_details['schoolLogo']; ?>">
+                <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;"><?php echo $school_details['schoolName']; ?></h5>
+                <p id="school-location" style="margin-bottom: 0px;"><?php echo $school_details['address']; ?></p>
+                <p id="school-email"><?php echo $school_details['email']; ?></p>
             </div>
             <div id="body">
                 <div class="container">
@@ -71,7 +137,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-md-end dataTables_filter" id="dataTable_filter">
-                                        <p>Total Interns:<span id="intern-number" style="margin-left: 8px;">4</span></p>
+                                        <p>Total Interns:<span id="intern-number" style="margin-left: 8px;"><?php echo $total_items; ?></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -87,26 +153,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Information Technology</td>
-                                            <td>2023</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Angelica Ramos</td>
-                                            <td>Computer Science</td>
-                                            <td>2023</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Information Technology</td>
-                                            <td>2022</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bradley Greer</td>
-                                            <td>Computer Science</td>
-                                            <td>2022</td>
-                                        </tr>
+                                        <?php 
+                                            while($row = $transaction_query_res->fetch_assoc()) {
+                                                $transactions[] = $row;
+                                            }
+
+                                            foreach($transactions as $transaction) {
+                                                $date = strtotime($transaction['date']);
+                                                echo "
+                                                <tr>
+                                                    <td>".$transaction['studentName']."</td>
+                                                    <td>".$transaction['course']."</td>
+                                                    <td>".date("Y", $date)."</td>
+                                                </tr>
+                                                ";
+                                            }
+
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -116,13 +179,12 @@
                         </div>
                         <nav class="d-flex justify-content-center">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                <?php 
+                                    $nav = new PageNavigation();
+                                    $nav->setTotalItems($total_items);
+                                    $nav->setItemsPerPage($items_per_page);
+                                    $nav->getNavigation("student-application.php?sch=1", $page);
+                                ?>
                             </ul>
                         </nav>
                     </div>

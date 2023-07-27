@@ -1,5 +1,67 @@
-<?php
+    require_once('../connection.php');
+    session_start();
 
+    require_once('../pageNavigation.php');
+    
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+
+    if(isset($_GET['sch'])) {
+        $schoolID = $_GET['sch'];
+    }
+
+    // Query For School Details
+    $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, a.email
+                                FROM school sc
+                                JOIN account a ON a.accountID = sc.accountID
+                                WHERE sc.schoolID =?;
+                                ");
+    $school_query->bind_param("s", $schoolID);
+    $school_query->execute();
+    $school_query_res = $school_query->get_result();
+    // Store list of schools and their details
+    $school_details = $school_query_res->fetch_assoc();
+    $school_query->close();
+
+    // Query for total number of students
+    $total_students = $con->prepare("SELECT COUNT(st.studentID) AS totalStudents 
+                                    FROM student st
+                                        JOIN studentstatus sts ON st.studentID = sts.studentID
+                                    WHERE st.schoolID = ? 
+                                        AND sts.status = 'pending' 
+                                    ");
+    $total_students->bind_param("i", $schoolID);
+    $total_students->execute();
+    $total_students_res = $total_students->get_result();
+    $total_items = $total_students_res->fetch_assoc()['totalStudents'];
+    $total_students->close();
+
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $items_per_page = 10;
+    $offset = ($page - 1) * $items_per_page;
 
 ?>
 
@@ -55,34 +117,70 @@
         <hr style="margin: 0px;color: rgb(197,197,197);">
     </div>
     <div id="content" style="padding-top: 25px;height: 600px;">
-        <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="https://4.bp.blogspot.com/-YZxFNaiint4/WOL95a6PLkI/AAAAAAAAAMs/WgHDfKoN9ocGbcnooOb-tLmKLoAVt7GaACLcB/s1600/TIP%2BTECHNOLOGY%2BINSTITUTE%2BOF%2BTHE%2BPHILIPPINES.png">
-            <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;">Technological Institute of the Philippines</h5>
-            <p id="school-location-1" style="margin-bottom: 0px;">363 Pascual Casal St, Quiapo, Manila</p>
-            <p id="school-email">manila@tip.edu.ph.</p>
+        <div class="text-center" id="school-info" style="padding-right: 24px;padding-left: 24px;"><img style="width: 100px;" src="../School-Logo/<?php echo $school_details['schoolLogo']; ?>">
+            <h5 id="school-name" style="color: rgb(0,0,0);font-weight: bold;padding-top: 5px;margin-bottom: 0px;"><?php echo $school_details['schoolName']; ?></h5>
+            <p id="school-location-1" style="margin-bottom: 0px;"><?php echo $school_details['address']; ?></p>
+            <p id="school-email"><?php echo $school_details['email']; ?></p>
         </div>
         <div id="body">
             <div class="container">
                 <div id="main-content">
-                    <div class="container" style="padding-bottom: 10px;">
-                        <div class="row" id="internship-body-1" style="background: #f2f2f2;color: rgb(0,0,0);">
-                            <div class="col-md-6">
-                                <div id="school-name-2" style="margin-top: 7px;"><a id="program-name-1" href="student-requirements.php" style="font-size: 18px;color: rgb(0,0,0);">Student Name</a></div>
-                                <p style="font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;">Year/Course</p>
+                    <?php
+
+                        // Required:
+                        // student name -- OK
+                        // year/course -- OK
+
+                        // Query for students of current school
+                        $student_query = $con->prepare("SELECT st.studentID, st.studentName, st.course, sts.status, st.applicationID
+                                                        FROM student st 
+                                                            JOIN studentstatus sts ON st.studentID = sts.studentID
+                                                        WHERE st.schoolID = ? 
+                                                            AND sts.status = 'pending' 
+                                                        LIMIT ?, ?");
+                        $student_query->bind_param("iii", $schoolID, $offset, $items_per_page);
+                        $student_query->execute();
+                        $student_query_res = $student_query->get_result();
+                        $students_list = array();
+                        while($row = $student_query_res->fetch_assoc()) {
+                            $students_list[] = $row;
+                        }
+                        $student_query->close();
+
+                        $action_base_url = '../studentChangeStatus.php';
+
+                        $_SESSION['prevLocation'] = 'Admin/student-application.php?sch='.$schoolID.'&page='.$page;
+
+                        foreach($students_list as $student) {
+                            echo "
+                            <div class=\"container\" style=\"padding-bottom: 10px;\">
+                                <div class=\"row\" id=\"internship-body\" style=\"background: #f2f2f2;color: rgb(0,0,0);\">
+                                    <div class=\"col-md-6\">
+                                        <div id=\"school-name-1\" style=\"margin-top: 7px;\"><a id=\"program-name\" href=\"#\" style=\"font-size: 18px;color: rgb(0,0,0);\">".$student['studentName']."</a></div>
+                                        <p style=\"font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;\">".$student['course']."</p>
+                                    </div>
+                                    <div class=\"col d-flex justify-content-center align-items-center justify-content-xxl-end\" id=\"colb-2\"><a href=\"student-requirements.php?std=".$student['studentID']."\"><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(13,110,253);border-width: 0px;height: 44px;border-radius: 10px;\"><i class=\"fa fa-file-text\"></i>&nbsp; View File</button></a></div>
+                                </div>
                             </div>
-                            <div class="col d-flex justify-content-center align-items-center justify-content-xxl-end" id="colb-2"><a href="student-requirements.php"><button class="btn btn-primary" type="button" style="background: rgb(13,110,253);border-width: 0px;height: 44px;border-radius: 10px;"><i class="fa fa-file-text"></i>&nbsp; View File</button></a></div>
-                        </div>
-                    </div>
-                    <div class="container" style="padding-bottom: 10px;">
-                        <div class="row" id="internship-body-2" style="background: #f2f2f2;color: rgb(0,0,0);">
-                            <div class="col-md-6">
-                                <div id="school-name-1" style="margin-top: 7px;"><a id="program-name-2" href="#" style="font-size: 18px;color: rgb(0,0,0);">Student Name</a></div>
-                                <p style="font-size: 13px;color: rgb(85,85,85);margin-bottom: 7px;">Year/Course</p>
-                            </div>
-                            <div class="col d-flex justify-content-center align-items-center justify-content-xxl-end" id="colb-2"><a href="student-requirements.php"><button class="btn btn-primary" type="button" style="background: rgb(13,110,253);border-width: 0px;height: 44px;border-radius: 10px;"><i class="fa fa-file-text"></i>&nbsp; View File</button></a></div>
-                        </div>
-                    </div>
+                            ";
+                        }
+                    ?>
+
                 </div>
             </div>
+            <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
+                <ul class="pagination">
+
+                    <?php 
+                        $nav = new PageNavigation();
+                        $nav->setTotalItems($total_items);
+                        $nav->setItemsPerPage($items_per_page);
+                        $nav->getNavigation("student-application.php?sch=1", $page);
+                    ?>
+
+                </ul>
+            </nav>
+
         </div>
     </div>
     <script src="hr-assets/bootstrap/js/bootstrap.min.js"></script>
