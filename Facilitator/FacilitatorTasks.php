@@ -17,20 +17,20 @@
     <link rel="stylesheet" href="facilitator-assets/css/Tasks.css">
 </head>
 
-<body style="color: rgb(0,0,0);"><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
-    <div class="container-fluid"><a href="FacilitatorSchoolDashboard.php"><img src="assets/img/logo_black.png" width="140" height="29" /></a>
-        <ul class="navbar-nav flex-nowrap ms-auto">
-            <li class="nav-item dropdown no-arrow mx-1"></li>
-            <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg" /></a>
+<body style="font-family: Poppins, sans-serif;">
+    <nav class="navbar navbar-light navbar-expand bg-white  topbar static-top" style="box-shadow: 0px 0px 2px rgba(33,37,41,0.66);">
+        <div class="container-fluid"><a href="index.php"><img src="facilitator-assets/img/logo_black.png" width="140" height="29" /></a>
+            <ul class="navbar-nav flex-nowrap ms-auto">
+                <li class="nav-item dropdown no-arrow">
+                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" ><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="FacilitatorSchoolDashboard.php"><i class="fas fa-school fa-sm fa-fw me-2 text-gray-400"></i> Schools</a><a class="dropdown-item" href="FacilitatorStudentList.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Student List</a><a class="dropdown-item" href="FacilitatorStudentLogs.php"><i class="fas fa-file fa-sm fa-fw me-2 text-gray-400"></i>Student Logs</a><a class="dropdown-item" href="FacilitatorTasks.php"><i class="fas fa-folder-open fa-sm fa-fw me-2 text-gray-400"></i>Task Documentation</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="index.php"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <section style="margin-top: 60px;color:#000000;">
         <div class="container">
@@ -59,49 +59,39 @@
                 </div>
                 <div class="col-md-6 col-lg-5 col-xxl-4"> <!--logs and tasks-->
                     <div style="border-radius: 20px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 8px;margin-bottom: 27px;">
-                    <div class="btn-group gap-2" role="group" style="width: 100%;height: 30px;">
-                        <button class="btn btn-primary" id="dailylogs-btn" type="button" style="border-radius: 50px;width: 50%;background: #ffffff;font-size: 15px;padding: 0 12px;color: #0017eb">Daily Logs</button>
-                        <button class="btn btn-primary" id="tasks-btn" type="button" style="border-radius: 50px;width: 50%;background: #0017eb;font-size: 15px;padding: 0 12px;">Tasks</button>
-                    </div>
+                        <div class="btn-group gap-2" role="group" style="width: 100%;height: 30px;"><button class="btn btn-primary" id="dailylogs-btn" type="button" style="border-radius: 50px;width: 50%;background: #ffffff;color: #0017eb;font-size: 15px;padding: 0 12px;">Daily Logs</button><button class="btn btn-primary" id="tasks-btn" type="button" style="border-radius: 50px;width: 50%;background: #0017eb;font-size: 15px;padding: 0 12px;">Tasks</button></div>
                     </div>
                     <div id="tasks-div" class="visible">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Tasks</h1>
                                 <h1 class="fw-semibold" style="font-size: 18px;">Pending Tasks<i class="far fa-trash-alt float-end"></i></h1>
-                                <ul id="incomplete-tasks">
-                                  <li>
-                                    <input type="checkbox">  
-                                    <label class="form-label">Label</label>
-                                    <button class="btn btn-primary float-end delete" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-trash-alt delete" style="color: rgb(221,21,21);"></i>
-                                    </button> 
-                                    <button class="btn btn-primary float-end edit" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-edit edit" style="color: #0017eb;font-size: 17px;"></i>
-                                    </button>
-                                  </li>
-                                  <li class="editMode">
-                                    <input type="checkbox">  <label class="form-label">Finish Task</label>
-                                    <input type="text"><button class="btn btn-primary float-end delete" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-trash-alt delete" style="color: rgb(221,21,21);"></i>
-                                    </button>
-                                    <button class="btn btn-primary float-end edit" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-edit edit" style="color: #0017eb;font-size: 17px;"></i>
-                                  </button>
-                                </li>
-                                </ul>
+                                <section class="todo-list">
+                                    <div class="list" id="todo-list"></div>
+                                </section>
                             </div>
                             <hr style="border-width: 1px;border-color: rgb(147,147,147);margin-top: 20px;margin-bottom: 15px;">
                             <div>
                                 <h1 class="fw-semibold" style="font-size: 18px;">Completed<i class="far fa-star float-end"></i></h1>
-                                <ul id="completed-tasks">
-                                    <li><label class="form-label"><input type="checkbox">Label</label></li>
-                                    <li>Item 4</li>
-                                    <li style="width: 98px;"></li>
+                                <ul id="completed-tasks" class="completed-list">
                                 </ul>
                             </div>
-                            <input type="text" id="new-task" style="width: 100%;border-radius: 50px;padding: 5px 20px;border: 1.5px solid rgb(204,204,204);margin-top: 25px;" placeholder="Add task here">
-                            <button class="btn btn-primary" id="add-task-btn" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 10px;background: #0017eb;">Add New Task</button>
+                            <section class="create-todo">
+                            <form id="new-todo-form">
+                                <input 
+                                    type="text" 
+                                    id="content" 
+                                    name="content"
+                                    style="width: 100%;border-radius: 50px;padding: 5px 20px;border: 1.5px solid rgb(204,204,204);margin-top: 25px;"
+                                    placeholder="Add task here" />
+                                <button
+                                    class="btn btn-primary"
+                                    type="submit"
+                                    style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 10px;background: #0017eb; color:white;">
+                                    Add new task
+                                </button>
+                            </form>
+                            </section>
                         </div>
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                             <div>
@@ -109,7 +99,7 @@
                             </div><input class="btn btn-primary" type="submit" style="width: 100%;border-radius: 20px;padding: 5px 10px;margin-top: 25px;background: #0017eb;">
                         </div>
                     </div>
-                    <div id="dailylogs-div" class="visible">
+                    <div id="dailylogs-div" class="hidden">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Daily Logs</h1>
@@ -171,17 +161,10 @@
     </section>
 
     <script src="facilitator-assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="facilitator-assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="facilitator-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
-    <script src="facilitator-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
-    <script src="facilitator-assets/js/theme.js"></script>
-    <script src="facilitator-assets/script.js"></script>
-    <script src="facilitator-assets/js/Task-List.js"></script>
-    <script src="facilitator-assets/js/Daily-Tasks-Toggle.js"></script>
+     <script src="facilitator-assets/js/theme.js"></script>
+     <script src="facilitator-assets/script.js"></script>
+     <script src="facilitator-assets/js/Daily-Tasks-Toggle.js"></script>
+     <script src="facilitator-assets/js/time.js"></script>
 </body>
 
 </html>
