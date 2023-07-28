@@ -105,7 +105,7 @@
             </ul>
         </div>
     </nav>
-    <div id="banner" style="height: 250px;background: url(&quot;hr-assets/img/New%20Project.jpg&quot;), #d3edff;">
+    <div id="banner" style="height: 250px;background: url(assets/img/banner.jpg) center / cover no-repeat, #d3edff;">
         <div class="container d-flex align-items-center" style="height: 250px;">
             <div class="row">
                 <div class="col-md-12">
