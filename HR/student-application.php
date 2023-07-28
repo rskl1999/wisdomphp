@@ -1,3 +1,4 @@
+<?php 
     require_once('../connection.php');
     session_start();
 
@@ -126,11 +127,6 @@
             <div class="container">
                 <div id="main-content">
                     <?php
-
-                        // Required:
-                        // student name -- OK
-                        // year/course -- OK
-
                         // Query for students of current school
                         $student_query = $con->prepare("SELECT st.studentID, st.studentName, st.course, sts.status, st.applicationID
                                                         FROM student st 
