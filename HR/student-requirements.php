@@ -106,7 +106,7 @@
             </ul>
         </div>
     </nav>
-    <div id="banner" style="height: 150px;background: url(&quot;hr-assets/img/New%20Project.jpg&quot;), #d3edff;"></div>
+    <div id="banner" style="height: 250px;background: url(assets/img/banner.jpg) center / cover no-repeat, #d3edff;"></div>
     <div class="container" id="nav2">
         <div class="row d-flex d-xl-flex align-items-center align-items-xl-center" style="height: 73px;">
             <div class="col" style="margin: 0px 20px;"><a data-bss-hover-animate="pulse" href="applicant.php" style="padding: 0px 10px;color: rgb(0,23,235);font-family: Poppins, sans-serif;"><i class="fa fa-user" style="color: rgb(0,23,235);"></i>&nbsp;Applicant</a><a href="school-transaction.php" style="padding: 0px 10px;color: rgb(197,197,197);font-family: Poppins, sans-serif;"><i class="fa fa-folder-open" style="color: rgb(197,197,197);"></i><strong>&nbsp;</strong>Transaction</a></div>
