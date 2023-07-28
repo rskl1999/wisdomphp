@@ -34,6 +34,7 @@ const renderCalendar = () => {
     }
     currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
     daysTag.innerHTML = liTag;
+
 }
 renderCalendar();
 
@@ -53,3 +54,174 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
+
+window.addEventListener('load', () => {
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const newTodoForm = document.querySelector('#new-todo-form');
+
+    newTodoForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const newTodoContent = e.target.elements.content.value.trim(); // Trim leading and trailing spaces
+
+        if (newTodoContent === "") {
+            alert("Please enter a task.");
+            return; // Stop execution if the content is blank
+        }
+
+        const newTodo = {
+            content: e.target.elements.content.value,
+            done: false,
+            createdAt: new Date().getTime()
+        }
+
+        if (!Array.isArray(todos)) {
+            todos = []; // Reset todos to an empty array if it's not an array
+        }
+
+        todos.push(newTodo);
+
+        localStorage.setItem('todos', JSON.stringify(todos));
+
+        // Reset the form
+        e.target.reset();
+
+        DisplayTodos(todos);
+    });
+
+    DisplayTodos(todos);
+})
+
+function DisplayTodos(todos, index) {
+    const todoList = document.querySelector('#todo-list');
+    const completedTasksList = document.querySelector('#completed-tasks'); // Get the completed tasks list
+    todoList.innerHTML = "";
+    completedTasksList.innerHTML = ""; // Clear the completed tasks list
+
+    if (!Array.isArray(todos)) {
+        todos = []; // Reset todos to an empty array if it's not an array
+    }
+
+    todos.forEach((todo, index) => {
+        const todoItem = document.createElement('div');
+        todoItem.classList.add('todo-item');
+
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        const span = document.createElement('span');
+        const content = document.createElement('div');
+        const actions = document.createElement('div');
+        const edit = document.createElement('button');
+        const deleteButton = document.createElement('button');
+
+        checkbox.type = 'checkbox';
+        checkbox.checked = todo.done;
+        content.classList.add('todo-content');
+        actions.classList.add('actions');
+        edit.classList.add('edit');
+        deleteButton.classList.add('delete');
+
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.value = todo.content;
+        inputField.readOnly = true;
+        inputField.style.display = 'none'; // Hide the input field initially
+
+        content.textContent = todo.content;
+
+        // Append the input field and content to the todoItem
+        todoItem.appendChild(inputField);
+        todoItem.appendChild(content);
+
+        edit.innerHTML = '<i class="far fa-edit edit" style="color: #0017eb; font-size: 17px;"></i>';
+        edit.className = "btn btn-primary float-end edit";
+        edit.type = "button";
+        edit.style.padding = "10px";
+        edit.style.background = "rgba(255, 255, 255, 0)";
+        edit.style.borderStyle = "none";
+        edit.style.height = "22px";
+
+        // Add a class for styling the delete button
+        deleteButton.innerHTML = '<i class="far fa-trash-alt" style="color: rgb(221, 21, 21); font-size: 17px;"></i>';
+        deleteButton.classList.add('delete-button');
+        deleteButton.className = "btn btn-primary float-end delete";
+        deleteButton.type = "button";
+        deleteButton.style.padding = "10px";
+        deleteButton.style.background = "rgba(255, 255, 255, 0)";
+        deleteButton.style.borderStyle = "none";
+        deleteButton.style.height = "22px";
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+        actions.appendChild(edit);
+        actions.appendChild(deleteButton);
+        todoItem.appendChild(label);
+        todoItem.appendChild(content);
+        todoItem.appendChild(actions);
+
+        // Append the todoItem to the appropriate list based on whether it's done or not
+        if (todo.done) {
+            content.style.textDecoration = 'line-through';
+            content.style.color = '#888';
+            label.classList.add("checked");
+            completedTasksList.appendChild(todoItem); // Append completed tasks to the completed tasks list
+          } else {
+            todoList.appendChild(todoItem); // Append pending tasks to the todo list
+          }
+      
+          checkbox.addEventListener('change', (e) => {
+            todo.done = e.target.checked;
+            localStorage.setItem('todos', JSON.stringify(todos));
+      
+            if (todo.done) {
+              content.style.textDecoration = 'line-through';
+              content.style.color = '#888';
+              label.classList.add("checked");
+              moveTaskToCompleted(todoItem); // Move the task to completed tasks list
+            } else {
+              content.style.textDecoration = 'none';
+              content.style.color = 'inherit';
+              label.classList.remove("checked");
+              moveTaskToIncomplete(todoItem); // Move the task back to the pending tasks list
+            }
+          });
+      
+          edit.addEventListener('click', () => {
+            if (!todo.done) { // Add this condition to check if the task is not completed
+                // Toggle the visibility of the input field and content when the edit button is clicked
+                inputField.style.display = inputField.style.display === 'none' ? 'block' : 'none';
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        
+                // Focus on the input field when it becomes visible
+                if (inputField.style.display !== 'none') {
+                    inputField.focus();
+                    inputField.removeAttribute('readOnly');
+                }
+            }
+        });
+        
+      
+          inputField.addEventListener('blur', (e) => {
+            const updatedContent = e.target.value;
+            todo.content = updatedContent;
+            localStorage.setItem('todos', JSON.stringify(todos));
+            DisplayTodos(todos);
+          });
+      
+          deleteButton.addEventListener('click', () => {
+            todos.splice(index, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            DisplayTodos(todos);
+          });
+        });
+      }
+
+function moveTaskToCompleted(todoItem) {
+    const completedTasksList = document.querySelector('#completed-tasks');
+    completedTasksList.appendChild(todoItem);
+}
+
+function moveTaskToIncomplete(todoItem) {
+    const todoList = document.querySelector('#todo-list');
+    todoList.appendChild(todoItem);
+}
