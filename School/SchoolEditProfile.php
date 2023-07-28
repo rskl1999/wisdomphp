@@ -31,6 +31,13 @@
       $contact_info = $row['contactInfo'];
       $password = $row['password'];
       $schoolLogo = $row['schoolLogo'];
+   } else {
+      $name = '';
+      $email = '';
+      $address = '';
+      $contact_info = '';
+      $password = '';
+      $schoolLogo = '';
    }
 
    // If form is submitted, update the user's profile in the database
@@ -38,7 +45,7 @@
       $n_schoolName = $_POST['schoolName'];
       $n_email = $_POST['email'];
       $n_address = $_POST['address'];
-      $n_contact_info = $_POST['email'];
+      $n_contact_info = $_POST['contactInfo'];
       // If user uploaded a logo, load logo; if not, use saved image
       $n_schoolLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $schoolLogo;
 
@@ -102,6 +109,7 @@
     <link rel="stylesheet" href="school-assets/css/Profile-Edit-Form.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
     <link rel="stylesheet" href="editProfile-assets/css/styles.min.css">
+    <link rel="stylesheet" href="editProfile-assets/css/style.css">
 </head>
 
 <body style="color: rgb(0,0,0);"><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
@@ -127,19 +135,19 @@
 
                 <div class="col-md-4 relative">
                    <div class="avatar">
-                        <img id="logoImage" src="../School-Logo/<?php echo $displayedLogo?>" style="">;
+                        <img id="logoImage" src="../School-Logo/<?php echo $displayedLogo?>" style="">
                   </div><input type="file" class="form-control" name="avatar-file"
                       style="border-radius: 0px;border-width: 0px;border-color: rgba(85,85,85,0);" accept="image/*">
                 </div>
 
                 <div class="col-md-8" style="font-family: Poppins, sans-serif;">
-                   <h3>Profile </h3>
+                   <h3 style="margin-bottom: 20px;">Profile </h3>
                    <div class="row" id="schoolName">
                       <div class="col-md-12">
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">School Name</label>
                                <input class="form-control" name="schoolName"
-                               type="text" value="<?php echo $name?>" style="height: 45px;border-radius: 35px;"
+                               type="text" value="<?php echo $name?>" placeholder="School Name" style="height: 45px;border-radius: 35px;"
                                required=""></div>
                       </div>
                    </div>
@@ -148,7 +156,7 @@
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">Email</label>
                                <input class="form-control"
-                               type="text" value="<?php echo $email?>" name="email"
+                               type="text" value="<?php echo $email?>" placeholder="school@email.edu.ph" name="email"
                                style="height: 45px;border-radius: 35px;" required="" inputmode="email"></div>
                       </div>
                    </div>
@@ -157,7 +165,7 @@
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">Address</label>
                                <input class="form-control" name="address"
-                               type="text" value="<?php echo $address ?>" style="height: 45px;border-radius: 35px;"
+                               type="text" value="<?php echo $address ?>" placeholder="Address" style="height: 45px;border-radius: 35px;"
                                required=""></div>
                       </div>
                    </div>
@@ -165,7 +173,7 @@
                       <div class="col-md-12">
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">Address</label>
-                               <input class="form-control" name="address2"
+                               <input class="form-control" name="address2" placeholder="Address"
                                type="text" value="<?php echo $address ?>" style="height: 45px;border-radius: 35px;"
                                required=""></div>
                       </div>
@@ -175,7 +183,7 @@
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">Contact Number</label>
                                <input
-                               class="form-control" type="text" value="<?php echo $contact_info ?>" name=""
+                               class="form-control" type="text" value="<?php echo $contact_info ?>" placeholder="09123456789" name="contact_info"
                                style="height: 45px;border-radius: 35px;" required="" inputmode="numeric" maxlength="11">
                          </div>
                       </div>
@@ -318,11 +326,11 @@
                          <div class="form-group"><label class="control-label"
                                style="font-family: Poppins, sans-serif;">Password</label><input class="form-control"
                                type="password" id="schoolPassword" style="height: 45px;border-radius: 35px;" required=""
-                               minlength="8" maxlength="16" value="<?php echo $contact_info ?>"></div>
+                               minlength="8" maxlength="16" value="<?php echo $password ?>" placeholder="Password"></div>
                       </div>
                    </div>
                    <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12" style="margin-top:15px;">
                            <button class="btn btn-default" type="button" name="cancel"
                            style="font-family: Poppins, sans-serif;width: 120px;background: rgba(0,23,235,0);color: #0017eb;height: 45px;border-radius: 35px;margin: 0px;margin-right: 20px;font-weight: bold;border-width: 2px;border-color: #0017eb;">Cancel</button>
                            <button class="btn btn-default" type="submit" name="submit"
