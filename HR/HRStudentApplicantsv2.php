@@ -40,7 +40,7 @@
             </ul>
         </div>
     </nav>
-    <div id="banner" style="height: 250px;background: url(&quot;hr-assets/img/New%20Project.jpg&quot;), #d3edff;"></div>
+    <div id="banner" style="height: 250px;background: url(assets/img/banner.jpg) center / cover no-repeat, #d3edff;"></div>
             <div class="container" style="padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student Applicants</h1>
                 <div></div>
