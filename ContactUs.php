@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-md-6 col-lg-5 col-xl-4">
                     <div style="background: url(&quot;assets/img/contact-us-bg.svg&quot;) bottom / auto no-repeat, #292d32;border-radius: 15px;">
-                        <h1 style="font-size: 35px;color: #ffffff;padding-top: 1rem;padding-left: 1.7rem;">Get in touch</h1>
+                        <h1 style="font-size: 35px;color: #ffffff;padding-top: 1rem;padding-left: 1.7rem;">Get in touch!</h1>
                         <h3 style="font-size: 15px;color: #ffffff;padding-left: 1.7rem;">Our friendly team would love to hear from you!</h3>
 
                         <form class="p-3 p-xl-4" method="post">
@@ -96,10 +96,11 @@
                             ?>
 
 
-                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name" style="border-radius: 15px;"></div>
-                            <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email" style="border-radius: 15px;"></div>
-                            <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message" style="border-radius: 15px;"></textarea></div>
-                            <div><button class="btn btn-primary d-block w-100" type="submit" style="color: rgb(255, 255, 255);background: #3a9af9;border-radius: 15px;border-style: none;">Submit</button></div>
+                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name" style="border-radius: 15px;" required></div>
+                            <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email" style="border-radius: 15px;" required></div>
+                            <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message" style="border-radius: 15px;" required></textarea></div>
+                            <div><button class="btn btn-primary d-block w-100" onclick="confirmFunction()" type="submit" style="color: rgb(255, 255, 255);background: #3a9af9;border-radius: 15px;border-style: none;">Submit</button></div>
+                            
                         </form>
                     </div>
                 </div>
@@ -107,6 +108,14 @@
         </div>
     </section>
     </div>
+
+    <!--SUBMIT BUTTON CONFIRMATION-->
+    <script>
+    function confirmFunction() {
+    confirm("Are you sure you want to submit the form?");
+    }
+    </script>
+
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/Card-Carousel-slider.js"></script>
