@@ -50,12 +50,12 @@
 </head>
 
 <body style="color: rgb(0,0,0);"><nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
-    <div class="container-fluid"><a href="StudentDashboard.php"><img src="assets/img/logo.png" width="140" height="29" /></a>
+    <div class="container-fluid"><a href="AdminDashboard.php"><img src="assets/img/logo.png" width="140" height="29" /></a>
         <ul class="navbar-nav flex-nowrap ms-auto">
             <li class="nav-item dropdown no-arrow mx-1"></li>
             <li class="nav-item dropdown no-arrow">
                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="admin-assets/img/avatars/avatar1.jpeg" /></a>
-                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="StudentProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="StudentDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
+                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="AdminProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="AdminDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
                         <div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <table class="table">
                         <thead style="--bs-body-bg: #55565a;">
                             <tr style="--bs-body-bg: #55565a;height: 56.5px;">
-                                <th style="padding-left: 30px;padding-right: 0px;padding-bottom: 15px;"><input type="checkbox" style="padding-bottom: 15px;"></th>
+                                <th style="padding-left: 30px;padding-right: 0px;padding-bottom: 15px;"><input type="checkbox" id="masterCheckbox" onchange="toggleAllCheckboxes()" style="padding-bottom: 15px;"></th>
                                 <th style="padding-bottom: 15px;">Account Name</th>
                                 <th style="padding-bottom: 15px;width: 326.594px;">Email</th>
                                 <th style="width: 155px;padding-bottom: 15px;">Role</th>
@@ -163,6 +163,26 @@
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../logout.js"></script>
-</body>
+    
+    <script>
+        function toggleAllCheckboxes() {
+        // Get the state (checked or unchecked) of the master checkbox
+        const masterCheckbox = document.getElementById('masterCheckbox');
+        const isChecked = masterCheckbox.checked;
 
+        // Get all checkboxes (except the master checkbox) on the page
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#masterCheckbox)');
+
+        // Loop through all checkboxes and set their 'checked' property based on the state of the master checkbox
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = isChecked;
+        });
+        }
+    </script>
+
+
+
+
+
+</body>
 </html>
