@@ -120,9 +120,16 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="Alumni.php">Alumni</a></li>
                     <li class="nav-item"><a class="nav-link" href="ContactUs.php">Contact</a></li>
+
                 </ul>
-                <a href = "register.php"><button class="btn btn-primary" type="button" style="margin: 0px 30px;border-radius: 35px;margin-right: 1px; background: #0017eb;font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;">Join Now</button></a>
-                <a href = "login.php"><button class="btn btn-primary" type="button" style="margin: 0px 15px;border-radius: 35px;background: rgba(0,23,235,0);font-family: Poppins, sans-serif;width: 106.7812px;padding: 10px 16px;color: #0017eb;border-width: 2px;border-color: #0017eb;font-weight: bold;">Sign in</button></a>
+                <a href="register.php">
+                <button class="btn btn-primary" type="button" style="margin: 0px 8px; border-radius: 35px; background: #0017eb; font-family: Poppins, sans-serif; width: 120px; padding: 10px 16px;">Join Now</button>
+                </a>
+
+                <a href="login.php">
+                <button class="btn btn-primary" type="button" style="margin: 0px 8px; border-radius: 35px; background: rgba(0,23,235,0); font-family: Poppins, sans-serif; width: 120px; padding: 10px 16px; color: #0017eb; border-width: 2px; border-color: #0017eb; font-weight: bold;">Sign in</button>
+                </a>
+
             </div>
         </div>
     </nav>
@@ -135,5 +142,4 @@
     <script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="assets/js/theme.js"></script>
 </body>
-
 </html>
