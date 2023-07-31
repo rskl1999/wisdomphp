@@ -1,6 +1,78 @@
 <?php
 
+    require_once('../connection.php');
+    session_start();
 
+    require_once('../pageNavigation.php');
+    
+    // Check if a registered account is logged in ...    
+    if(isset($_SESSION['accountID'])){
+        $accID = $_SESSION['accountID'];
+
+        $sql = "SELECT accountID FROM account WHERE accountID = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $accID);
+        $stmt->execute();
+        $stmt->bind_result($accountID);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If account ID is not located in database ... return to index.php
+        if(!$accountID){
+            header("Location: ../index.php");
+            exit(); // Added exit() to stop further execution
+        }
+    }
+    // Else return to index.php
+    else{
+        header("Location: ../index.php");
+        exit(); // Added exit() to stop further execution
+    }
+
+    $accountid = $_SESSION['accountID'];
+
+    if(isset($_GET['sch'])) {
+        $schoolID = $_GET['sch'];
+    }
+
+    // Query for applicant details
+    $applicant_query = $con->prepare("SELECT schoolName FROM school WHERE schoolID = ?");
+    $applicant_query->bind_param("i", $schoolID);
+    $applicant_query->execute();
+    $applicant_query_res = $applicant_query->get_result();
+    $school_details = $applicant_query_res->fetch_assoc();
+
+    // Page Variables
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $items_per_page = 5;
+    $offset = ($page - 1) * $items_per_page;
+
+
+    // Query for students 
+    $stud_batch_query = $con->prepare("SELECT st.studentName, ac.email, sts.status, st.submittedRequirements, ap.duration
+                                        FROM student st
+                                        JOIN account ac ON st.accountID = ac.accountID
+                                        JOIN studentstatus sts ON sts.studentID = st.studentID
+                                        JOIN internshipapplication ap ON ap.internshipapplicationID = st.applicationID
+                                        WHERE st.schoolID = ?
+                                        "); 
+    $stud_batch_query->bind_param("i", $schoolID);
+    $stud_batch_query->execute();
+    $stud_batch_query_res = $stud_batch_query->get_result();
+    $students_detail = array();
+    while($row = $stud_batch_query_res->fetch_assoc()) {
+        $row['submittedRequirements'] = empty($row['submittedRequirements']) ? '' : $row['submittedRequirements'];
+        $students_detail[] = $row;
+    }
+
+    $school_name = $students_detail['schoolName'] ?? "School_Name";
+
+    foreach($students_detail as $student) {
+        echo "<br/>";
+        print_r($student);
+    }
+
+    $total_items = count($students_detail);
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +132,80 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                                // TODO: Make webpage recognize student's submitted requirements
+
+                                function checkListSubmitted($submitted_req) {
+    
+                                    $student_requirements = ['resume', 'recommendation letter', '30-to60-second video', 'personal information form', 'consent form', 'school registration form', 'vaccination certificate'];
+
+                                    $output = "";
+                                    foreach($submitted_req as $req) {
+                                        if(in_array(strtolower($req), $student_requirements)) {
+                                            $output .= "\n<p style=\"margin-bottom: 5px;\"><i class=\"far fa-check-square\" style=\"font-size: 16px;margin-right: 14px;\"></i>".$req."</p>";
+                                        }
+                                    }
+                                    if(strlen($output) <=0 ) {
+                                        $output = 'None';
+                                    }
+                                    return $output;
+                                }
+
+                                function checkListIncomplete($submitted_req) {
+
+                                    $student_requirements = ['resume', 'recommendation letter', '30-to60-second video', 'personal information form', 'consent form', 'school registration form', 'vaccination certificate'];
+
+                                    $output = "";
+                                    $incomplete = array_diff($student_requirements, array_map('strtolower', $submitted_req));
+                                    foreach($incomplete as $req) {
+                                        $output .= "<p style=\"margin-bottom: 5px;\"><i class=\"far fa-file\" style=\"font-size: 17px;margin-right: 14px;\"></i>".$req."</p>";
+                                    }
+                                    if(strlen($output) <= 0) {
+                                        $output = 'None';
+                                    }
+                                    return $output;
+                                }
+
+                                for($i = $offset; $i < $offset + $items_per_page && $i < $total_items; $i++) {
+                                    $student = $students_detail[$i];
+                                    $submitted_requirements = array();
+
+                                    if(!empty($student['submittedRequirements'])) {
+                                        $submitted_requirements = explode(',', $student['submittedRequirements']);
+                                        foreach($submitted_requirements as $subreq) {
+                                            if(str_contains($subreq, '.')) {
+                                                print("<br/>");
+                                                print('before:'.$subreq);
+                                                $subreq = explode('.', $subreq)[0];
+                                                print("<br/>");
+                                                print('after:'.$subreq);
+                                            }
+                                        }
+                                    }
+
+                                    echo "
+                                        <tr>
+                                            <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
+                                            <td>
+                                                <h1 style=\"font-size: 16px;\"><strong>".$student['studentName']."</strong></h1>
+                                                <p>".$student['email']."</p>
+                                            </td>
+                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #f0800c;background: #FFEDD5;width: 90%;border-radius: 35px;border-style: none;\">".$student['status']."</button></td>
+                                            <td>
+                                                ".checkListSubmitted($submitted_requirements)."
+                                                <div></div>
+                                            </td>
+                                            <td>
+                                                ".checkListIncomplete($submitted_requirements)."
+                                            </td>
+                                            <td>".$student['duration']."</td>
+                                            <td style=\"width: 205.844px;\"><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 120px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-check-square\" style=\"margin-right: 5px;\"></i>Approve</button></td>
+                                        </tr>
+                                    ";
+                                }
+
+                            ?>
+                            <!--
                             <tr>
                                 <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
                                 <td>
@@ -81,6 +227,7 @@
                                 <td>200</td>
                                 <td style="width: 205.844px;"><button class="btn btn-primary" type="button" style="border-style: solid;border-radius: .75rem;width: 120px;padding: 10px;margin-right: 15px;"><i class="far fa-check-square" style="margin-right: 5px;"></i>Approve</button></td>
                             </tr>
+
                             <tr>
                                 <td style="padding-left: 30px;padding-right: 0px;"><input type="checkbox"></td>
                                 <td>
@@ -121,18 +268,18 @@
                                 <td>200</td>
                                 <td><button class="btn btn-primary" type="button" style="border-radius: .75rem;width: 120px;padding: 10px;margin-right: 15px;background: var(--bs-table-border-color);border-style: solid;border-color: var(--bs-table-border-color);color: rgb(0,0,0);"><i class="far fa-check-square" style="margin-right: 5px;"></i>Approved</button></td>
                             </tr>
+-->
                         </tbody>
                     </table>
                 </div>
                 <nav class="text-center" style="margin-left: 40%;margin-top: 3%;margin-right: 40%;">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                        <?php
+                            $nav = new PageNavigation();
+                            $nav->setTotalItems($total_items);
+                            $nav->setItemsPerPage($items_per_page);
+                            $nav->getNavigation("HRStudentApplicantsv2.php?sch=".$schoolID, $page);
+                        ?>
                     </ul>
                 </nav>
             </div>
