@@ -120,44 +120,37 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tasks-div" class="visible">
+                    <div id="tasks-div" class="hidden">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Tasks</h1>
                                 <h1 class="fw-semibold" style="font-size: 18px;">Pending Tasks<i class="far fa-trash-alt float-end"></i></h1>
-                                <ul id="incomplete-tasks">
-                                  <li>
-                                    <input type="checkbox">  
-                                    <label class="form-label">Label</label>
-                                    <button class="btn btn-primary float-end delete" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-trash-alt delete" style="color: rgb(221,21,21);"></i>
-                                    </button> 
-                                    <button class="btn btn-primary float-end edit" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-edit edit" style="color: #0017eb;font-size: 17px;"></i>
-                                    </button>
-                                  </li>
-                                  <li class="editMode">
-                                    <input type="checkbox">  <label class="form-label">Finish Task</label>
-                                    <input type="text"><button class="btn btn-primary float-end delete" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-trash-alt delete" style="color: rgb(221,21,21);"></i>
-                                    </button>
-                                    <button class="btn btn-primary float-end edit" type="button" style="padding: 0px;background: rgba(255,255,255,0);border-style: none;height: 22px;">
-                                      <i class="far fa-edit edit" style="color: #0017eb;font-size: 17px;"></i>
-                                  </button>
-                                </li>
-                                </ul>
+                                <section class="todo-list">
+                                    <div class="list" id="todo-list"></div>
+                                </section>
                             </div>
                             <hr style="border-width: 1px;border-color: rgb(147,147,147);margin-top: 20px;margin-bottom: 15px;">
                             <div>
                                 <h1 class="fw-semibold" style="font-size: 18px;">Completed<i class="far fa-star float-end"></i></h1>
-                                <ul id="completed-tasks">
-                                    <li><label class="form-label"><input type="checkbox">Label</label></li>
-                                    <li>Item 4</li>
-                                    <li style="width: 98px;"></li>
+                                <ul id="completed-tasks" class="completed-list">
                                 </ul>
                             </div>
-                            <input type="text" id="new-task" style="width: 100%;border-radius: 50px;padding: 5px 20px;border: 1.5px solid rgb(204,204,204);margin-top: 25px;" placeholder="Add task here">
-                            <button class="btn btn-primary" id="add-task-btn" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 10px;background: #0017eb;">Add New Task</button>
+                            <section class="create-todo">
+                            <form id="new-todo-form">
+                                <input 
+                                    type="text" 
+                                    id="content" 
+                                    name="content"
+                                    style="width: 100%;border-radius: 50px;padding: 5px 20px;border: 1.5px solid rgb(204,204,204);margin-top: 25px;"
+                                    placeholder="Add task here" />
+                                <button
+                                    class="btn btn-primary"
+                                    type="submit"
+                                    style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 10px;background: #0017eb; color:white;">
+                                    Add new task
+                                </button>
+                            </form>
+                            </section>
                         </div>
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                             <div>
