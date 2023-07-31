@@ -34,7 +34,7 @@
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item dropdown no-arrow">
                     <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="hr-assets/img/avatars/side%20logo.png"></a>
-                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
             <div class="container" style="padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student Applicants</h1>
                 <div></div>
-                <h1 style="font-size: 30px;">School Name Here</h1>
+                <h1 style="font-size: 30px;"><?php echo $school_name; ?></h1>
                 <p>BS Information Technology |&nbsp;Batch 1</p>
                 <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);">
                     <table class="table">
@@ -148,6 +148,7 @@
     <script src="assets/js/Profile-Edit-Form-profile.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/untitled.js"></script>
+    <script src="../logout.js"></script>
 </body>
 
 </html>

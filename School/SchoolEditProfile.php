@@ -120,7 +120,7 @@
             <li class="nav-item dropdown no-arrow">
                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="../School-Logo/<?php echo $schoolLogo; ?>" /></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="SchoolEditProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="SchoolDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                        <div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
                 </div>
             </li>
@@ -356,6 +356,7 @@
     <script src="editProfile-assets/js/jquery.min.js"></script>
     <script src="editProfile-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="editProfile-assets/js/script.min.js"></script>
+    <script src="../logout.js"></script>
 </body>
 
 </html>
