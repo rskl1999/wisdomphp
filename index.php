@@ -53,7 +53,7 @@
             </div>
             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3" style="margin-top: -57px;">
                 <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
-                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 15px;">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 3px 20px;">
                             <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/technotyper.png">
                                 <h4 class="card-title" style="margin-top: 16px;font-weight: bold;">TechnoTyper</h4>
                                 <p class="card-text" style="font-size: 14px; text-align:justify;"><span style="background-color: transparent;">A keyboarding web application to be developed for the purpose of teaching children with ages 4 to 6 years old the QWERTY finger typing method through fun and educational activities that will help develop and master typing skills using a keyboard.</span></p>
@@ -61,7 +61,7 @@
                         </div>
                     </a></div>
                 <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
-                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 15px;">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 3px 20px;">
                             <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/original-0219a6b663e274b49d3c5816428c890a.webp">
                                 <h4 class="card-title" style="margin-top: 16px;font-weight: bold;">Project Name</h4>
                                 <p class="card-text" style="font-size: 14px; text-align:justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a interdum ipsum. Nulla non ultrices ex. Quisque sit amet diam ante. Nullam lacinia, libero semper egestas varius, erat mauris molestie nibh, non vehicula neque massa eu sem.</p>
@@ -69,7 +69,7 @@
                         </div>
                     </a></div>
                 <div class="col"><a class="text-decoration-none" href="#" style="color: rgb(0,0,0);">
-                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 5px 15px;">
+                        <div class="card" style="border-radius: 15px;border-style: none;box-shadow: 0px 3px 8px 0px rgb(215,215,215);padding: 3px 20px;">
                             <div class="card-body p-4"><img width="306" height="80" style="width: 100%;object-fit: cover;height: 130px;border-radius: 15px;" src="assets/img/original-d210c6d256c9abb879cd7600b7e5c276.webp">
                                 <h4 class="card-title" style="margin-top: 16px;font-weight: bold;"><strong>Project Name</strong></h4>
                                 <p class="card-text" style="font-size: 14px; text-align:justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a interdum ipsum. Nulla non ultrices ex. Quisque sit amet diam ante. Nullam lacinia, libero semper egestas varius, erat mauris molestie nibh, non vehicula neque massa eu sem.</p>
