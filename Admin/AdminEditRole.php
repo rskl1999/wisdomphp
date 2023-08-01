@@ -93,17 +93,20 @@
     <link rel="stylesheet" href="admin-assets/css/Navbar-With-Button-icons.css">
     <link rel="stylesheet" href="admin-assets/css/Profile-Edit-Form-styles.css">
     <link rel="stylesheet" href="admin-assets/css/Profile-Edit-Form.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body style="color: rgb(0,0,0);">
     <nav class="navbar navbar-light navbar-expand bg-white  topbar static-top">
-    <div class="container-fluid"><a href="StudentDashboard.php"><img src="assets/img/logo.png" width="140" height="29" /></a>
+    <div class="container-fluid"><a href="AdminDashboard.php"><img src="assets/img/logo.png" width="140" height="29" /></a>
         <ul class="navbar-nav flex-nowrap ms-auto">
             <li class="nav-item dropdown no-arrow mx-1"></li>
             <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="admin-assets/img/avatars/avatar1.jpeg" /></a>
-                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="StudentProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="StudentDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
-                        <div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="admin-assets/img/avatars/avatar1.jpeg" /></a>
+                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="AdminProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="StudentDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
                 </div>
             </li>
@@ -133,25 +136,31 @@
                             <div><input class="form-control" type="text" name="email" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" value="<?php echo $account_details['email']?>"></div>
                         </div>
                     </div>
-                    <div class="row" style="height: 110px;">
-                        <div class="col" style="margin: 23px;margin-top: 5px;">
-                            <div><label class="form-label" style="font-size: 16px;"><strong>Account Role</strong></label></div>
-                            <div class="dropdown" style="border-radius: 25px;width: 100%;height: 50px;color: #C7BABA;border: 1px solid #d1d3e2;"><button class="btn btn-primary disabled dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-black);background: rgb(255,255,255);border-style: none;margin: 5px;" disabled="false"><?php echo $account_details['role']?></button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Student</a>
-                                    <a class="dropdown-item" href="#">School</a>
-                                    <a class="dropdown-item" href="#">Facilitator</a>
-                                    <a class="dropdown-item" href="#">Human Resource</a>
-                                    <a class="dropdown-item" href="#">Admin</a>
+                    
+                    <body>
+                        <div class="row" style="height: 110px;">
+                            <div class="col" style="margin: 23px;margin-top: 5px;">
+                                <div><label class="form-label" style="font-size: 16px;"><strong>Account Role</strong></label></div>
+                                <div class="dropdown" style="border-radius: 25px;width: 100%;height: 50px;color: #C7BABA;border: 1px solid #d1d3e2;">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: var(--bs-black);background: rgb(255,255,255);border-style: none;margin: 5px;">
+                                        --Select--
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" onclick="selectRole('Student')">Student</a>
+                                        <a class="dropdown-item" onclick="selectRole('School')">School</a>
+                                        <a class="dropdown-item" onclick="selectRole('Facilitator')">Facilitator</a>
+                                        <a class="dropdown-item" onclick="selectRole('Human Resource')">Human Resource</a>
+                                        <a class="dropdown-item" onclick="selectRole('Admin')">Admin</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div></div>
                         </div>
+                </div>
                         <div class="col" style="margin: 23px;margin-top: 5px;">
                             <div><label class="form-label" style="font-size: 16px;"><strong>Password</strong></label></div>
                             <div><input class="form-control" type="password" style="border-radius: 25px;width: 100%;height: 50px;border: 1px solid #d1d3e2;" placeholder="*************"></div>
                         </div>
-                    </div>
+
                     <div class="row" style="height: 110px;">
                         <div class="col">
                             <button class="btn btn-primary" type="button" style="margin: 25px;border-radius: 25px;width: 160px;height: 50px;margin-right: 0px;color: var(--bs-btn-bg);background: var(--bs-btn-disabled-color);border: 1px solid var(--bs-btn-bg);" onclick="location.href='AdminDashboard.php';"><strong>Cancel</strong></button>
@@ -162,8 +171,21 @@
             </form>
         </section>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../logout.js"></script>
-</body>
 
+    <script>
+        function selectRole(role) {
+            document.getElementById('dropdownMenuButton').innerText = role;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+</body>
 </html>
