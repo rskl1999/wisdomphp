@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="assets/css/Simple-Slider.css">
     <link rel="stylesheet" href="assets/css/Tasks.css">
     <link rel="stylesheet" href="assets/css/Ultimate-Event-Calendar.css">
+    <link rel="stylesheet" href="alumni.css">
 </head>
 
 <body>
@@ -27,42 +28,51 @@
         <!-- <section style="background: url(&quot;assets/img/aboutBg.svg&quot;) top / cover; height: 1455px;"> -->
         <!-- <div class="black-rectangle" style="position: absolute; top: 95em; left: 0; width: 100%; height: 24.5rem; background-color: #000;"></div> -->
         <div class="container" style="width: 1000px; max-width: 1500px; position: relative; margin: 0 auto; top: 50px; text-align: center;">
-        <h1 class="abt-tk" style="font-weight: bold; font-size: 80px;">Why join <span style="color: #0017EB;">Technokids?</span></h1>
-        <br>
+        <h1 class="abt-tk" style="font-weight: bold; font-size: 80px;">Why join <span style="color: #0017EB;">Technokids?<span class="blinking-cursor">|</span></span></h1> 
+            <br>
         </div>
     </div>
         
     <div style="font-family: Poppins, bold;">
         <div class="container" style="width: 1000px; max-width: 1500px; position: relative; margin: 0 auto; top: 100px; text-align: center; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 90px;">
-            <div>
-            <div></div><i class="fa-solid fa-badge-check" style="font-size: 21px;color: #3448ff;width: 30px;"></i>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Guaranteed</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
-            <br>
-            <br>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Strong Together</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+            <div style="padding-bottom: 30px;">
+                <i class="fa-solid fa-square-check" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Guaranteed</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto; ">Offers assurances regarding the quality and effectiveness of the curriculum and training programs.</h2>
             </div>
 
-            <div>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Learning</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
-            <br>
-            <br>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Professional</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+            <div style="padding-bottom: 30px;">
+                <i class="fa-sharp fa-solid fa-graduation-cap" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Learning</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
             </div>
-            
-            <div>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Achievement</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
-            <br>
-            <br>
-            <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Big Network</h1>
-            <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+
+            <div style="padding-bottom: 30px;">
+                <i class="fa-solid fa-hand-fist" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Strong Together</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+            </div>
+
+            <div style="padding-bottom: 30px;">
+                <i class="fa-solid fa-user-tie" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Professional</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+            </div>
+
+            <div style="padding-bottom: 30px;">
+                <i class="fa-solid fa-medal" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Achievement</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+            </div>
+
+            <div style="padding-bottom: 30px;">
+                <i class="fa-solid fa-people-group" style="font-size: 50px; color: #0017EB;"></i>
+                <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Big Network</h1>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
             </div>
         </div>
     </div>
+
 
 
     <div>
@@ -125,5 +135,4 @@
 <!-- footer-->
 <?php include 'includes/footer.php'; ?>
 </body>
-
 </html>
