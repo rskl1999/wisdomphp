@@ -21,7 +21,13 @@ if (isset($_POST['Login'])) {
             $row = mysqli_fetch_array($result);
             $hashed_password = $row['password'];
 
-            if (password_verify($password, $hashed_password)) {
+            // Temporary bypass for null passwords
+            $bypass = false;
+            if(empty($hashed_password)) {
+                $bypass = true;
+            }
+
+            if (password_verify($password, $hashed_password) || $bypass) {
                 $role = $row['role'];
                 switch ($role) {
                     case "student":
