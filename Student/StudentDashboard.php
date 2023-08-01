@@ -1,5 +1,67 @@
 <?php
 
+    require_once('../connection.php');
+    session_start();
+
+    include('../pageNavigation.php');
+
+    include('../checkLogin.php');
+
+    $accountID = $_SESSION['accountID'];
+
+    // Query for duration + hours rendered
+    $duration_query = $con->prepare("SELECT ap.duration, st.hoursRendered
+                                    FROM internshipapplication ap
+                                    JOIN student st ON ap.internshipapplicationID = st.applicationID
+                                    WHERE st.accountID = ?
+                                    ");
+    $duration_query->bind_param("i", $accountID);
+    $duration_query->execute();
+    $duration_res = $duration_query->get_result();
+    $duration_query->close();
+    $total_duration = $duration_res->fetch_assoc();
+    $total_duration['duration'] = $total_duration['duration'] ?? 0;
+    $total_duration['hoursRendered'] = $total_duration['hoursRendered'] ?? 0;
+
+    // Query for School and Facilitator Details
+    $school_query = $con->prepare("SELECT st.schoolID, sc.schoolName, sc.address, sc.schoolLogo
+                                    FROM student st
+                                    JOIN school sc ON st.schoolID = sc.schoolID
+                                    WHERE st.accountID = ?
+                                    ");
+    $school_query->bind_param("i", $accountID);
+    $school_query->execute();
+    $school_res = $school_query->get_result();
+    $school_query->close();
+    $school_details = $school_res->fetch_assoc();
+    $school_details['schoolName'] = $school_details['schoolName'] ?? 'School\'s Name';
+    $school_details['address'] = $school_details['address'] ?? 'School Address';
+    $school_details['schoolLogo'] = $school_details['schoolLogo'] ?? 'default.png';
+
+    // Query for tasks
+    $task_query = $con->prepare("SELECT ts.taskID, ts.applicationID, ts.title, ts.description, ts.allotedHours, ts.dateStarted, ts.dateFinished, ts.status
+                                FROM studenttask stk
+                                JOIN tasks ts ON stk.taskID = ts.taskID
+                                JOIN student st ON  stk.studentID = st.studentID
+                                JOIN account ac ON st.accountID = ac.accountID
+                                WHERE ac.accountID = ?
+                                ");
+    $task_query->bind_param("i", $accountID);
+    $task_query->execute();
+    $task_res = $task_query->get_result();
+    $task_query->close();
+    $tasks_detail = array();
+    while($row = $task_res->fetch_assoc()) {
+        $tasks_detail[] = $row;
+    }
+
+
+    // Table page setup
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $total_items = count($tasks_detail);
+    $items_per_page = 10;
+    $offset = ($page - 1) * $items_per_page;
+
 
 ?>
 
@@ -55,7 +117,7 @@
                         <div class="col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-center">
                             <p style="margin: 0px;font-weight: bold;">Required Hours</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;">240</span></div>
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;"><?php echo $total_duration['duration']; ?></span></div>
                     </div>
                 </div>
             </div>
@@ -65,7 +127,7 @@
                         <div class="col-md-6 d-flex justify-content-center">
                             <p style="margin: 0px;font-weight: bold;">Rendered Hours</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;">120</span></div>
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;"><?php echo $total_duration['hoursRendered']; ?></span></div>
                     </div>
                 </div>
             </div>
@@ -75,7 +137,7 @@
                         <div class="col-md-6 d-flex justify-content-center">
                             <p style="margin: 0px;font-weight: bold;">Remaining Hours</p>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;">120</span></div>
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;margin-left:20px;"><?php echo ($total_duration['duration'] - $total_duration['hoursRendered']); ?></span></div>
                     </div>
                 </div>
             </div>
@@ -87,9 +149,9 @@
             <h1 style="font-size: 30px;color: rgb(0,0,0);padding: 10px 5px;font-family: Poppins, sans-serif;"><strong>School</strong></h1>
                 <div class="card" style="border-radius: 25px; border-style: none;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center" style="border-radius: 25px; box-shadow: 0px 4px 20px rgba(0,0,0,0.15); border-style: none; height: 230px; width: 600px;">
-                        <img src="assets/img/adu.png" alt="School Image" style="position: absolute; top: 50%; left: 25%; transform: translate(-50%, -50%); width: 150px; height: 150; border-radius: 50%;">
-                        <h5 class="card-title ml-2 text-center" style="font-weight: bold; font-family: Poppins, sans-serif;margin-left:40%; padding-right: 5%;">Adamson University</h5>
-                        <h6 class="card-title ml-3 text-center" style="font-family: Poppins, sans-serif;margin-left:40%; padding-right: 5%;">900 San Marcelino St, Ermita, Manila, 1000 Metro Manila</h6>
+                        <img src="../School-Logo/<?php echo $school_details['schoolLogo']; ?>" alt="School Image" style="position: absolute; top: 50%; left: 25%; transform: translate(-50%, -50%); width: 150px; height: 150; border-radius: 50%;">
+                        <h5 class="card-title ml-2 text-center" style="font-weight: bold; font-family: Poppins, sans-serif;margin-left:40%; padding-right: 5%;"><?php echo $school_details['schoolName']; ?></h5>
+                        <h6 class="card-title ml-3 text-center" style="font-family: Poppins, sans-serif;margin-left:40%; padding-right: 5%;"><?php echo $school_details['address']; ?></h6>
                     </div>
                 </div>
             </div>
@@ -138,42 +200,44 @@
                     </tr>
                 </thead>
                 <tbody style="color: rgb(0,0,0);font-size: 12px;">
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>
-                            <p style="margin: 0px;"><strong>Task 1</strong></p><small>Create a php file</small>
-                        </td>
-                        <td>
-                            <span style="padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;">Completed</span>
-                        </td>
-                        <td>07/07/2023</td>
-                        <td>07/07/2023&nbsp;</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>
-                            <p style="margin: 0px;"><strong>Task 2</strong></p><small>Create a php file</small>
-                        </td>
-                        <td>
-                            <span style="padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;">Completed</span>
-                        </td>
-                        <td>07/07/2023</td>
-                        <td>07/07/2023&nbsp;</td>
-                        <td>5</td>
-                    </tr>
+
+                    <?php
+                        for($i = $offset; $i < ($offset + $items_per_page) && $i < $total_items; $i++) {
+                            $task = $tasks_detail[$i];
+                            $task['status'] = $task['status'] ?? "Pending";
+                            $task['dateStarted'] = $task['dateStarted'] ?? "No Date";
+                            $task['dateFinished'] = $task['dateFinished'] ?? "No Date";
+                            echo "
+                                <tr>
+                                    <td><input type=\"checkbox\"></td>
+                                    <td style=\"max-width: 100px;\">
+                                        <p style=\"margin: 0px;\"><strong>".$task['title']."</strong></p>
+                                        <small>".$task['description']."</small>
+                                    </td>
+                                    <td>
+                                        <span style=\"padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;\">".$task['status']."</span>
+                                    </td>
+                                    <td>".$task['dateStarted']."</td>
+                                    <td>".$task['dateFinished']."</td>
+                                    <td>".$task['allotedHours']."</td>
+                                </tr>
+                            ";
+                        }
+                    ?>
+
                 </tbody>
             </table>
         </div>
         <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="padding: 20px 0px;">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+
+                <?php
+                    $nav = new PageNavigation();
+                    $nav->setTotalItems($total_items);
+                    $nav->setItemsPerPage($items_per_page);
+                    $nav->getNavigation("StudentDashboard.php", $page);
+                ?>
+
             </ul>
         </nav>
     </div>
