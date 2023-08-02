@@ -7,6 +7,9 @@
 
     // Store Account ID
     $accountid = $_SESSION['accountID'];
+
+    $f_name = '';
+    $l_name = '';
     
     $sql = "SELECT *
                 FROM student st
@@ -37,7 +40,7 @@
         $profileImage = $row['profileImage'];
     } else {
         $name = 'Student Name';
-        $email = 'student@email.com';
+        $email = '';
         $password = '';
         $course = '';
         $profileImage = '';
@@ -137,7 +140,7 @@
                     <input type="file" class="form-control" name="avatar-file" style="border-radius: 0px;border-width: 0px;border-color: rgba(85,85,85,0);" accept="image/*">
                 </div>
                 <div class="col-md-8 mb-2" style="font-family: Poppins, sans-serif; font-weight:bold;color:#1C1C1C;">
-                    <h3>Profile</h3>
+                    <h3 style="font-weight:bold; margin-bottom: 20px;">Student Profile</h3>
                     <div class="row">
                         <div class="col-md-6 mb-4">
                             <div class="form-group">
@@ -154,7 +157,7 @@
                         <div class="col-md-12 mb-4">
                             <div class="form-group">
                                 <label class="control-label" style="font-family: Poppins, sans-serif;">Email</label>
-                                <input class="form-control" name="email" type="text" value="<?php echo $email?>" placeholder="student.email@gmail.com" style="height: 45px;border-radius: 35px;" required="" inputmode="email">
+                                <input class="form-control" name="email" type="text" value="<?php echo $email?>" placeholder="student@email.com" style="height: 45px;border-radius: 35px;" required="" inputmode="email">
                             </div>
                         </div>
                         <div class="col-md-12 mb-4">
@@ -172,7 +175,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <button class="btn btn-default" type="button" name="cancel" style="font-family: Poppins, sans-serif;width: 120px;background: rgba(0,23,235,0);color: #0017eb;height: 45px;border-radius: 35px;margin: 0px;margin-right: 20px;margin-top:20px;font-weight: bold;border-width: 2px;border-color: #0017eb;">Cancel</button>
+                            <button class="btn btn-default" type="button" name="cancel" href="Student/StudentDashboard.php" style="font-family: Poppins, sans-serif;width: 120px;background: rgba(0,23,235,0);color: #0017eb;height: 45px;border-radius: 35px;margin: 0px;margin-right: 20px;margin-top:20px;font-weight: bold;border-width: 2px;border-color: #0017eb;">Cancel</button>
                             <button class="btn btn-default" type="submit" name="submit" style="font-family: Poppins, sans-serif;width: 120px;background: #0017eb;color: rgb(255,255,255);height: 45px;border-radius: 35px;margin: 0px;margin-right: 20px;margin-top: 20px;border-width: 0px;">Save</button>
                         </div>
                     </div>
