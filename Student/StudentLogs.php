@@ -171,63 +171,79 @@
                     </div>
                     <div id="dailylogs-div" class="<?php echo $logs_tag; ?>">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
-                            <div>
-                                <h1 class="fw-bold" style="font-size: 25px;">Daily Logs</h1>
+                        <div>
+                            <h1 class="fw-bold" style="font-size: 25px;">Daily Logs</h1>
+                        </div>
+                        <div class="row d-flex" style="border-radius: 15px;padding: 14px 7px;border: 1px solid rgb(218,218,218);">
+                            <div class="col-auto col-xxl-5 offset-xxl-0 flex-fill align-self-center">
+                                <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Rendered Hours</h1>
                             </div>
-                            <div class="row d-flex" style="border-radius: 15px;padding: 14px 7px;border: 1px solid rgb(218,218,218);">
+                            <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
+                            <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;" id="rendered-hours">00</h1>
+                            <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
+                        </div>
+                        <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
+                            <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;" id="rendered-minutes">00</h1>
+                            <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
+                        </div>
+                        </div>
+                        <div>
+                            <div class="row d-flex" style="margin-top: 12px;">
+                                <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill">
+                                    <label class="form-label flex-shrink-1">Time In</label>
+                                    <input type="time" id="time-in" style="width: 100%;height: 37px;border-radius: 25px;padding: 16px;border: 1px solid #dadada;">
+                                </div>
+                                <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill">
+                                    <label class="form-label flex-shrink-1">Time Out</label>
+                                    <input type="time" id="time-out" style="width: 100%;border-radius: 25px;padding: 16px;height: 37px;border: 1px solid rgb(218,218,218);">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
+                    </div>
+                    <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
+                    <div>
+                        <div class="row d-flex" style="padding: 14px 7px;">
+                        <div class="col-auto col-xxl-5 offset-xxl-0 flex-fill align-self-center">
+                            <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Rendered</h1>
+                        </div>
+                        <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
+                            <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;" id="total-rendered-hours">00</h1>
+                            <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
+                        </div>
+                        <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
+                            <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;" id="total-rendered-minutes">00</h1>
+                            <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="total-remaining-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
+                        <div>
+                            <div class="row d-flex" style="padding: 14px 7px;">
                                 <div class="col-auto col-xxl-5 offset-xxl-0 flex-fill align-self-center">
-                                    <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Rendered Hours</h1>
+                                    <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Remaining</h1>
                                 </div>
                                 <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                    <h1 id="renderedHours" class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">00</h1>
+                                    <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;" id="total-remaining-hours">00</h1>
                                     <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
                                 </div>
-                                <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                    <h1 id="renderedMins" class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">00</h1>
-                                    <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row d-inline-flex" style="margin-top: 12px;">
-                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time In</label><input id="input-timein" onchange="changeHoursRendered()" type="time" value="" name="timein" style="width: 100%;height: 37px;border-radius: 25px;padding: 16px;border: 1px solid #dadada;"></div>
-                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time Out</label><input id="input-timeout" onchange="changeHoursRendered()" type="time" name="timeout" style="width: 100%;border-radius: 25px;padding: 16px;height: 37px;border: 1px solid rgb(218,218,218);"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <p id="error-message"></p>
-                            </div>
-                            <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="submit" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
-                        </div>
-                        <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
-                            <div>
-                                <div class="row d-flex" style="padding: 14px 7px;">
-                                    <div class="col-auto col-xxl-5 offset-xxl-0 flex-fill align-self-center">
-                                        <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Rendered</h1>
-                                    </div>
-                                    <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo str_pad($student_logs['hoursRendered'], 2, '0', STR_PAD_LEFT); ?></h1>
-                                        <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
-                                    </div>
-                                    <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo str_pad($minutes, 2, '0', STR_PAD_LEFT); ?></h1>
-                                        <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div id="total-required-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
-                            <div>
-                                <div class="row d-flex" style="padding: 14px 7px;">
-                                    <div class="col-auto col-xxl-3 offset-xxl-0 flex-fill align-self-center">
-                                        <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Required</h1>
-                                    </div>
-                                    <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo $total_duration; ?></h1>
-                                        <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    </div>
+                    <div id="total-required-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
+                    <div>
+                        <div class="row d-flex" style="padding: 14px 7px;">
+                        <div class="col-auto col-xxl-3 offset-xxl-0 flex-fill align-self-center">
+                            <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Required</h1>
                         </div>
+                        <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
+                            <input type="number" id="total-required-hours" min="0" max="500" value="0" style="font-family: Poppins,sans-serif; font-weight:bold;font-size: 26px;margin-bottom: 0px;width: 50px;border: none;text-align: center; width:70px;" />
+                            <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
+                        </div>
+                    </div>
+                </div>
                     </div>
                     <div id="tasks-div" class="<?php echo $docu_tag; ?>">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
@@ -274,18 +290,10 @@
 
     <script src="student-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="student-assets/js/bs-init.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="student-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
-    <script src="student-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="student-assets/js/theme.js"></script>
     <script src="student-assets/script.js"></script>
-    <script src="student-assets/js/Task-List.js"></script>
-    <script src="student-assets/js/Ultimate-Event-Calendar.js"></script>
     <script src="student-assets/js/Daily-Logs-Toggle.js"></script>
+    <script src="student-assets/js/logs.js"></script>
     <script src="../logout.js"></script>
 </body>
 
