@@ -1,3 +1,98 @@
+<?php
+/**
+ * Required:
+ * ----- Daily Logs -------
+ *  rendered hours(day)
+ *  time in
+ *  time out
+ *  total rendered hours
+ *  total required
+ * -------- Tasks ---------
+ *  tasks list (pending / completed)
+ *  documentation
+ * 
+ */
+
+    require_once('../connection.php');
+    session_start();
+
+    include('../pageNavigation.php');
+
+    include('../checkLogin.php');
+
+    $accountID = $_SESSION['accountID'];
+
+    $today = date('m/d/Y');
+    $time = date('H:m:s', time()); // Not sure where to use this
+
+    // Check if current student already timed in
+    $log_query = $con->prepare("SELECT dl.logID, dl.studentID, st.hoursRendered, dl.date, dl.dateTimeIn, dl.dateTimeOut
+                                FROM dailylog dl
+                                JOIN student st ON dl.studentID = st.studentID
+                                WHERE st.accountID = ?
+                                    AND dl.date = ?
+                                ");
+    $log_query->bind_param("is", $accountID, $today);
+    $log_query->execute();
+    $log_query_res = $log_query->get_result();
+    $student_logs = $log_query_res->fetch_assoc();
+
+    // Query for application duration
+    $duration_query = $con->prepare("SELECT ip.duration, st.studentID
+                                    FROM internshipapplication ip
+                                    JOIN student st ON st.applicationID = ip.internshipapplicationID
+                                    JOIN account ac ON ac.accountID = st.accountID
+                                    WHERE ac.accountID = ?");
+    $duration_query->bind_param("i", $accountID);
+    $duration_query->execute();
+    $duration_query_res = $duration_query->get_result();
+    $temp_holder = $duration_query_res->fetch_assoc();
+    $total_duration = $temp_holder['duration'];
+    $studentID = $temp_holder['studentID'];
+
+
+    // Query for task of current student
+    $tasks_query = $con->prepare("SELECT DISTINCT tk.title
+                                    FROM tasks tk
+                                    JOIN studenttask stk ON stk.taskID = tk.taskID
+                                    JOIN student st ON st.studentID = st.studentID
+                                    WHERE tk.status = 'pending'
+                                        AND st.studentID = ?
+                                    ");
+    $tasks_query->bind_param("i", $studentID);
+    $tasks_query->execute();
+    $tasks_query_res = $tasks_query->get_result();
+    $tasks_list = array();
+    while($row = $tasks_query_res->fetch_assoc()) {
+        $tasks_list[] = $row;
+    }
+
+    // CASE: student has no log
+    if(empty($student_logs)) {
+        echo "Log empty\n";
+        $student_logs = ['logID'=>-1, 'studentID'=>-1, 'hoursRendered'=>0, 'date'=>"", 'dateTimeIn'=>"", 'dateTImeOut'=>""];
+        echo "<br/>";
+        print_r($student_logs);
+    }
+
+    // $log_time_in = ?? $student_logs[0]
+
+    $minutes = 0; // TODO: assign proper value to this variable
+
+    // echo "<br/>";
+    // echo $today;
+    // echo "<br/>";
+    // echo $time;
+    // echo "<br/>";
+    // print_r($student_logs);
+    // echo "<br/>";
+    // echo $total_duration;
+    // echo "<br/>";
+    // print_r($tasks_list);
+    // echo "<br/>";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,20 +169,24 @@
                                     <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Rendered Hours</h1>
                                 </div>
                                 <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                    <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">08</h1>
+                                    <h1 id="renderedHours" class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">00</h1>
                                     <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
                                 </div>
                                 <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                    <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">08</h1>
+                                    <h1 id="renderedMins" class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">00</h1>
                                     <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
                                 </div>
                             </div>
                             <div>
                                 <div class="row d-inline-flex" style="margin-top: 12px;">
-                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time In</label><input type="time" style="width: 100%;height: 37px;border-radius: 25px;padding: 16px;border: 1px solid #dadada;"></div>
-                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time Out</label><input type="time" style="width: 100%;border-radius: 25px;padding: 16px;height: 37px;border: 1px solid rgb(218,218,218);"></div>
+                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time In</label><input id="input-timein" onchange="changeHoursRendered()" type="time" value="" name="timein" style="width: 100%;height: 37px;border-radius: 25px;padding: 16px;border: 1px solid #dadada;"></div>
+                                    <div class="col-auto col-xxl-6 flex-shrink-1 flex-fill"><label class="form-label flex-shrink-1">Time Out</label><input id="input-timeout" onchange="changeHoursRendered()" type="time" name="timeout" style="width: 100%;border-radius: 25px;padding: 16px;height: 37px;border: 1px solid rgb(218,218,218);"></div>
                                 </div>
-                            </div><button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
+                            </div>
+                            <div>
+                                <p id="error-message"></p>
+                            </div>
+                            <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="submit" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
                         </div>
                         <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                             <div>
@@ -96,11 +195,11 @@
                                         <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Rendered</h1>
                                     </div>
                                     <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">08</h1>
+                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo str_pad($student_logs['hoursRendered'], 2, '0', STR_PAD_LEFT); ?></h1>
                                         <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
                                     </div>
                                     <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">08</h1>
+                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo str_pad($minutes, 2, '0', STR_PAD_LEFT); ?></h1>
                                         <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">mins</h1>
                                     </div>
                                 </div>
@@ -113,7 +212,7 @@
                                         <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px;text-align: left;margin-bottom: 0px;">Total Required</h1>
                                     </div>
                                     <div class="col-auto col-xxl-3 d-inline-flex flex-fill justify-content-center align-items-xxl-center">
-                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;">200</h1>
+                                        <h1 class="fw-semibold" style="font-size: 26px;margin-bottom: 0px;"><?php echo $total_duration; ?></h1>
                                         <h1 class="fw-normal" style="font-size: 15px;margin-bottom: 0px;margin-left: 3px;">hrs</h1>
                                     </div>
                                 </div>
@@ -165,6 +264,7 @@
 
     <script src="student-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="student-assets/js/bs-init.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>

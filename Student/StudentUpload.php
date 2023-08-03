@@ -1,5 +1,80 @@
 <?php
 
+    require_once('../connection.php');
+    session_start();
+            
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    // Send email using PHPMailer
+    require '../vendor/autoload.php';
+
+    $schoolLogo =$_SESSION['schoolLogo'];
+    //Check Account ID if set
+    if(isset($_SESSION['accountID'])){
+        $accountID = $_SESSION['accountID'];
+
+        $sql ="SELECT accountID FROM account WHERE accountID = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("i", $accountID);
+            $stmt->execute();
+            $stmt->bind_result($accountID);
+            $stmt->fetch();
+            $stmt->close();
+            
+        if(!$accountID){
+            header("Location:../index.php");
+        }
+    }
+    else{
+        header("Location:../index.php");
+    }
+
+    
+
+    //if Upload is pressed
+    if(isset($_POST['submit'])){
+
+        if (isset($_POST['submit'])) {
+            // Count total files
+            // Get total files count
+            $countFiles = count($_FILES['file']['name']);
+                
+            // Loop through all files
+            for ($i = 0; $i < $countFiles; $i++) {
+                // Get the file name and type
+                $filename = $_FILES['file']['name'][$i];
+                $filetype = $_FILES['file']['type'][$i];
+
+                // Upload file if it's a PDF or MP4
+                if ($filetype == 'application/pdf' || $filetype == 'video/mp4') {
+                    if (move_uploaded_file($_FILES['file']['tmp_name'][$i], '../uploads/'.$filename)) {
+                        echo $filename.' uploaded successfully.<br>';
+
+                        // Insert file name into database
+                        $sql = "UPDATE school SET moa = '$filename' WHERE accountID = $accountID";
+                        if ($con->query($sql) === TRUE) {
+                            echo "File name added to database.<br>";
+                        } else {
+                            echo "Error adding file name to database: " . $con->error."<br>";
+                        }
+                    } else {
+                        echo 'Error uploading '.$filename.'<br>';
+                    }
+                } else {
+                    echo 'Invalid file type for '.$filename.'<br>';
+                }
+            }
+            $con->close();
+            echo 'File successfully submitted.<br/>';
+            header('Location: SchoolAddStudent.php');
+        } else {
+            echo 'No files submitted.<br>';
+        }
+    }    
+          
+
 
 ?>
 
@@ -40,7 +115,7 @@
     </div>
 </nav>
     <div id="banner" style="height: 150px;background: url(&quot;student-assets/img/banner-bg.png&quot;) center / cover no-repeat, #d3edff;"></div>
-    <form>
+    <form method="POST" enctype="multipart/form-data">
         <div class="container">
             <div class="row">
                 <div class="col d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
@@ -50,7 +125,7 @@
                         <div class="card-body" style="border: 1px dashed #0017eb;background: #f9fff9;padding: 70px;"><i class="la la-cloud-upload d-flex d-xxl-flex justify-content-center justify-content-xxl-center" style="font-size: 100px;color: #0017eb;"></i>
                             <p class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center"><strong>Upload Files :</strong>&nbsp;Supported formats: MP4, PDF</p><input class="form-control d-xxl-flex justify-content-xxl-center" type="file" multiple="" required="">
                         </div>
-                        <div class="d-flex d-xxl-flex justify-content-end justify-content-xxl-end" id="buttons" style="padding: 20px 0px;"><button class="btn btn-primary" id="discard" type="button" style="background: rgba(0,23,235,0);width: 150px;height: 45px;border-radius: 35px;margin-right: 25px;color: #0017eb;border-width: 2px;"><strong>Cancel</strong></button><button class="btn btn-primary" type="button" style="background: #0017eb;width: 150px;height: 45px;border-radius: 35px;margin-right: 25px;">Upload</button></div>
+                        <div class="d-flex d-xxl-flex justify-content-end justify-content-xxl-end" id="buttons" type="submit" style="padding: 20px 0px;"><button class="btn btn-primary" id="discard" type="button" style="background: rgba(0,23,235,0);width: 150px;height: 45px;border-radius: 35px;margin-right: 25px;color: #0017eb;border-width: 2px;"><strong>Cancel</strong></button><button class="btn btn-primary" type="button" style="background: #0017eb;width: 150px;height: 45px;border-radius: 35px;margin-right: 25px;">Upload</button></div>
                     </div>
                 </div>
             </div>
