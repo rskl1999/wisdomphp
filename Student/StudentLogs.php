@@ -79,6 +79,16 @@
 
     $minutes = 0; // TODO: assign proper value to this variable
 
+    // Display either student logs or taks on load
+    $logs_tag = "visible";
+    $docu_tag = "hidden";
+    if(isset($_GET['side'])) {
+        if($_GET['side'] == "docu") {
+            $docu_tag = "visible";
+            $logs_tag = "hidden";
+        }
+    }
+
     // echo "<br/>";
     // echo $today;
     // echo "<br/>";
@@ -159,7 +169,7 @@
                         <button class="btn btn-primary" id="tasks-btn" type="button" style="border-radius: 50px;width: 50%;background: #ffffff;font-size: 15px;padding: 0 12px;color: #0017eb;">Tasks</button>
                     </div>
                     </div>
-                    <div id="dailylogs-div" class="visible">
+                    <div id="dailylogs-div" class="<?php echo $logs_tag; ?>">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Daily Logs</h1>
@@ -219,7 +229,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tasks-div" class="hidden">
+                    <div id="tasks-div" class="<?php echo $docu_tag; ?>">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Tasks</h1>
