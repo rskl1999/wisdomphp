@@ -39,16 +39,16 @@
     <section style="margin-top: 60px;color:#000000;">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-lg-8">
+                <div class="col-md-8 col-lg-8" style="padding: 0;">
                     <h2 style="font-family: Poppins, sans-serif; font-size: 20px;">Calendar</h2> 
                         <div class="wrapper">
                             <div class="icons">
                                 <h1 class="current-date" style="font-family: Poppins,sans-serif; font-weight:bold;"></h1>
-                                <span id="prev" class="material-symbols-rounded" style="margin-left: 47%;">&lsaquo;</span>
-                                <span id="next" class="material-symbols-rounded" style="margin-left: 50%;">&rsaquo;</span>
+                                <span id="prev" class="material-symbols-rounded" style="margin-left: 52%;">&lsaquo;</span>
+                                <span id="next" class="material-symbols-rounded" style="margin-left: 55%;">&rsaquo;</span>
                             </div>
                         <div class="calendar">
-                        <ul class="weeks" style="margin-right:25px; margin-left:15px;">
+                        <ul class="weeks">
                             <li>S</li>
                             <li>M</li>
                             <li>T</li>
@@ -133,7 +133,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit Hours</button>
+                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" 
+                                id="new-task" 
+                                type="button" 
+                                style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">
+                            Submit Hours
+                        </button>
                     </div>
                         <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                     <div>
