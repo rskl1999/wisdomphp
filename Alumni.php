@@ -38,42 +38,43 @@
             <div style="padding-bottom: 30px;">
                 <i class="fa-solid fa-square-check" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Guaranteed</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto; ">Offers assurances regarding the quality and effectiveness of the curriculum and training programs.</h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto; ">Offers assurances regarding the quality and effectiveness of the curriculum and training programs.</h2>
             </div>
 
             <div style="padding-bottom: 30px;">
                 <i class="fa-sharp fa-solid fa-graduation-cap" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Learning</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto;">Offer an enriching learning experience, equipping interns with the skills and knowledge required to excel in the I.T. industry.</h2>
             </div>
 
             <div style="padding-bottom: 30px;">
                 <i class="fa-solid fa-hand-fist" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Strong Together</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto;">We believe in the power of collaboration. Together with our valued partners, we commit to excellence in I.T. industry.</h2>
             </div>
 
             <div style="padding-bottom: 30px;">
                 <i class="fa-solid fa-user-tie" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Professional</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto;">Our team of skilled and experienced professionals is dedicated to crafting tailored I.T. solutions.</h2>
             </div>
 
             <div style="padding-bottom: 30px;">
                 <i class="fa-solid fa-medal" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Achievement</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto;">We are proud of our numerous achievements that reflect our commitment to excellence and innovation in the I.T. industry.</h2>
             </div>
 
             <div style="padding-bottom: 30px;">
                 <i class="fa-solid fa-people-group" style="font-size: 50px; color: #0017EB;"></i>
                 <h1 class="abt-tk" style="font-weight: bold; font-size: 30px;">Big Network</h1>
-                <h2 class="tk-desc" style="max-width: 550px; font-size: 15px; margin: 0 auto;">PCMed-TechnoKids, conceptualized in 2002, is a premier computer curriculum service provider in the </h2>
+                <h2 class="tk-desc" style="max-width: 550px; font-size: 16px; margin: 0 auto;">We take pride in our expansive network that spans across industries and regions.</h2>
             </div>
         </div>
     </div>
 
-
+    
+<!--INTERNS ALUMNI TESTAMENTS -->
 
     <div>
         <section style="background: url(&quot;assets/img/Group%2033527.svg&quot;) top / cover;height: 1200px;padding-top: 8rem;">
