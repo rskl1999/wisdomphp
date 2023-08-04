@@ -143,8 +143,6 @@
                         }
                         $student_query->close();
 
-                        $action_base_url = '../studentChangeStatus.php';
-
                         $_SESSION['prevLocation'] = 'Admin/student-application.php?sch='.$schoolID.'&page='.$page;
 
                         foreach($students_list as $student) {
@@ -171,7 +169,7 @@
                         $nav = new PageNavigation();
                         $nav->setTotalItems($total_items);
                         $nav->setItemsPerPage($items_per_page);
-                        $nav->getNavigation("student-application.php?sch=1", $page);
+                        $nav->getNavigation("student-application.php?sch=".$schoolID, $page);
                     ?>
 
                 </ul>

@@ -62,8 +62,14 @@
         $transactions[] = $row;
     }
 
-    // Query for total number of students
-    $total_transaction = $con->prepare("SELECT COUNT(st.transactionID) AS totalTransactions FROM transaction st");
+    // Query for total number of unique students per school with transaction record
+    $total_transaction = $con->prepare("SELECT COUNT(DISTINCT st.studentID) AS totalTransactions 
+                                        FROM transaction tr
+                                        JOIN account a ON a.accountID = tr.accountID
+                                        JOIN student st ON st.accountID = tr.accountID
+                                        WHERE st.schoolID = ?
+                                        ");
+    $total_transaction->bind_param("i", $schoolID);
     $total_transaction->execute();
     $total_transaction_res = $total_transaction->get_result();
     $total_items = $total_transaction_res->fetch_assoc()['totalTransactions'];
