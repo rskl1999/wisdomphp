@@ -1,11 +1,13 @@
 <?php
-   session_start();
-   require_once('../connection.php');
+    session_start();
+    require_once('../connection.php');
+
+    require_once('../PageNavigation.php');
 
     $school_index = isset($_GET['school_index']) ? $_GET['school_index'] : 1;
 
     // Query for List of Students
-    $students_query = "SELECT st.studentName, st.course, st.hoursRendered, sts.status, b.batchNo, ap.duration
+    $students_query = "SELECT st.studentID, st.studentName, st.course, st.hoursRendered, sts.status, b.batchNo, ap.duration
                     FROM student st
                     JOIN internshipapplication ap ON st.applicationID = ap.internshipapplicationID
                     JOIN studentstatus sts ON st.schoolID = sts.schoolID AND st.studentID = sts.studentID
@@ -25,7 +27,7 @@
     // Temp FIx: If no students were found in query, set null value for variable
     //           Do this so that the webpage will display an empty list instead of an error.
     if(empty($students_list)) {
-        $students_list[] = array("studentName" => "", "course" => "", "hoursRendered" => 0, "status" => "", "batchNo" => 0, "duration" => 0);
+        $students_list[] = array("studentID" => -1, "studentName" => "", "course" => "", "hoursRendered" => 0, "status" => "", "batchNo" => 0, "duration" => 0);
     }
 
     // Query for School Details
@@ -121,7 +123,12 @@
                                                 <td>".$students_list[$i]['course']."</td>
                                                 <td>".$students_list[$i]['duration']."</td>
                                                 <td>".$students_list[$i]['hoursRendered']."</td>
-                                                <td><button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button><button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button></td>
+                                                <td>
+                                                    <a style=\"text-decoration: none;\" href=\"FacilitatorTasks.php?stid=".$students_list[$i]['studentID']."\">
+                                                        <button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button>
+                                                    </a>
+                                                    <button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button>
+                                                </td>
                                             </tr>
                                         ";
                                     }
@@ -137,36 +144,14 @@
                 </div>
                 <nav class="text-center" style="margin-left: 40%;margin-top: 3%;margin-right: 40%;">
                     <ul class="pagination">
-                        <?php
-                            $total_pages = ceil($total_items / $items_per_page);
 
-                            if ($total_pages > 1) {
-                                // Validate the current page number
-                                $page = max($page, 1);
-                                $page = min($page, $total_pages);
-                            
-                                // Generate the "Previous" button link
-                                $prev_page = $page - 1;
-                                if ($prev_page >= 1) {
-                                    echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' . $prev_page . '">«</a></li>';
-                                }
-                            
-                                // Create the pagination links
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    if ($i == $page) {
-                                        echo '<li class="page-item active"><a class="page-link" href="#">' . $i. '</a></li>';
-                                    } else {
-                                        echo '<li class="page-item"><a class="page-link" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' .$i. '">'.$i. '</a></li>';
-                                    }
-                                }
-                            
-                                // Generate the "Next" button link
-                                $next_page = $page + 1;
-                                if ($next_page <= $total_pages) {
-                                    echo '<li class="page-item"><a class="page-link" aria-label="Next" href="FacilitatorStudentList.php?school_index='.$school_index.'&page=' . $next_page . '">»</a></li>';
-                                }
-                            }
+                        <?php
+                            $nav = new PageNavigation();
+                            $nav->setTotalItems($total_items);
+                            $nav->setItemsPerPage($items_per_page);
+                            $nav->getNavigation("FacilitatorStudentList.php?school_index=".$school_index, $page);
                         ?>
+
                     </ul>
                 </nav>
             </div>

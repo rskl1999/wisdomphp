@@ -69,10 +69,10 @@
 
     // CASE: student has no log
     if(empty($student_logs)) {
-        echo "Log empty\n";
+        // echo "Log empty\n";
         $student_logs = ['logID'=>-1, 'studentID'=>-1, 'hoursRendered'=>0, 'date'=>"", 'dateTimeIn'=>"", 'dateTImeOut'=>""];
-        echo "<br/>";
-        print_r($student_logs);
+        // echo "<br/>";
+        // print_r($student_logs);
     }
 
     // $log_time_in = ?? $student_logs[0]
@@ -81,13 +81,15 @@
 
     // Display either student logs or taks on load
     $logs_tag = "visible";
-    $docu_tag = "hidden";
+    $task_tag = "hidden";
     if(isset($_GET['side'])) {
         if($_GET['side'] == "docu") {
-            $docu_tag = "visible";
             $logs_tag = "hidden";
+            $task_tag = "visible";
         }
     }
+    $logs_color = strcmp($logs_tag, "visible") ? "#0017eb" : "#ffffff";
+    $task_color = strcmp($task_tag, "visible") ? "#0017eb" : "#ffffff";
 
     // echo "<br/>";
     // echo $today;
@@ -245,7 +247,7 @@
                         </div>
                     </div>
                 </div>
-                    <div id="tasks-div" class="<?php echo $docu_tag; ?>">
+                    <div id="tasks-div" class="<?php echo $task_tag; ?>">
                         <div style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;">
                             <div>
                                 <h1 class="fw-bold" style="font-size: 25px;">Tasks</h1>

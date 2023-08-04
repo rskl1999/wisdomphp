@@ -1,5 +1,68 @@
 <?php
 
+/* 
+Required:
+    school name
+    course
+    batch no.
+    --------------------
+    student name
+    student email
+    student status
+    time-in
+    time-out
+    tasks
+    totalHours
+    duration
+*/
+
+    session_start();
+    require_once('../connection.php');
+
+    require_once('../PageNavigation.php');
+
+    $school_index = isset($_GET['school_index']) ? $_GET['school_index'] : 1;
+
+    // Query for List of Students
+    $students_query = "SELECT st.studentName, st.course, st.hoursRendered, sts.status, b.batchNo, ap.duration
+                    FROM student st
+                    JOIN internshipapplication ap ON st.applicationID = ap.internshipapplicationID
+                    JOIN studentstatus sts ON st.schoolID = sts.schoolID AND st.studentID = sts.studentID
+                    JOIN batch b ON b.batchID = ap.batchID AND ap.internshipApplicationID = st.applicationID
+                    WHERE st.schoolID = ?";
+    $students_stmt = $con->prepare($students_query);
+    $students_stmt->bind_param("i", $school_index);
+    $students_stmt->execute();
+    $students_result = $students_stmt->get_result();
+    // Store List of Students
+    $students_list = array();
+    while($row = $students_result->fetch_assoc()) {
+        $students_list[] = $row;
+    }
+    // Close query
+    $students_stmt->close();
+    // Temp FIx: If no students were found in query, set null value for variable
+    //           Do this so that the webpage will display an empty list instead of an error.
+    if(empty($students_list)) {
+        $students_list[] = array("studentName" => "", "course" => "", "hoursRendered" => 0, "status" => "", "batchNo" => 0, "duration" => 0);
+    }
+
+    // Query for School Details
+    $school_query = "SELECT schoolName, schoolLogo FROm school where schoolID = ?";
+    $school_stmt = $con->prepare($school_query);
+    $school_stmt->bind_param("i", $school_index);
+    $school_stmt->execute();
+    $school_result = $school_stmt->get_result();
+    // Store School detail
+    $school_detail = $school_result->fetch_assoc();
+    // Close query 
+    $school_stmt->close();
+
+    // Varibales for table-page setup
+    $total_items = count($students_list);
+    $items_per_page = 10;
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+    $offset = ($page - 1) * $items_per_page;
 
 ?>
 
@@ -100,13 +163,14 @@
                 </div>
                 <nav class="text-center" style="margin-left: 40%;margin-top: 3%;margin-right: 40%;">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+
+                        <?php
+                            $nav = new PageNavigation();
+                            $nav->setTotalItems($total_items);
+                            $nav->setItemsPerPage($items_per_page);
+                            $nav->getNavigation("FacilitatorStudentList.php?school_index=".$school_index, $page);
+                        ?>
+
                     </ul>
                 </nav>
             </div>

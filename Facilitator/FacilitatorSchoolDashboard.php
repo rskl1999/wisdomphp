@@ -2,30 +2,9 @@
     require_once('../connection.php');
     session_start();
 
-    // Check if a registered account is logged in ...    
-    if(isset($_SESSION['accounID'])) {
-        $accountID = $_SESSION['accounID'];
+    include('../checkLogin.php');
 
-        $sql = "SELECT accountID FROM account WHERE accountID = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $accID);
-        $stmt->execute();
-        $stmt->bind_result($accountID);
-        $stmt->fetch();
-        $stmt->close();
-
-        // If account ID is not located in database ... return to login page
-        if(!$accountID){
-            // header("Location: ../login.php");
-            // exit(); // Added exit() to stop further execution
-        }
-
-    }
-    // Else return to index.php
-    else{
-        // header("Location: ../login.php");
-        // exit(); // Added exit() to stop further execution
-    }
+    include('../pageNavigation.php');
 
     $accountid = $_SESSION['accountID'];
     $schools_list = array();
@@ -54,8 +33,10 @@
 
     $SchoolQuery->close();
 
+
+    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
     // Page offset for displaying card in specific pages
-    $page_offset = 0
+    $page_offset = ($page - 1) * $card_count_per_page;
 ?>
 
 <!DOCTYPE html>
@@ -124,38 +105,14 @@
     <div class="col" style="padding:50px 30px;">
         <nav class="d-flex d-lg-flex justify-content-center justify-content-lg-center" style="text-align: center;">
             <ul class="pagination">
+
                 <?php
-                    // Determine how many page numbers to show
-                    $total_items = count($card_details);
-                    $total_pages = ceil($total_items / $card_count_per_page);
-
-                    if ($total_pages > 1) {
-                        // Validate the current page number
-                        $page = max($page, 1);
-                        $page = min($page, $total_pages);
-
-                        // Generate the "Previous" button link
-                        $prev_page = $page - 1;
-                        if ($prev_page >= 1) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Previous" href="FacilitatorSchoolDashboard.php?page=' . $prev_page . '">«</a></li>';
-                        }
-
-                        // Create the pagination links
-                        for ($i = 1; $i <= $total_pages; $i++) {
-                            if ($i == $page) {
-                                echo '<li class="page-item active"><a class="page-link" href="FacilitatorSchoolDashboard.php?page=' . $i . '">' . $i . '</a></li>';
-                            } else {
-                                echo '<li class="page-item"><a class="page-link" href="FacilitatorSchoolDashboard.php?page=' . $i . '">' . $i . '</a></li>';
-                            }
-                        }
-
-                        // Generate the "Next" button link
-                        $next_page = $page + 1;
-                        if ($next_page <= $total_pages) {
-                            echo '<li class="page-item"><a class="page-link" aria-label="Next" href="FacilitatorSchoolDashboard.php?page=' . $next_page . '">»</a></li>';
-                        }
-                    }
+                    $nav = new PageNavigation();
+                    $nav->setTotalItems($schoolCount);
+                    $nav->setItemsPerPage($card_count_per_page);
+                    $nav->getNavigation("SchoolDashboard.php", $page);
                 ?>
+
             </ul>
         </nav>
     </div>
