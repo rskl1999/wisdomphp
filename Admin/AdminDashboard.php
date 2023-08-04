@@ -145,19 +145,6 @@
                         ?>
                     </ul>
                 </nav>
-
-                <script>
-                    function confirmDelete() {
-                        var response = confirm('Are you sure you would like to delete this account?');
-                        if(response) {
-                            fetch('../account-delete.php')
-                                .then(response => response.text())
-                                .then(data => {
-                                    console.log(data);
-                                });
-                        }
-                    }
-                </script>
             </div>
         </section>
     </div>
@@ -177,6 +164,17 @@
         checkboxes.forEach((checkbox) => {
             checkbox.checked = isChecked;
         });
+        }
+
+        function confirmDelete() {
+            var response = confirm('Are you sure you would like to delete this account?');
+            if(response) {
+                fetch('../account-delete.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data);
+                    });
+            }
         }
     </script>
 

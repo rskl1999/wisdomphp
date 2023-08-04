@@ -53,7 +53,7 @@
 
     // Query for task of current student
     $tasks_query = $con->prepare("SELECT DISTINCT tk.title
-                                    FROM tasks tk
+                                    FROM task tk
                                     JOIN studenttask stk ON stk.taskID = tk.taskID
                                     JOIN student st ON st.studentID = st.studentID
                                     WHERE tk.status = 'pending'
