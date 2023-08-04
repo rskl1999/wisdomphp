@@ -66,7 +66,7 @@
             $unique_id = uniqid(); // Generate unique identifier
             $image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
             $new_image_name = $unique_id . '.png'; // Create new file name with extension
-            move_uploaded_file($image_tmp_name, "../School-Logo/" . $new_image_name);
+            move_uploaded_file($image_tmp_name, "../Student-Logo/" . $new_image_name);
         }        
 
         // Update the Student email

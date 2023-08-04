@@ -47,7 +47,7 @@
                             FROM student st 
                             JOIN school sc ON st.schoolID = sc.schoolID 
                             JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                            WHERE sc.accountID = ? AND sts.status='finished' OR sts.status='accepted'");
+                            WHERE sc.accountID = ? AND (sts.status='finished' OR sts.status='accepted')");
 
     $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
                                 FROM school 

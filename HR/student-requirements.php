@@ -116,7 +116,7 @@
     <div class="container">
         <form method="POST">
             <div class="row">
-                <div class="col-md-4 text-center" style="margin: 20px 0px;"><img style="width: 200px;height: 200px;border-radius: 50%;margin: 10px 0px;" src="hr-assets/img/Jocas-Kim-Orlan.jpg">
+                <div class="col-md-4 text-center" style="margin: 20px 0px;"><img style="width: 200px;height: 200px;border-radius: 50%;margin: 10px 0px;" src="../Student-Logo/<?php echo $student_details['profileImage']; ?>">
                     <h4 id="student-name" style="margin: 0px;"><strong><?php echo $student_details['studentName']; ?></strong></h4>
                     <small id="student-email"><span style="color: rgb(147, 147, 147);"><?php echo $student_details['email']; ?></span></small>
                 </div>
@@ -125,36 +125,36 @@
                     <div class="row">
                         <div class="col"><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<div id="main-content" class="file_manager">
-        <div class="container">            
-            <div class="row clearfix">
+                <div id="main-content" class="file_manager">
+                        <div class="container">            
+                            <div class="row clearfix">
 
-                <?php 
+                                <?php 
 
-                    for($i = 0; $i < count($student_requirements); $i++) {
-                        echo "
-                            <div class=\"col-lg-3 col-md-4 col-sm-12\">
-                                <div class=\"card\">
-                                    <div class=\"file\">
-                                        <a href=\"javascript:void(0);\">
+                                    for($i = 0; $i < count($student_requirements); $i++) {
+                                        echo "
+                                            <div class=\"col-lg-3 col-md-4 col-sm-12\">
+                                                <div class=\"card\">
+                                                    <div class=\"file\">
+                                                        <a href=\"javascript:void(0);\">
 
-                                            <div class=\"icon\">
-                                                <i class=\"fa fa-file text-info\"></i>
-                                            </div>
-                                            <div class=\"file-name\">
-                                                <p class=\"m-b-5 text-muted\">".$student_requirements[$i]."</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>                
-                        ";
-                    }
+                                                            <div class=\"icon\">
+                                                                <i class=\"fa fa-file text-info\"></i>
+                                                            </div>
+                                                            <div class=\"file-name\">
+                                                                <p class=\"m-b-5 text-muted\">".$student_requirements[$i]."</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>                
+                                        ";
+                                    }
 
-                ?>
-            </div>
-        </div>
-    </div></div>
+                                ?>
+                            </div>
+                        </div>
+                    </div></div>
                     </div>
                     
                     <div class="row">

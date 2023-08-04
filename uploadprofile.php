@@ -25,8 +25,6 @@ if (isset($_POST['create'])) {
     
     $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 
-    // The user data was already inserted in create-acct.php, so no need to insert it again here.
-
     // Get the role from the previous insertion
     $sql = "SELECT accountID, role FROM account WHERE email = ?";
     $stmt = $con->prepare($sql);
@@ -63,11 +61,44 @@ if (isset($_POST['create'])) {
 
     move_uploaded_file($image_tmp_name, $folder . $new_logo_name);
 
-    $stmt = $con->prepare("INSERT INTO school (accountID, schoolName, address, contactInfo, schoolLogo) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
-    $stmt->execute();
+    // Upload user data to individual tables
+    echo $role;
+    echo "\nschool: ".strcmp($role, 'school');
+    echo "\nstudent: ".strcmp($role, 'student');
+    echo "\nfaci: ".strcmp($role, 'facilitator');
+    echo "\nhr: ".strcmp($role, 'hr');
+    if(strcmp($role, 'school') == 0) { // SCHOOL
+        $stmt = $con->prepare("INSERT INTO school (accountID, schoolName, address, contactInfo, schoolLogo) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $userID, $schoolName, $address, $contactno, $new_logo_name);
+        $stmt->execute();
 
-    $stmt->close();
+        $stmt->close();
+    }
+    else if (strcmp($role, 'student') == 0) { // STUDENT
+        $stmt = $con->prepare("INSERT INTO student (accountID, studentName, profileImage) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $userID, $schoolName, $new_logo_name);
+        $stmt->execute();
+
+        $stmt->close();
+    }
+    else if (strcmp($role, 'facilitator') == 0) { // FACILITATOR
+        echo "pota faci";
+        $stmt = $con->prepare("INSERT INTO facilitator (accountID, facilitatorName, profileImage) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $userID, $schoolName, $new_logo_name);
+        $stmt->execute();
+
+        $stmt->close();
+    }
+    else if (strcmp($role, 'hr') == 0) { // HR
+        echo "pota";
+        $stmt = $con->prepare("INSERT INTO hr (accountID, hrName, profileImage) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $userID, $schoolName, $new_logo_name);
+        $stmt->execute();
+
+        $stmt->close();
+    }
+    else if (strcmp($role, 'admin') == 0) { // ADMIN
+    }
     $con->close();
 
     // Clear out SESSION variables

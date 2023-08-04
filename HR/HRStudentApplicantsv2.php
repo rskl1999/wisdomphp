@@ -67,11 +67,6 @@
 
     $school_name = $students_detail['schoolName'] ?? "School_Name";
 
-    foreach($students_detail as $student) {
-        echo "<br/>";
-        print_r($student);
-    }
-
     $total_items = count($students_detail);
 ?>
 

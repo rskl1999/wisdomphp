@@ -1,25 +1,11 @@
 <?php
 
-/* 
-Required:
-    school name
-    course
-    batch no.
-    --------------------
-    student name
-    student email
-    student status
-    time-in
-    time-out
-    tasks
-    totalHours
-    duration
-*/
-
     session_start();
     require_once('../connection.php');
 
-    require_once('../PageNavigation.php');
+    include('../PageNavigation.php');
+
+    include('../checkLogin.php');
 
     $school_index = isset($_GET['school_index']) ? $_GET['school_index'] : 1;
 
@@ -39,9 +25,9 @@ Required:
     while($row = $students_result->fetch_assoc()) {
         $students_list[] = $row;
     }
-    // Close query
-    $students_stmt->close();
-    // Temp FIx: If no students were found in query, set null value for variable
+    $students_stmt->close(); // Close query
+
+    // TEMP FIX: If no students were found in query, set null value for variable
     //           Do this so that the webpage will display an empty list instead of an error.
     if(empty($students_list)) {
         $students_list[] = array("studentName" => "", "course" => "", "hoursRendered" => 0, "status" => "", "batchNo" => 0, "duration" => 0);

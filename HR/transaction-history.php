@@ -52,10 +52,15 @@
     $transaction_query = $con->prepare("SELECT tr.accountID, tr.date, st.course, studentName
                                         FROM transaction tr
                                         JOIN student st ON tr.accountID = st.accountID
+                                        WHERE schoolID = ?
                                         ");
+    $transaction_query->bind_param("i", $schoolID);
     $transaction_query->execute();
     $transaction_query_res = $transaction_query->get_result();
     $transactions = array();
+    while($row = $transaction_query_res->fetch_assoc()) {
+        $transactions[] = $row;
+    }
 
     // Query for total number of students
     $total_transaction = $con->prepare("SELECT COUNT(st.transactionID) AS totalTransactions FROM transaction st");
@@ -154,17 +159,24 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            while($row = $transaction_query_res->fetch_assoc()) {
-                                                $transactions[] = $row;
+                                            if(!empty($transactions)) {
+                                                foreach($transactions as $transaction) {
+                                                    $date = strtotime($transaction['date']);
+                                                    echo "
+                                                    <tr>
+                                                        <td>".$transaction['studentName']."</td>
+                                                        <td>".$transaction['course']."</td>
+                                                        <td>".date("Y", $date)."</td>
+                                                    </tr>
+                                                    ";
+                                                }
                                             }
-
-                                            foreach($transactions as $transaction) {
-                                                $date = strtotime($transaction['date']);
+                                            else {
                                                 echo "
                                                 <tr>
-                                                    <td>".$transaction['studentName']."</td>
-                                                    <td>".$transaction['course']."</td>
-                                                    <td>".date("Y", $date)."</td>
+                                                    <td><em>No Data</em></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 ";
                                             }

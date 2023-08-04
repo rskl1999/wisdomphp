@@ -41,7 +41,7 @@
     // Query for tasks
     $task_query = $con->prepare("SELECT ts.taskID, ts.applicationID, ts.title, ts.description, ts.allotedHours, ts.dateStarted, ts.dateFinished, ts.status
                                 FROM studenttask stk
-                                JOIN tasks ts ON stk.taskID = ts.taskID
+                                JOIN task ts ON stk.taskID = ts.taskID
                                 JOIN student st ON  stk.studentID = st.studentID
                                 JOIN account ac ON st.accountID = ac.accountID
                                 WHERE ac.accountID = ?
