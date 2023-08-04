@@ -7,10 +7,12 @@
     $accoundid = $_SESSION['accountID'];
 
     // Query for List of Accounts
-    $account_query = "SELECT ac.accountID, IF(role='student',st.studentName,sc.schoolName) AS Name, ac.email, ac.role
+    $account_query = "SELECT ac.accountID, IF(role='student',st.studentName, IF(role='school', sc.schoolName, IF(role='facilitator', fc.facilitatorName, hr.accountID))) AS Name, ac.email, ac.role
                     FROM account ac
                         LEFT JOIN student st ON st.accountID = ac.accountID
                         LEFT JOIN school sc ON sc.accountID = ac.accountID
+                        LEFT JOIN facilitator fc ON fc.accountID = ac.accountID
+                        LEFT JOIN hr ON hr.accountID = ac.accountID
                     WHERE NOT ac.accountID = ?";
     $account_stmt = $con->prepare($account_query);
     $account_stmt->bind_param("i", $accoundid);
@@ -97,7 +99,7 @@
                                                         <i class=\"far fa-edit\"></i>
                                                     </button>
                                                 </a>
-                                                <a onclick=\"confirmDelete()\">
+                                                <a onclick=\"confirmDelete(".$accounts_detail[$i]['accountID'].")\">
                                                     <button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(233,78,80);border-radius: .75rem;width: 50px;padding: 10px;border-style: solid;border-color: #E94E50;\">
                                                         <i class=\"far fa-trash-alt\"></i>
                                                     </button>
@@ -166,15 +168,16 @@
         });
         }
 
-        function confirmDelete() {
+        function confirmDelete(id) {
             var response = confirm('Are you sure you would like to delete this account?');
             if(response) {
-                fetch('../account-delete.php')
+                fetch('../account-delete.php?deleteid='+id)
                     .then(response => response.text())
                     .then(data => {
-                        console.log(data);
+                        window.location.replace('AdminDashboard.php');
                     });
             }
+            // console.log(response);
         }
     </script>
 
