@@ -24,14 +24,16 @@
 <body style="font-family: Poppins, sans-serif;">
 
 <div>
-    <section style="background: url(&quot;assets/img/indivcategory_header.svg&quot;);height: 270px;width: auto;"></section>
+    <section style="background: url(&quot;assets/img/header.svg&quot;);  background-position: right; height: 270px;width: auto;"></section>
     <main style="max-width: 800px;margin: 0 auto;">
 
-     <!--ROBOTICS CATEGORY -->
 
+    
+     <!--ROBOTICS CATEGORY -->
  <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="robotics" style="font-weight: bold;margin-top: -15px;">Robotics</h1>
+            <section id="robotics" style="background: url(&quot;assets/img/arduino.jpg&quot;) no-repeat; background-position: bottom; background-size: cover; height: 270px; width: auto;"></section>
+                <h1 style="font-weight: bold;margin-top: 15px;">Robotics</h1>
                 <p style="width: auto; text-align: justify;">A back-end developer intern is responsible for involving building and maintaining the server-side logic and infrastructure that powers web applications, mobile apps, or other software systems.</p>
                 <p style="width: auto; text-align: justify;">During their internship, a back-end developer will learn the technology stack. They will be familiarized with the backend technologies, frameworks, and programming languages used by the organization. This may include languages like Java, Python, Ruby, or frameworks like Node.js or Django.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
@@ -88,7 +90,8 @@
 
         <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="3dprinting" style="font-weight: bold;margin-top: -15px;">3D Printing</h1>
+            <section id="3dprinting" style="background: url(&quot;assets/img/3d-printing.jpg&quot;) no-repeat; background-size: cover; height: 270px; width: auto;"></section>
+                <h1 style="font-weight: bold;margin-top: 15px;">3D Printing</h1>
                 <p style="width: auto; text-align: justify;">A front-end developer intern is responsible for assisting in the creation and maintenance of the user interface (UI) for websites and applications. They work closely with the design team to ensure that the visual elements of a website or application are translated into a functional and engaging user experience.</p>
                 <p style="width: auto; text-align: justify;">During their internship, a front-end developer will learn how to write clean, organized code using HTML, CSS, and JavaScript. They will also gain experience in using frameworks such as React, Angular, or Vue to build interactive web applications.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
@@ -145,7 +148,8 @@
 
         <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="programming" style="font-weight: bold;margin-top: -15px;">Programming</h1>
+                <section id="programming" style="background: url(&quot;assets/img/programming.jpg&quot;) no-repeat; background-size: cover; height: 270px; width: auto;"></section>
+                <h1 style="font-weight: bold;margin-top: 15px;">Programming</h1>
                 <p style="width: auto; text-align: justify;">A back-end developer intern is responsible for involving building and maintaining the server-side logic and infrastructure that powers web applications, mobile apps, or other software systems.</p>
                 <p style="width: auto; text-align: justify;">During their internship, a back-end developer will learn the technology stack. They will be familiarized with the backend technologies, frameworks, and programming languages used by the organization. This may include languages like Java, Python, Ruby, or frameworks like Node.js or Django.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
@@ -203,7 +207,8 @@
 
          <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="graphicdesign" style="font-weight: bold;margin-top: -15px;">Graphic Design</h1>
+                <section id="graphicdesign" style="background: url('assets/img/graphicdesigning.jpg') no-repeat; background-size: cover; height: 270px; width: auto;"></section>
+                <h1 style="font-weight: bold;margin-top: 15px;">Graphic Design</h1>
                 <p style="width: auto; text-align: justify;">A back-end developer intern is responsible for involving building and maintaining the server-side logic and infrastructure that powers web applications, mobile apps, or other software systems.</p>
                 <p style="width: auto; text-align: justify;">During their internship, a back-end developer will learn the technology stack. They will be familiarized with the backend technologies, frameworks, and programming languages used by the organization. This may include languages like Java, Python, Ruby, or frameworks like Node.js or Django.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
@@ -259,7 +264,8 @@
 <!--NETWORKING CATEGORY --> 
  <section style="margin-top: 5rem;">
             <div class="container">
-                <h1 id="animation" style="font-weight: bold;margin-top: -15px;">Animation</h1>
+            <section id="animation" style="background: url(&quot;assets/img/3d-animator.jpg&quot;) no-repeat; background-position: center; background-size: cover; height: 270px; width: auto;"></section>
+                <h1 style="font-weight: bold;margin-top: 15px;">Animation</h1>
                 <p style="width: auto; text-align: justify;">As a networking intern, you will have the opportunity to gain practical experience in the field of computer networking, working with network infrastructure, protocols, and systems to support efficient and secure communication between devices and networks.</p>
                 <p style="width: auto; text-align: justify;">They assist network engineers and administrators in tasks such as network configuration, troubleshooting, monitoring, documentation, security implementation, and participating in collaborative projects to support the organization's network infrastructure and ensure efficient and secure communication between devices and networks.</p>
                 <a href ="register.php"><button class="btn btn-primary fw-semibold" type="button" style="background: #0017EB;border-radius: 5rem;padding: 6px 25px;margin-top: 1rem;">Join Now</button></a>
