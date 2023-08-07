@@ -3,62 +3,18 @@
     session_start();
 
     include('../PageNavigation.php');
-
     include('../checkLogin.php');
 
     $accountid = $_SESSION['accountID'];
 
-    // Query for Number of pending students
-    $Numpending = $con->prepare("SELECT COUNT(st.studentID) AS pendingNum 
-                             FROM student st 
-                             JOIN school sc ON st.schoolID = sc.schoolID 
-                             JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                             WHERE sc.accountID = ? AND sts.status='pending'");
-    $Numpending->bind_param("i", $accountid);
-    $Numpending->execute();
-    $result = $Numpending->get_result();
-    $row = $result->fetch_assoc();
-    $Numpending->close();
-    $pendingNum = $row['pendingNum'];
+    include('scripts/studentCount.php');
 
-    // Query for Number of accepted students
-    $Numenrolled = $con->prepare("SELECT COUNT(st.studentID) AS enrolled 
-                                FROM student st 
-                                JOIN school sc ON st.schoolID = sc.schoolID 
-                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                                WHERE sc.accountID = ? AND sts.status='accepted'");
-    $Numenrolled->bind_param("i", $accountid);
-    $Numenrolled->execute();
-    $result = $Numenrolled->get_result();
-    $row = $result->fetch_assoc();
-    $Numenrolled->close();
-    $enrolled = $row['enrolled'];
-
-    // Query for Total Number of students (finished or accepted)
-    $total = $con->prepare("SELECT COUNT(st.studentID) AS studTotal 
-                            FROM student st 
-                            JOIN school sc ON st.schoolID = sc.schoolID 
-                            JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                            WHERE sc.accountID = ? AND (sts.status='finished' OR sts.status='accepted')");
-    $total->bind_param("i", $accountid);
-    $total->execute();
-    $result = $total->get_result();
-    $row = $result->fetch_assoc();
-    $total->close();
-    $studentTotal = $row['studTotal'];
-
-    // Query for school logo
-    $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
-                                FROM school 
-                                WHERE accountID = ?");
-    $schoolLogo->bind_param("i", $accountid);        
-    $schoolLogo->execute();
-    $result = $schoolLogo->get_result();
-    $row = $result->fetch_assoc();
-    $schoolLogo->close();
-    $_SESSION['schoolLogo'] = $row['schoolLogo'];
-    $_SESSION['schoolID'] = $row['schoolID'];
     $schoolid = $_SESSION['schoolID'];
+
+    $_SESSION['items_per_page'] = 10;
+    $_SESSION['page'] = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+
+    include('scripts/studentList.php');
 
 ?>
 
@@ -115,7 +71,7 @@
                         </div>
 
                         <!-- Number of All Students -->
-                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $studentTotal ?></span></div>
+                        <div class="col-md-6 d-flex justify-content-center"><span style="font-size: 66px;font-weight: bold;"><?php echo $studentTotal; ?></span></div>
                     </div>
                 </div>
             </div>
@@ -161,61 +117,24 @@
                 </thead>
                 <tbody style="color: rgb(0,0,0);font-size: 12px;">
                 <?php
-                    $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
 
-                    $items_per_page = 10;
-
-                    // Counts students from current school 
-                    $total_stud_query = "SELECT COUNT(studentID) FROM student WHERE schoolID = ?"; 
-                    // Selects student details of those who applied in the internship
-                    $students = $con->prepare("SELECT st.studentName, b.batchID, b.batchNo, sts.status, st.course, st.hoursRendered, a.duration, ac.email
-                                            FROM student st
-                                                JOIN internshipapplication a ON st.schoolID = a.schoolID
-                                                JOIN school sc ON st.schoolID = sc.schoolID 
-                                                JOIN batch b ON b.batchID = a.batchID AND a.internshipApplicationID = st.applicationID
-                                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                                                JOIN account ac ON st.accountID = ac.accountID
-                                            WHERE st.schoolID = ?
-                                            LIMIT ?, ?");
-                    // Execution of getting srudent count
-                    $total_stud_stmt = $con->prepare($total_stud_query);
-                    $total_stud_stmt->bind_param("i", $schoolid);
-                    $total_stud_stmt->execute();
-                    $total_stud_result = $total_stud_stmt->get_result();
-                    $total_items = $total_stud_result->fetch_row()[0];
-
-                    // Execution of getting students' details
-                    $offset = ($page - 1) * $items_per_page;
-                    $students->bind_param("iii", $schoolid, $offset, $items_per_page);
-                    $students->execute();
-                    $result = $students->get_result();
-
-                    while($row = $result->fetch_assoc()) {
-                        // Loop thru the details of each row ... 
-                        foreach($row as $key=>$value) {
-                            if($key == 'hoursRendered' & !$value){
-                                    $value = 0;
-                            }
+                    if(isset($_POST['data'])) {
+                        foreach($_POST['data'] as $student) {
+                            echo "
+                                <tr>
+                                    <td><input type=\"checkbox\"></td>
+                                    <td>
+                                        <p style=\"margin: 0px;\"><strong>".$student['studentName']."</strong></p><small>".$student['email']."</small>
+                                    </td>
+                                    <td>".$student['batchNo']."</td>
+                                    <td><span style=\"padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;\">".$student['status']."</span></td>
+                                    <td>".$student['course']."</td>
+                                    <td>".$student['hoursRendered']."&nbsp;</td>
+                                    <td>".$student['duration']."</td>
+                                </tr>
+                            ";
                         }
-
-                        // Print to website each student and their details
-                        echo "
-                            <tr>
-                                <td><input type=\"checkbox\"></td>
-                                <td>
-                                    <p style=\"margin: 0px;\"><strong>".$row['studentName']."</strong></p><small>".$row['email']."</small>
-                                </td>
-                                <td>".$row['batchNo']."</td>
-                                <td><span style=\"padding: 2px 14px;background: #d8ffdf;border-radius: 35px;color: #89c593;\">".$row['status']."</span></td>
-                                <td>".$row['course']."</td>
-                                <td>".$row['hoursRendered']."&nbsp;</td>
-                                <td>".$row['duration']."</td>
-                            </tr>
-                        ";
                     }
-
-                    $total_stud_stmt->close();
-                    $students->close();  
                 ?>
                 </tbody>
             </table>
@@ -235,10 +154,10 @@
         </div>
     </div>
     <script src="school-assets/bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="school-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="school-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="school-assets/js/Profile-Edit-Form-profile.js"></script>
@@ -247,6 +166,7 @@
     <script src="../logout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="scripts/nav.js"></script>
+    <script src="studentList.js"></script>
 </body>
 
 </html>
