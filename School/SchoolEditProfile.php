@@ -118,7 +118,7 @@
 				<li class="nav-item d-flex justify-content-center align-items-center dropdown no-arrow mx-1"><a href="SchoolAddStudent.php"><button class="btn btn-primary" type="button" style="background: #0017eb;border-radius: 35px;width: 130px;">Add Student</button></a></li>
 				<li class="nav-item dropdown no-arrow mx-1"></li>
 				<li class="nav-item dropdown no-arrow">
-					<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="../School-Logo/<?php echo $schoolLogo; ?>" /></a>
+					<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img id="school-logo" class="border rounded-circle img-profile"></a>
 						<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="SchoolEditProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="SchoolDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
 							<div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
 						</div>
@@ -190,134 +190,15 @@
 					</div>
 					<div class="row" id="2col" style="font-family: Poppins, sans-serif;">
 						<div class="col-md-6 col-sm-12" id="province" style="font-family: Poppins, sans-serif;">
-							<div class="form-group"><label class="control-label">Province</label><select
+							<div class="form-group"><label class="control-label">Province</label><select id="provinceSelect"
 								class="form-control" style="height: 45px;border-radius: 35px;" required>
 								<option value="" disabled selected>Select a Province</option>
-								<option value="Abra">Abra</option>
-								<option value="Agusan del Norte">Agusan del Norte</option>
-								<option value="Agusan del Sur">Agusan del Sur</option>
-								<option value="Aklan">Aklan</option>
-								<option value="Albay">Albay</option>
-								<option value="Antique">Antique</option>
-								<option value="Apayao">Apayao</option>
-								<option value="Aurora">Aurora</option>
-								<option value="Basilan">Basilan</option>
-								<option value="Bataan">Bataan</option>
-								<option value="Batanes">Batanes</option>
-								<option value="Batangas">Batangas</option>
-								<option value="Benguet">Benguet</option>
-								<option value="Biliran">Biliran</option>
-								<option value="Bohol">Bohol</option>
-								<option value="Bukidnon">Bukidnon</option>
-								<option value="Bulacan">Bulacan</option>
-								<option value="Cagayan">Cagayan</option>
-								<option value="Camarines Norte">Camarines Norte</option>
-								<option value="Camarines Sur">Camarines Sur</option>
-								<option value="Camiguin">Camiguin</option>
-								<option value="Capiz">Capiz</option>
-								<option value="Catanduanes">Catanduanes</option>
-								<option value="Cavite">Cavite</option>
-								<option value="Cebu">Cebu</option>
-								<option value="Compostela Valley">Compostela Valley</option>
-								<option value="Cotabato">Cotabato</option>
-								<option value="Davao de Oro">Davao de Oro</option>
-								<option value="Davao del Norte">Davao del Norte</option>
-								<option value="Davao del Sur">Davao del Sur</option>
-								<option value="Davao Occidental">Davao Occidental</option>
-								<option value="Davao Oriental">Davao Oriental</option>
-								<option value="Dinagat Islands">Dinagat Islands</option>
-								<option value="Eastern Samar">Eastern Samar</option>
-								<option value="Guimaras">Guimaras</option>
-								<option value="Ifugao">Ifugao</option>
-								<option value="Ilocos Norte">Ilocos Norte</option>
-								<option value="Ilocos Sur">Ilocos Sur</option>
-								<option value="Iloilo">Iloilo</option>
-								<option value="Isabela">Isabela</option>
-								<option value="Kalinga">Kalinga</option>
-								<option value="La Union">La Union</option>
-								<option value="Laguna">Laguna</option>
-								<option value="Lanao del Norte">Lanao del Norte</option>
-								<option value="Lanao del Sur">Lanao del Sur</option>
-								<option value="Leyte">Leyte</option>
-								<option value="Maguindanao">Maguindanao</option>
-								<option value="Marinduque">Marinduque</option>
-								<option value="Masbate">Masbate</option>
-								<option value="Mindoro Occidental">Mindoro Occidental</option>
-								<option value="Mindoro Oriental">Mindoro Oriental</option>
-								<option value="Misamis Occidental">Misamis Occidental</option>
-								<option value="Misamis Oriental">Misamis Oriental</option>
-								<option value="Mountain Province">Mountain Province</option>
-								<option value="Negros Occidental">Negros Occidental</option>
-								<option value="Negros Oriental">Negros Oriental</option>
-								<option value="North Cotabato">North Cotabato</option>
-								<option value="Northern Samar">Northern Samar</option>
-								<option value="Nueva Ecija">Nueva Ecija</option>
-								<option value="Nueva Vizcaya">Nueva Vizcaya</option>
-								<option value="Palawan">Palawan</option>
-								<option value="Pampanga">Pampanga</option>
-								<option value="Pangasinan">Pangasinan</option>
-								<option value="Quezon">Quezon</option>
-								<option value="Quirino">Quirino</option>
-								<option value="Rizal">Rizal</option>
-								<option value="Romblon">Romblon</option>
-								<option value="Samar">Samar</option>
-								<option value="Sarangani">Sarangani</option>
-								<option value="Siquijor">Siquijor</option>
-								<option value="Sorsogon">Sorsogon</option>
-								<option value="South Cotabato">South Cotabato</option>
-								<option value="Southern Leyte">Southern Leyte</option>
-								<option value="Sultan Kudarat">Sultan Kudarat</option>
-								<option value="Sulu">Sulu</option>
-								<option value="Surigao del Norte">Surigao del Norte</option>
-								<option value="Surigao del Sur">Surigao del Sur</option>
-								<option value="Tarlac">Tarlac</option>
-								<option value="Tawi-Tawi">Tawi-Tawi</option>
-								<option value="Zambales">Zambales</option>
-								<option value="Zamboanga del Norte">Zamboanga del Norte</option>
-								<option value="Zamboanga del Sur">Zamboanga del Sur</option>
-								<option value="Zamboanga Sibugay">Zamboanga Sibugay</option>
 								</select></div>
 						</div>
 						<div class="col-md-6 col-sm-12" id="city" style="font-family: Poppins, sans-serif;">
-							<div class="form-group"><label class="control-label">City</label><select class="form-control"
+							<div class="form-group"><label class="control-label">City</label><select id="citySelect" class="form-control"
 								style="height: 45px;border-radius: 35px;" required>
 								<option value="" disabled selected>Select a City</option>
-								<option value="Manila">Manila</option>
-								<option value="Quezon City">Quezon City</option>
-								<option value="Caloocan">Caloocan</option>
-								<option value="Davao City">Davao City</option>
-								<option value="Cebu City">Cebu City</option>
-								<option value="Zamboanga City">Zamboanga City</option>
-								<option value="Taguig">Taguig</option>
-								<option value="Pasig">Pasig</option>
-								<option value="Antipolo">Antipolo</option>
-								<option value="Valenzuela">Valenzuela</option>
-								<option value="Las Piñas">Las Piñas</option>
-								<option value="Makati">Makati</option>
-								<option value="Mandaluyong">Mandaluyong</option>
-								<option value="Marikina">Marikina</option>
-								<option value="Muntinlupa">Muntinlupa</option>
-								<option value="Navotas">Navotas</option>
-								<option value="Parañaque">Parañaque</option>
-								<option value="Pasay">Pasay</option>
-								<option value="San Juan">San Juan</option>
-								<option value="Tagaytay">Tagaytay</option>
-								<option value="Tarlac City">Tarlac City</option>
-								<option value="Lapu-Lapu City">Lapu-Lapu City</option>
-								<option value="Iloilo City">Iloilo City</option>
-								<option value="Baguio City">Baguio City</option>
-								<option value="Batangas City">Batangas City</option>
-								<option value="General Santos City">General Santos City</option>
-								<option value="Olongapo City">Olongapo City</option>
-								<option value="Puerto Princesa City">Puerto Princesa City</option>
-								<option value="Cagayan de Oro City">Cagayan de Oro City</option>
-								<option value="Bacolod City">Bacolod City</option>
-								<option value="Butuan City">Butuan City</option>
-								<option value="Cotabato City">Cotabato City</option>
-								<option value="Laoag City">Laoag City</option>
-								<option value="Naga City">Naga City</option>
-								<option value="Tacloban City">Tacloban City</option>
-								<option value="Zamboanga City">Zamboanga City</option>
 								</select></div>
 						</div>
 					</div>
@@ -357,6 +238,60 @@
 		<script src="editProfile-assets/bootstrap/js/bootstrap.min.js"></script>
 		<script src="editProfile-assets/js/script.min.js"></script>
 		<script src="../logout.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script src="scripts/nav.js"></script>
+		<script>
+			const provinceList = [
+				"Metro Manila", "Abra", "Agusan del Norte", "Agusan del Sur", "Aklan", "Albay", "Antique",
+				"Apayao", "Aurora", "Basilan", "Bataan", "Batanes", "Batangas", "Biliran", "Benguet", "Bohol",
+				"Bukidnon", "Bulacan", "Cagayan", "Camarines Norte", "Camarines Sur", "Camiguin", "Capiz",
+				"Catanduanes", "Cavite", "Cebu", "Compostela", "Davao del Norte", "Davao del Sur",
+				"Davao Oriental", "Eastern Samar", "Guimaras", "Ifugao", "Ilocos Norte", "Ilocos Sur", "Iloilo",
+				"Isabela", "Kalinga", "Laguna", "Lanao del Norte", "Lanao del Sur", "La Union", "Leyte",
+				"Maguindanao", "Marinduque", "Masbate", "Mindoro Occidental", "Mindoro Oriental",
+				"Misamis Occidental", "Misamis Oriental", "Mountain Province", "Negros Occidental",
+				"Negros Oriental", "North Cotabato", "Northern Samar", "Nueva Ecija", "Nueva Vizcaya",
+				"Palawan", "Pampanga", "Pangasinan", "Quezon", "Quirino", "Rizal", "Romblon", "Samar", "Sarangani",
+				"Siquijor", "Sorsogon", "South Cotabato", "Southern Leyte", "Sultan Kudarat", "Sulu",
+				"Surigao del Norte", "Surigao del Sur", "Tarlac", "Tawi-Tawi", "Zambales", "Zamboanga del Norte",
+				"Zamboanga del Sur", "Zamboanga Sibugay"
+				];
+			const selectElementProvince = document.getElementById("provinceSelect");
+
+			function populateProvince() {
+				provinceList.forEach(province => {
+					const optionElement = document.createElement("option");
+					optionElement.textContent = province;
+					optionElement.value = province;
+					selectElementProvince.appendChild(optionElement);
+				});
+			}
+
+			// Call the function to populate the select element
+			populateProvince();
+
+			const cityList = [
+				"Manila", "Quezon City", "Caloocan", "Davao City", "Cebu City", "Zamboanga City", "Taguig",
+				"Pasig", "Antipolo", "Valenzuela", "Las Piñas", "Makati", "Mandaluyong", "Marikina", "Muntinlupa",
+				"Navotas", "Parañaque", "Pasay", "San Juan", "Tagaytay", "Tarlac City", "Lapu-Lapu City",
+				"Iloilo City", "Baguio City", "Batangas City", "General Santos City", "Olongapo City",
+				"Puerto Princesa City", "Cagayan de Oro City", "Bacolod City", "Butuan City", "Cotabato City",
+				"Laoag City", "Naga City", "Tacloban City"
+				];
+			const selectElementCity = document.getElementById("citySelect");
+
+			function populateCity() {
+				cityList.forEach(city => {
+					const optionElement = document.createElement("option");
+					optionElement.textContent = city;
+					optionElement.value = city;
+					selectElementCity.appendChild(optionElement);
+				});
+			}
+
+			// Call the function to populate the select element
+			populateCity();
+		</script>
 	</body>
 
 	</html>

@@ -2,83 +2,56 @@
     require_once('../connection.php');
     session_start();
 
-    require_once('../PageNavigation.php');
+    include('../PageNavigation.php');
 
-    // Check if a registered account is logged in ...    
-    if(isset($_SESSION['accountID'])){
-        $accID = $_SESSION['accountID'];
-
-        $sql = "SELECT accountID FROM account WHERE accountID = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $accID);
-        $stmt->execute();
-        $stmt->bind_result($accountID);
-        $stmt->fetch();
-        $stmt->close();
-
-        // If account ID is not located in database ... return to index.php
-        if(!$accountID){
-            header("Location: ../index.php");
-            exit(); // Added exit() to stop further execution
-        }
-    }
-    // Else return to index.php
-    else{
-        header("Location: ../index.php");
-        exit(); // Added exit() to stop further execution
-    }
+    include('../checkLogin.php');
 
     $accountid = $_SESSION['accountID'];
 
-    // prepare statements
+    // Query for Number of pending students
     $Numpending = $con->prepare("SELECT COUNT(st.studentID) AS pendingNum 
                              FROM student st 
                              JOIN school sc ON st.schoolID = sc.schoolID 
                              JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
                              WHERE sc.accountID = ? AND sts.status='pending'");
-
-    $Numenrolled = $con->prepare("SELECT COUNT(st.studentID) AS enrolled 
-                                FROM student st 
-                                JOIN school sc ON st.schoolID = sc.schoolID 
-                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                                WHERE sc.accountID = ? AND sts.status='accepted'");
-
-    $total = $con->prepare("SELECT COUNT(st.studentID) AS studTotal 
-                            FROM student st 
-                            JOIN school sc ON st.schoolID = sc.schoolID 
-                            JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
-                            WHERE sc.accountID = ? AND (sts.status='finished' OR sts.status='accepted')");
-
-    $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
-                                FROM school 
-                                WHERE accountID = ?");
-        
-    
     $Numpending->bind_param("i", $accountid);
-    $Numenrolled->bind_param("i", $accountid);
-    $total->bind_param("i", $accountid);
-    $schoolLogo->bind_param("i", $accountid);        
-
-
-    // execute queries
     $Numpending->execute();
     $result = $Numpending->get_result();
     $row = $result->fetch_assoc();
     $Numpending->close();
     $pendingNum = $row['pendingNum'];
 
+    // Query for Number of accepted students
+    $Numenrolled = $con->prepare("SELECT COUNT(st.studentID) AS enrolled 
+                                FROM student st 
+                                JOIN school sc ON st.schoolID = sc.schoolID 
+                                JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                                WHERE sc.accountID = ? AND sts.status='accepted'");
+    $Numenrolled->bind_param("i", $accountid);
     $Numenrolled->execute();
     $result = $Numenrolled->get_result();
     $row = $result->fetch_assoc();
     $Numenrolled->close();
     $enrolled = $row['enrolled'];
 
+    // Query for Total Number of students (finished or accepted)
+    $total = $con->prepare("SELECT COUNT(st.studentID) AS studTotal 
+                            FROM student st 
+                            JOIN school sc ON st.schoolID = sc.schoolID 
+                            JOIN studentstatus sts ON sts.schoolID = sc.schoolID AND sts.studentID = st.studentID
+                            WHERE sc.accountID = ? AND (sts.status='finished' OR sts.status='accepted')");
+    $total->bind_param("i", $accountid);
     $total->execute();
     $result = $total->get_result();
     $row = $result->fetch_assoc();
     $total->close();
     $studentTotal = $row['studTotal'];
 
+    // Query for school logo
+    $schoolLogo = $con->prepare("SELECT schoolLogo, schoolID 
+                                FROM school 
+                                WHERE accountID = ?");
+    $schoolLogo->bind_param("i", $accountid);        
     $schoolLogo->execute();
     $result = $schoolLogo->get_result();
     $row = $result->fetch_assoc();
@@ -114,7 +87,7 @@
             <li class="nav-item d-flex justify-content-center align-items-center dropdown no-arrow mx-1"><a href="SchoolAddStudent.php"><button class="btn btn-primary" type="button" style="background: #0017eb;border-radius: 35px;width: 130px;">Add Student</button></a></li>
             <li class="nav-item dropdown no-arrow mx-1"></li>
             <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="../School-Logo/<?php echo $_SESSION['schoolLogo'];?>" /></a>
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img id="school-logo" class="border rounded-circle img-profile"/></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="SchoolEditProfile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Edit Profile</a><a class="dropdown-item" href="SchoolDashboard.php"><i class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>Dashboard</a>
                         <div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
@@ -262,16 +235,18 @@
         </div>
     </div>
     <script src="school-assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
     <script src="school-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="school-assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
     <script src="school-assets/js/Profile-Edit-Form-profile.js"></script>
     <script src="school-assets/js/theme.js"></script>
     <script src="school-assets/js/untitled.js"></script>
     <script src="../logout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="scripts/nav.js"></script>
 </body>
 
 </html>
