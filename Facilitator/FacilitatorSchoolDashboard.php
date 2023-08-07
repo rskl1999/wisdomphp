@@ -13,25 +13,27 @@
     $card_count_per_page = 8;
     $card_count_per_row = 4;
 
-    // Count Total Number of Schools Registered in the Database
-    $SchoolNum = $con->prepare("SELECT COUNT(schoolID) AS schoolCount FROM school");
-    $SchoolNum->execute();
-    $SchoolNum_result = $SchoolNum->get_result();
-    $SchoolNum_row = $SchoolNum_result->fetch_assoc();
-    $SchoolNum->close();
-    $schoolCount = $SchoolNum_row['schoolCount'];
+    include('scripts/schoolCount.php');
 
-    $card_details = array();
-    // Get School Names with their IDs and Addresses
-    $SchoolQuery = $con->prepare("SELECT schoolName, schoolID, address, schoolLogo FROM school");
-    $SchoolQuery->execute();
-    $SchoolQuery_result = $SchoolQuery->get_result();
+    // // Count Total Number of Schools Registered in the Database
+    // $SchoolNum = $con->prepare("SELECT COUNT(schoolID) AS schoolCount FROM school");
+    // $SchoolNum->execute();
+    // $SchoolNum_result = $SchoolNum->get_result();
+    // $SchoolNum_row = $SchoolNum_result->fetch_assoc();
+    // $SchoolNum->close();
+    // $schoolCount = $SchoolNum_row['schoolCount'];
 
-    while($SchoolQuery_row = $SchoolQuery_result->fetch_assoc()) {
-        $card_details[] = $SchoolQuery_row;
-    }
+    // $card_details = array();
+    // // Get School Names with their IDs and Addresses
+    // $SchoolQuery = $con->prepare("SELECT schoolName, schoolID, address, schoolLogo FROM school");
+    // $SchoolQuery->execute();
+    // $SchoolQuery_result = $SchoolQuery->get_result();
 
-    $SchoolQuery->close();
+    // while($SchoolQuery_row = $SchoolQuery_result->fetch_assoc()) {
+    //     $card_details[] = $SchoolQuery_row;
+    // }
+
+    // $SchoolQuery->close();
 
 
     $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
@@ -66,7 +68,7 @@
         <ul class="navbar-nav flex-nowrap ms-auto">
             <li class="nav-item dropdown no-arrow mx-1"></li>
             <li class="nav-item dropdown no-arrow">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg" /></a>
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img id="user-logo" class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg" /></a>
                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="FacilitatorSchoolDashboard.php"><i class="fas fa-school fa-sm fa-fw me-2 text-gray-400"></i> Schools</a><a class="dropdown-item" href="FacilitatorStudentList.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Student List</a><a class="dropdown-item" href="FacilitatorStudentLogs.php"><i class="fas fa-file fa-sm fa-fw me-2 text-gray-400"></i>Student Logs</a><a class="dropdown-item" href="FacilitatorTasks.php"><i class="fas fa-folder-open fa-sm fa-fw me-2 text-gray-400"></i>Task Documentation</a>
                         <div class="dropdown-divider"></div><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i> Logout</a>
                     </div>
@@ -85,6 +87,9 @@
             // Loop through the card details and create the cards in a grid layout
             for ($i = $page_offset; $i < min($page_offset + $card_count_per_page, count($card_details)); $i++) {
                 $card = $card_details[$i];
+                if(empty($card['schoolLogo'])) {
+                    $card['schoolLogo'] = 'default.png';
+                }
                 echo "
                     <div class=\"col-md-3 mb-4\">
                         <a href=\"FacilitatorStudentList.php?school_index=".$card['schoolID']."\" style=\"text-decoration: none; color:black;\">
@@ -124,6 +129,8 @@
     </div>
     <script src="facilitator-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../logout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="scripts/nav.js"></script>
 </body>
 
 </html>

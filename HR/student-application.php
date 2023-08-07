@@ -183,6 +183,8 @@
     <script src="hr-assets/js/Bold-BS4-Animated-Back-To-Top-backtotop.js"></script>
     <script src="hr-assets/js/theme.js"></script>
     <script src="../logout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="scripts/nav.js"></script>
 </body>
 
 </html>
