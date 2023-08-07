@@ -44,6 +44,7 @@
     // Varibales for table-page setup
     $total_items = count($students_list);
     $items_per_page = 10;
+    
 ?>
 
 <!DOCTYPE html>
@@ -82,15 +83,15 @@
 </nav>
     <div id="banner" style="height: 250px;background: url(&quot;assets/img/banner-bg.png&quot;) center / cover no-repeat, #d3edff;">
     </div>
-        <section id="table">
-            <div class="container" style="margin-right: 5.5px;margin-left: 12.5px;padding: 0px 8px;">
+        <section id="table" style="font-family: Poppins, sans-serif;">
+            <div class="container" style="width: 100%;padding: 0px 8px;">
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;margin-top: 30px;">Student List</h1>
                 <h1 style="text-align: left;font-weight: bold;margin-bottom: 15px;font-size: 30px;"><span style="font-weight: normal !important;"><?php echo $school_detail['schoolName']; ?></span></h1>
                 <p><?php echo $students_list[0]['course']; ?> |&nbsp;Batch <?php echo $students_list[0]['batchNo']; ?></p>
-                <div class="table-responsive" style="border-radius: 1.5rem;padding-top: 5px;border: 2px solid rgb(227,230,240);width: 100%;">
+                <div class="table-responsive" style="border:none;width: 100%;">
                     <table class="table">
                         <thead style="--bs-body-bg: #55565a;">
-                            <tr style="--bs-body-bg: #55565a;height: 56.5px;">
+                            <tr style="--bs-body-bg: #55565a;height: 56.5px; color:#121212;border-top: 1px solid #DEDEDE;">
                                 <th style="padding-left: 30px;padding-right: 0px;padding-bottom: 15px;"><input type="checkbox" style="padding-bottom: 15px;"></th>
                                 <th style="padding-bottom: 15px;">Student Name</th>
                                 <th style="padding-bottom: 15px;">Batch</th>
@@ -103,42 +104,51 @@
                         </thead>
                         <tbody>
                             <?php
-                                $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+                            $page = isset($_GET['page']) ? abs(intval($_GET['page'])) : 1;
+                            $offset = ($page - 1) * $items_per_page;
 
-                                $offset = ($page - 1) * $items_per_page;
+                            // If students list is not empty...
+                            if (!empty($students_list[0]['studentName']) && !empty($students_list[0]['course']) && !empty($students_list[0]['status'])) {
+                                // Display all students
+                                for ($i = $offset; ($i < $offset + $items_per_page) && ($i < count($students_list)); $i++) {
+                                    $status = $students_list[$i]['status'];
 
-                                // If students list is not empty...
-                                if(!empty($students_list[0]['studentName']) && !empty($students_list[0]['course']) && !empty($students_list[0]['status'])) {
-                                    // Display all students
-                                    for($i = $offset; ($i < $offset + $items_per_page) && ($i < count($students_list)); $i++) {
-                                        echo "
-                                            <tr>
-                                                <td style=\"padding-left: 30px;padding-right: 0px;\"><input type=\"checkbox\"></td>
-                                                <td>
-                                                    <h1 style=\"font-size: 16px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
-                                                    <p>studentemail@gmail.com</p>
-                                                </td>
-                                                <td>Batch ".$students_list[$i]['batchNo']."</td>
-                                                <td><button class=\"btn btn-primary\" type=\"button\" style=\"color: #CA8A04;background: rgb(254,249,195);width: 90%;border-radius: 35px;border-style: none;\">".$students_list[$i]['status']."</button></td>
-                                                <td>".$students_list[$i]['course']."</td>
-                                                <td>".$students_list[$i]['duration']."</td>
-                                                <td>".$students_list[$i]['hoursRendered']."</td>
-                                                <td>
-                                                    <a style=\"text-decoration: none;\" href=\"FacilitatorTasks.php?stid=".$students_list[$i]['studentID']."\">
-                                                        <button class=\"btn btn-primary\" type=\"button\" style=\"border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button>
-                                                    </a>
-                                                    <button class=\"btn btn-primary\" type=\"button\" style=\"background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button>
-                                                </td>
-                                            </tr>
-                                        ";
+                                    // Determine the appropriate styles based on status
+                                    $buttonStyles = '';
+                                    if ($status == 'accepted') {
+                                        $buttonStyles = 'background-color: rgb(200, 235, 190); color: #009900;';  // Lighter green
+                                    } elseif ($status == 'pending') {
+                                        $buttonStyles = 'background-color: rgb(255, 255, 180); color: #CC9900;';  // Lighter yellow
+                                    } elseif ($status == 'declined') {
+                                        $buttonStyles = 'background-color: rgb(255, 200, 200); color: #CC0000;';  // Lighter red
                                     }
-                                } else {
-                                    // Display a message if no students are available
-                                    echo '<tr><td colspan="8">No students found.</td></tr>';
+
+                                    echo "
+                                        <tr>
+                                            <td style=\"padding-left: 30px;padding-right: 0px;padding-top:17px;\"><input type=\"checkbox\"></td>
+                                            <td>
+                                                <h1 style=\"font-size: 16px;color:#121212;margin-top:10px;\"><strong>".$students_list[$i]['studentName']."</strong></h1>
+                                                <p>studentemail@gmail.com</p>
+                                            </td>
+                                            <td><p style=\"margin-top: 20px;\">Batch ".$students_list[$i]['batchNo']."</p></td>
+                                            <td><button class=\"btn btn-primary\" type=\"button\" style=\"".$buttonStyles."width: 90%;margin-top:15px;border-radius: 35px;border-style: none;font-size:14px;\">".$status."</button></td>
+                                            <td><p style=\"margin-top: 20px;\">".$students_list[$i]['course']."</p></td>
+                                            <td><p style=\"margin-top: 20px;\">".$students_list[$i]['duration']."</p></td>
+                                            <td><p style=\"margin-top: 20px;\">".$students_list[$i]['hoursRendered']."</p></td>
+                                            <td>
+                                                <a style=\"text-decoration: none;margin-top:10px;\" href=\"FacilitatorTasks.php?stid=".$students_list[$i]['studentID']."\">
+                                                    <button class=\"btn btn-primary\" type=\"button\" style=\"margin-top:15px;border-style: solid;border-radius: .75rem;width: 100px;padding: 10px;margin-right: 15px;font-size:14px;\"><i class=\"far fa-eye\" style=\"margin-right: 5px;\"></i>View</button>
+                                                </a>
+                                                <button class=\"btn btn-primary\" type=\"button\" style=\"margin-top:15px;background: rgb(22,163,74);border-color: rgb(22,163, 74);border-top-color: rgb(22,163,;border-right-color: 74);border-bottom-color: rgb(22,163,;border-left-color: 74);border-radius: .75rem;width: 100px;padding: 10px;font-size:14px;\"><i class=\"far fa-check-circle\" style=\"margin-right: 5px;\"></i>Done</button>
+                                            </td>
+                                        </tr>
+                                    ";
                                 }
-
+                            } else {
+                                // Display a message if no students are available
+                                echo '<tr><td colspan="8">No students found.</td></tr>';
+                            }
                             ?>
-
                         </tbody>
                     </table>
                 </div>
@@ -158,8 +168,6 @@
         </section>
     <script src="facilitator-assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../logout.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="scripts/nav.js"></script>
 </body>
 
 </html>
