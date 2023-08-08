@@ -87,9 +87,10 @@
                                 <button
                                     class="btn btn-primary"
                                     type="submit"
-                                    style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 10px;background: #0017eb; color:white;">
+                                    style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 15px;background: #0017eb; color:white;">
                                     Add new task
                                 </button>
+                                <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="taskcalendar" type="button" style="width: 100%;border-radius: 50px; border-color:#3A9AF9; padding: 5px 5px;margin-top: 10px; background: #3A9AF9;">Generate Task Calendar</button>
                             </form>
                             </section>
                         </div>
@@ -97,6 +98,7 @@
                             <div>
                                 <h1 class="fw-bold" style="font-size: 20px;">Documentation</h1><input type="file" style="overflow: hidden;width: 255px;">
                             </div><input class="btn btn-primary" type="submit" style="width: 100%;border-radius: 20px;padding: 5px 10px;margin-top: 25px;background: #0017eb;">
+                            <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="taskcalendar" type="button" style="width: 100%;border-radius: 50px; border-color:#3A9AF9; padding: 5px 5px;margin-top: 10px; background: #3A9AF9;">See Documentation</button>
                         </div>
                     </div>
                     <div id="dailylogs-div" class="hidden">
@@ -125,7 +127,6 @@
                                 </div>
                             </div>
 
-
                             <div class="row d-flex" style="border-radius: 15px; padding: 14px 7px; border: 1px solid rgb(218, 218, 218); margin-top: 20px;">
                                 <div class="col-auto col-xxl-8 offset-xxl-0 flex-fill align-self-center">
                                     <h1 class="fw-semibold d-xxl-flex flex-fill align-items-xxl-center" style="font-size: 18px; text-align: left; margin-bottom: 0px;">Notes/Remarks:</h1>
@@ -134,7 +135,7 @@
                             </div>
 
                         <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="submit" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 20px; background: #0017eb;">Submit</button>
-                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="pdf" type="button" style="width: 30%; border-radius: 50px; padding: 5px 5px; margin-top: 10px; background: #0017eb; ">Print PDF</button>
+                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="taskcalendar" type="button" style="width: 100%;border-radius: 50px; border-color:#3A9AF9; padding: 5px 5px;margin-top: 10px; background: #3A9AF9;">Generate Daily Logs</button>
                         </div>
                                 
                         <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
@@ -180,5 +181,4 @@
     <script src="facilitator-assets/js/time.js"></script>
     <script src="../logout.js"></script>
 </body>
-
 </html>
