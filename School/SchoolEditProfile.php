@@ -2,11 +2,7 @@
 	session_start();
 	require_once('../connection.php');
 
-	// Handle the case when the "accountID" key is not set in the session
-	if (!isset($_SESSION['accountID'])) {
-		header("Location: ../index.php");
-		exit(); // Terminate the script to prevent further execution
-	}
+	include('../checkLogin.php');
 
 	// Store Account and School IDs
 	$accountid = $_SESSION['accountID'];
