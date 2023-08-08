@@ -133,8 +133,10 @@
                                 </div>
                             </div>
 
-                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="new-task" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 37px;background: #0017eb;">Submit</button>
+                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="submit" type="button" style="width: 100%;border-radius: 50px;padding: 5px 10px;margin-top: 20px; background: #0017eb;">Submit</button>
+                        <button class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" id="pdf" type="button" style="width: 30%; border-radius: 50px; padding: 5px 5px; margin-top: 10px; background: #0017eb; ">Print PDF</button>
                         </div>
+                                
                         <div id="total-rendered-div" style="border-radius: 15px;box-shadow: 0px 0px 10px 0px rgba(82,82,82,0.18);padding: 25px;margin-top: 1.5rem;">
                             <div>
                                 <div class="row d-flex" style="padding: 14px 7px;">
