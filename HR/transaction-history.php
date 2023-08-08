@@ -39,7 +39,7 @@
     $school_query = $con->prepare("SELECT DISTINCT sc.schoolID, sc.schoolName, sc.address, sc.schoolLogo, a.email
                                 FROM school sc
                                 JOIN account a ON a.accountID = sc.accountID
-                                WHERE sc.schoolID =?;
+                                WHERE sc.schoolID =?
                                 ");
     $school_query->bind_param("s", $schoolID);
     $school_query->execute();
@@ -217,6 +217,8 @@
     <script src="hr-assets/js/Bold-BS4-Animated-Back-To-Top-backtotop.js"></script>
     <script src="hr-assets/js/theme.js"></script>
     <script src="../logout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="scripts/nav.js"></script>
 </body>
 
 </html>

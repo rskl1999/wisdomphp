@@ -1,38 +1,9 @@
 <?php
-
-    /*
-    * TODO:
-    *   - Define student profile picture location
-    */
-
     require_once('../connection.php');
     session_start();
 
-    require_once('../pageNavigation.php');
-    
-    // Check if a registered account is logged in ...    
-    if(isset($_SESSION['accountID'])){
-        $accID = $_SESSION['accountID'];
-
-        $sql = "SELECT accountID FROM account WHERE accountID = ?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $accID);
-        $stmt->execute();
-        $stmt->bind_result($accountID);
-        $stmt->fetch();
-        $stmt->close();
-
-        // If account ID is not located in database ... return to index.php
-        if(!$accountID){
-            header("Location: ../index.php");
-            exit(); // Added exit() to stop further execution
-        }
-    }
-    // Else return to index.php
-    else{
-        header("Location: ../index.php");
-        exit(); // Added exit() to stop further execution
-    }
+    include('../pageNavigation.php');
+    include('../checkLogin.php');
 
     $accountid = $_SESSION['accountID'];
 
@@ -99,7 +70,7 @@
         <div class="container-fluid"><img src="hr-assets/img/logo.png" width="150" height="31" style="width: 129px;height: 27px;">
             <ul class="navbar-nav flex-nowrap ms-auto">
                 <li class="nav-item dropdown no-arrow">
-                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile" src="hr-assets/img/avatars/side%20logo.png"></a>
+                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><img class="border rounded-circle img-profile"></a>
                         <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a id="dashboard_logout" class="dropdown-item"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
                 </li>
@@ -116,9 +87,9 @@
     <div class="container">
         <form method="POST">
             <div class="row">
-                <div class="col-md-4 text-center" style="margin: 20px 0px;"><img style="width: 200px;height: 200px;border-radius: 50%;margin: 10px 0px;" src="../Student-Logo/<?php echo $student_details['profileImage']; ?>">
-                    <h4 id="student-name" style="margin: 0px;"><strong><?php echo $student_details['studentName']; ?></strong></h4>
-                    <small id="student-email"><span style="color: rgb(147, 147, 147);"><?php echo $student_details['email']; ?></span></small>
+                <div class="col-md-4 text-center" style="margin: 20px 0px;"><img id="student-profile" style="width: 200px;height: 200px;border-radius: 50%;margin: 10px 0px;">
+                    <h4 id="student-name" style="margin: 0px;"><strong></strong></h4>
+                    <small id="student-email"><span style="color: rgb(147, 147, 147);"></span></small>
                 </div>
                 <div class="col-md-8" style="margin: 20px 0px;">
                     <h4><strong>Requirements:</strong></h4>
@@ -161,12 +132,10 @@
                         <div class="col d-flex d-xxl-flex justify-content-end justify-content-xxl-end" style="margin: 50px 0px;">
                             <div class="btn-group" role="group">
                                 <button class="btn btn-primary" name="accept" id="accept" type="submit" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: rgb(0,160,45);">
-                                    <i class="fas fa-check-circle" style="margin: 0px 6px;"></i>
-                                    Accept
+                                    <i class="fas fa-check-circle" style="margin: 0px 6px;"></i> Accept
                                 </button>
                                 <button class="btn btn-primary" name="decline" id="decline" type="submit" style="margin: 0px 10px;background: rgba(78,115,223,0);border-radius: 0px;border-width: 0px;border-color: rgba(255,255,255,0);color: red;">
-                                    <i class="fas fa-times-circle" style="margin: 0px 6px;"></i>
-                                    Decline
+                                    <i class="fas fa-times-circle" style="margin: 0px 6px;"></i> Decline
                                 </button>
                             </div>
                         </div>
@@ -183,6 +152,7 @@
     <script src="../logout.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="scripts/nav.js"></script>
+    <script src="scripts/studentRequirement.js"></script>
 </body>
 
 </html>
