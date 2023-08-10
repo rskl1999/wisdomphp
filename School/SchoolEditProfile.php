@@ -23,7 +23,13 @@
 
 		$name = $row['schoolName'];
 		$email = $row['email'];
-		$address = $row['address'];
+		//
+		$complete_address = $row['address'];
+		$arr_address = explode(",", $complete_address);
+		$province = $arr_address[count($arr_address)-1];
+		$city = $arr_address[count($arr_address)-2];
+		$address = join(",", array_slice($arr_address, 0, count($arr_address)-2));
+		//
 		$contact_info = $row['contactInfo'];
 		$password = $row['password'];
 		$schoolLogo = $row['schoolLogo'];
@@ -40,16 +46,30 @@
 	if (isset($_POST['submit'])) {
 		$n_schoolName = $_POST['schoolName'];
 		$n_email = $_POST['email'];
-		$n_address = $_POST['address'];
+		if(isset($_POST['addressCity']) && isset($_POST['addressProvince'])) {
+			$n_address = $_POST['address'].",".$_POST['addressCity'].",".$_POST['addressProvince'];
+		}
+		else {
+			$n_address = $address;
+		}
 		$n_contact_info = $_POST['contactInfo'];
 		// If user uploaded a logo, load logo; if not, use saved image
-		$n_schoolLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $schoolLogo;
+		if(!empty($_POST['avatar-file'])) {
+			$n_schoolLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $schoolLogo;
 
-		$image_name = $_FILES["avatar-file"]["name"];
-		$image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
-		$image_type = $_FILES["avatar-file"]["type"];
-		$image_size = $_FILES["avatar-file"]["size"];
+			$image_name = $_FILES["avatar-file"]["name"];
+			$image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
+			$image_type = $_FILES["avatar-file"]["type"];
+			$image_size = $_FILES["avatar-file"]["size"];
+		}
+		else {
+			$n_schoolLogo = $schoolLogo;
 
+			$image_name = $_FILES["avatar-file"]["name"];
+			$image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
+			$image_type = $_FILES["avatar-file"]["type"];
+			$image_size = $_FILES["avatar-file"]["size"];
+		}
 		// Check if the user uploaded a new logo
 		if($_FILES['avatar-file']['error'] !== 4 || ($_FILES['avatar-file']['size'] !== 0 && $_FILES['avatar-file']['error'] !== 0)){
 			$unique_id = uniqid(); // Generate unique identifier
@@ -70,6 +90,14 @@
 		// Update the School information
 		$stmt = $con->prepare("UPDATE school SET schoolName=?, address=?, contactInfo=?, schoolLogo=? WHERE accountID=?");
 		$stmt->bind_param("ssssi", $n_schoolName, $n_address, $n_contact_info, $n_schoolLogo, $accountid);
+		$stmt->execute();
+
+		// Update password
+		$hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+		$stmt = $con->prepare("UPDATE account 
+								SET password=? 
+								WHERE accountID=?");
+		$stmt->bind_param("si", $hashed_pass, $accountid);
 		$stmt->execute();
 		
 		$stmt->close();
@@ -132,7 +160,7 @@
 					<div class="col-md-4 relative">
 					<div class="avatar">
 							<img id="logoImage" src="../School-Logo/<?php echo $displayedLogo?>" style="">
-					</div><input type="file" class="form-control" name="avatar-file"
+					</div><input type="file" class="form-control" name="avatar-file" value="<?php echo $displayedLogo?>"
 						style="border-radius: 0px;border-width: 0px;border-color: rgba(85,85,85,0);" accept="image/*">
 					</div>
 
@@ -179,22 +207,22 @@
 							<div class="form-group"><label class="control-label"
 								style="font-family: Poppins, sans-serif;">Contact Number</label>
 								<input
-								class="form-control" type="text" value="<?php echo $contact_info ?>" placeholder="09123456789" name="contact_info"
+								class="form-control" type="text" value="<?php echo $contact_info ?>" placeholder="09123456789" name="contactInfo"
 								style="height: 45px;border-radius: 35px;" required="" inputmode="numeric" maxlength="11">
 							</div>
 						</div>
 					</div>
 					<div class="row" id="2col" style="font-family: Poppins, sans-serif;">
 						<div class="col-md-6 col-sm-12" id="province" style="font-family: Poppins, sans-serif;">
-							<div class="form-group"><label class="control-label">Province</label><select id="provinceSelect"
+							<div class="form-group"><label class="control-label">Province</label><select id="provinceSelect" name="addressProvince"
 								class="form-control" style="height: 45px;border-radius: 35px;" required>
-								<option value="" disabled selected>Select a Province</option>
+								<option value="<?php echo $province; ?>" disabled selected><?php echo $province; ?></option>
 								</select></div>
 						</div>
 						<div class="col-md-6 col-sm-12" id="city" style="font-family: Poppins, sans-serif;">
-							<div class="form-group"><label class="control-label">City</label><select id="citySelect" class="form-control"
+							<div class="form-group"><label class="control-label">City</label><select id="citySelect" name="addressCity" class="form-control"
 								style="height: 45px;border-radius: 35px;" required>
-								<option value="" disabled selected>Select a City</option>
+								<option value="<?php echo $city; ?>" disabled selected><?php echo $city; ?></option>
 								</select></div>
 						</div>
 					</div>
