@@ -1,7 +1,118 @@
 <?php
+session_start();
+	require_once('../connection.php');
+
+	include('../checkLogin.php');
+
+	// Store Account and School IDs //add adminID -> admintb
+	$accountid = $_SESSION['accountID'];
+	$userid = $_SESSION['adminID'];
+	
+    //add accountID -> admintb
+	$sql = "SELECT *
+				FROM admintb ad
+				JOIN account a ON a.accountID = ad.accountID
+				WHERE adminID = ?";
+	
+	$stmt = $con->prepare($sql);
+	$stmt->bind_param("i", $userid);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+	if ($result->num_rows > 0) {
+		$row = $result->fetch_assoc();
+
+		$name = $row['adminName']; //add adminName
+		$email = $row['email']; //add email
+		//
+		$complete_address = $row['address'];
+		$arr_address = explode(",", $complete_address);
+		$province = $arr_address[count($arr_address)-1];
+		$city = $arr_address[count($arr_address)-2];
+		$address = join(",", array_slice($arr_address, 0, count($arr_address)-2));
+		//
+		$contact_info = $row['contactInfo'];
+		$password = $row['password'];
+		$adminLogo = $row['adminLogo'];
+	} else {
+		$name = '';
+		$email = '';
+		$address = '';
+		$contact_info = '';
+		$password = '';
+		$adminLogo = '';
+	}
+
+	// If form is submitted, update the user's profile in the database
+	if (isset($_POST['submit'])) {
+		$n_adminName = $_POST['adminName'];
+		$n_email = $_POST['email'];
+		if(isset($_POST['addressCity']) && isset($_POST['addressProvince'])) {
+			$n_address = $_POST['address'].",".$_POST['addressCity'].",".$_POST['addressProvince'];
+		}
+		else {
+			$n_address = $address;
+		}
+		$n_contact_info = $_POST['contactInfo'];
+		// If user uploaded a logo, load logo; if not, use saved image
+		if(!empty($_POST['avatar-file'])) {
+			$n_adminLogo = $_POST['avatar-file'] ? $_POST['avatar-file'] : $adminLogo;
+
+			$image_name = $_FILES["avatar-file"]["name"];
+			$image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
+			$image_type = $_FILES["avatar-file"]["type"];
+			$image_size = $_FILES["avatar-file"]["size"];
+		}
+		else {
+			$n_adminLogo = $adminLogo;
+
+			$image_name = $_FILES["avatar-file"]["name"];
+			$image_tmp_name = $_FILES["avatar-file"]["tmp_name"];
+			$image_type = $_FILES["avatar-file"]["type"];
+			$image_size = $_FILES["avatar-file"]["size"];
+		}
+		// Check if the user uploaded a new logo
+		if($_FILES['avatar-file']['error'] !== 4 || ($_FILES['avatar-file']['size'] !== 0 && $_FILES['avatar-file']['error'] !== 0)){
+			$unique_id = uniqid(); // Generate unique identifier
+			$image_extension = pathinfo($image_name, PATHINFO_EXTENSION); // Get the file extension
+			$new_logo_name = $unique_id . '.png'; // Create new file name with extension
+			move_uploaded_file($image_tmp_name, "../School-Logo/" . $new_logo_name);
+			$n_adminLogo = $new_logo_name;
+			$_SESSION['adminLogo'] = $new_logo_name; // Set new logo as Session Logo 
+		} else {
+			$displayedLogo = $_SESSION['adminLogo'];
+		}
+		
+		// Update the School Role
+		$stmt = $con->prepare("UPDATE account SET email=? WHERE email=?");
+		$stmt->bind_param("ss", $n_email, $email);
+		$stmt->execute();
+		
+		// Update the School information
+		$stmt = $con->prepare("UPDATE school SET adminName=?, address=?, contactInfo=?, adminLogo=? WHERE accountID=?");
+		$stmt->bind_param("ssssi", $n_adminName, $n_address, $n_contact_info, $n_adminLogo, $accountid);
+		$stmt->execute();
+
+		// Update password
+		$hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+		$stmt = $con->prepare("UPDATE account 
+								SET password=? 
+								WHERE accountID=?");
+		$stmt->bind_param("si", $hashed_pass, $accountid);
+		$stmt->execute();
+		
+		$stmt->close();
+		$con->close();
+		
+		// Update the session variables
+		$_SESSION['success'] = "Account Updated Successfully";
 
 
-?>
+		header("Location:SchoolDashboard.php");
+	}
+	$displayedLogo = $_SESSION['adminLogo'];
+	?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,5 +222,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="scripts/nav.js"></script>
 </body>
-
 </html>
